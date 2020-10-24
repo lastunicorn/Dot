@@ -1,9 +1,8 @@
-﻿using DustInTheWind.Dot.Application;
-using DustInTheWind.Dot.AudioSupport;
+﻿using DustInTheWind.Dot.AudioSupport;
 
 namespace DustInTheWind.Dot.Presentation.Views
 {
-    public class HelpView : ViewBase, IHelpView
+    public class HelpView : ViewBase
     {
         public HelpView(Audio audio)
             : base(audio)

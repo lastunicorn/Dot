@@ -3,16 +3,17 @@ using DustInTheWind.Dot.AdventureGame.ActionModel;
 using DustInTheWind.Dot.AdventureGame.ActionResults;
 using DustInTheWind.Dot.AdventureGame.GameModel;
 using DustInTheWind.Dot.AdventureGame.ObjectModel;
+using DustInTheWind.Dot.Domain.DataAccess;
 
 namespace DustInTheWind.Dot.AdventureGame.ActionResultHandlers
 {
     public class AcquireObjectsResultHandler : ResultHandlerBase<AcquireObjectsResult>
     {
-        private readonly GameBase game;
+        private readonly GameRepository gameRepository;
 
-        public AcquireObjectsResultHandler(GameBase game)
+        public AcquireObjectsResultHandler(GameRepository gameRepository)
         {
-            this.game = game ?? throw new ArgumentNullException(nameof(game));
+            this.gameRepository = gameRepository ?? throw new ArgumentNullException(nameof(gameRepository));
         }
 
         public override void Handle(AcquireObjectsResult acquireObjectsResult)
@@ -22,7 +23,8 @@ namespace DustInTheWind.Dot.AdventureGame.ActionResultHandlers
                 foreach (IObject @object in acquireObjectsResult.Objects)
                 {
                     @object.Parent?.RemoveObject(@object);
-                    game.Inventory.AddObject(@object);
+                    GameBase game = gameRepository.Get() as GameBase;
+                    game?.Inventory.AddObject(@object);
                 }
             }
         }

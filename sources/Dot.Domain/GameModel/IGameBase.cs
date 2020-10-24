@@ -23,8 +23,8 @@ namespace DustInTheWind.Dot.Domain.GameModel
 
         void Finish();
 
-        StorageNode Save();
+        StorageData Export();
 
-        void Load(StorageNode storageNode);
+        void Import(StorageData storageData);
     }
 }

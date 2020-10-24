@@ -39,6 +39,9 @@ namespace DustInTheWind.Dot.AudioSupport
 
         public void Play(string audioFileName, AudioChannelType channel)
         {
+            if (AudioAssembly == null || AudioNamespace == null)
+                return;
+
             EnsureChannelExists(channel);
 
             string audioResourceName = AudioNamespace + "." + audioFileName;
@@ -51,6 +54,9 @@ namespace DustInTheWind.Dot.AudioSupport
 
         public void PlayRepeat(string audioFileName, AudioChannelType channel)
         {
+            if (AudioAssembly == null || AudioNamespace == null)
+                return;
+
             EnsureChannelExists(channel);
 
             string audioResourceName = AudioNamespace + "." + audioFileName;
@@ -83,7 +89,10 @@ namespace DustInTheWind.Dot.AudioSupport
 
         public void WaitChannel(AudioChannelType channel)
         {
-            players[channel].WaitToEnd();
+            bool channelExists = players.ContainsKey(channel);
+
+            if (channelExists)
+                players[channel].WaitToEnd();
         }
     }
 }

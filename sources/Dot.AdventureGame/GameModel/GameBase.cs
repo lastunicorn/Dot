@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using DustInTheWind.Dot.AdventureGame.ActionModel;
 using DustInTheWind.Dot.AdventureGame.Actions;
 using DustInTheWind.Dot.AdventureGame.LocationModel;
@@ -222,10 +223,10 @@ namespace DustInTheWind.Dot.AdventureGame.GameModel
             }
         }
 
-        public virtual StorageNode Save()
+        public virtual StorageData Export()
         {
             // Different Properties
-            StorageNode storageNode = new StorageNode
+            StorageData storageDataNode = new StorageData
             {
                 { "state", State },
                 { "is-new", isNew },
@@ -235,66 +236,83 @@ namespace DustInTheWind.Dot.AdventureGame.GameModel
                 { "inventory", Inventory.Export() }
             };
 
+            storageDataNode.SaveTime = DateTime.UtcNow;
+            storageDataNode.Version = GetAssemblyVersion();
+
             // Locations
             IEnumerable<string> locationTypeNames = LocationEngine.Locations
                 .Where(x => x != null)
                 .Select(x => x.GetType().FullName);
 
-            storageNode.Add("locations", string.Join(";", locationTypeNames));
+            storageDataNode.Add("locations", string.Join(";", locationTypeNames));
 
             foreach (ILocation location in LocationEngine.Locations)
             {
-                StorageNode locationStorageNode = location.Export();
-                storageNode.Add("location." + location.Id, locationStorageNode);
+                StorageDataNode locationStorageDataNode = location.Export();
+                storageDataNode.Add("location." + location.Id, locationStorageDataNode);
             }
 
             // Add Ons
             foreach (IAddOn addOn in AddOns)
             {
-                StorageNode addOnStorageNode = addOn.Save();
-                storageNode.Add("addon." + addOn.Id, addOnStorageNode);
+                StorageDataNode addOnStorageDataNode = addOn.Export();
+                storageDataNode.Add("addon." + addOn.Id, addOnStorageDataNode);
             }
 
-            return storageNode;
+            return storageDataNode;
         }
 
-        public virtual void Load(StorageNode storageNode)
+        private static Version GetAssemblyVersion()
         {
+            Assembly assembly = Assembly.GetEntryAssembly();
+            AssemblyName assemblyName = assembly.GetName();
+
+            return assemblyName.Version;
+        }
+
+        public virtual void Import(StorageData storageData)
+        {
+            Version currentVersion = GetAssemblyVersion();
+            int comparisonResult = currentVersion.CompareTo(storageData.Version, 2);
+
+            if (comparisonResult < 0)
+                throw new Exception("Storage data was created by a newer version. It cannot be imported.");
+
             // Different Properties
-            State = (GameState)storageNode["state"];
-            isNew = (bool)storageNode["is-new"];
-            isFinished = (bool)storageNode["is-finished"];
-            gameTimer.TotalPlayTime = (TimeSpan)storageNode["total-play-time"];
+            State = (GameState)storageData["state"];
+            isNew = (bool)storageData["is-new"];
+            isFinished = (bool)storageData["is-finished"];
+            gameTimer.TotalPlayTime = (TimeSpan)storageData["total-play-time"];
 
             // Locations
-            IEnumerable<KeyValuePair<string, object>> locationNodes = storageNode
+            IEnumerable<KeyValuePair<string, object>> locationNodes = storageData
                 .Where(x => x.Key.StartsWith("location."));
 
             foreach (KeyValuePair<string, object> pair in locationNodes)
             {
                 string locationId = pair.Key.Substring("location.".Length);
                 ILocation location = LocationEngine.Locations.FirstOrDefault(x => x.Id == locationId);
-                location?.Import((StorageNode)pair.Value);
+                location?.Import((StorageDataNode)pair.Value);
             }
 
             // Add Ons
-            IEnumerable<KeyValuePair<string, object>> addOnNodes = storageNode
+            IEnumerable<KeyValuePair<string, object>> addOnNodes = storageData
                 .Where(x => x.Key.StartsWith("addon."));
 
             foreach (KeyValuePair<string, object> pair in addOnNodes)
             {
                 string addOnId = pair.Key.Substring("addon.".Length);
                 IAddOn addOn = AddOns.Single(x => x.Id == addOnId);
-                addOn.Load((StorageNode)pair.Value);
+                addOn.Load((StorageDataNode)pair.Value);
             }
 
             // Current Location
-            string currentLocationId = (string)storageNode["current-location"];
+            string currentLocationId = (string)storageData["current-location"];
             LocationEngine.MoveTo(currentLocationId);
 
             // Inventory
-            StorageNode inventoryStorageNode = (StorageNode)storageNode["inventory"];
-            Inventory.Import(inventoryStorageNode);
+            StorageDataNode inventoryStorageDataNode = (StorageDataNode)storageData["inventory"];
+            Inventory.Import(inventoryStorageDataNode);
         }
 
         protected virtual void OnStateChanged()

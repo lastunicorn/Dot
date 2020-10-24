@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -15,11 +15,11 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\Dot.AdventureGame\Dot.AdventureGame.csproj" />
         <ProjectReference Include="..\Dot.Application\Dot.Application.csproj" />
         <ProjectReference Include="..\Dot.AudioSupport\Dot.AudioSupport.csproj" />
         <ProjectReference Include="..\Dot.ConsoleHelpers\Dot.ConsoleHelpers.csproj" />
         <ProjectReference Include="..\Dot.Domain\Dot.Domain.csproj" />
-        <ProjectReference Include="..\Dot.AdventureGame\Dot.AdventureGame.csproj" />
         <ProjectReference Include="..\Dot.WindowsNative\Dot.WindowsNative.csproj" />
     </ItemGroup>
 

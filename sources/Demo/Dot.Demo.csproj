@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>DustInTheWind.Dot.Demo</AssemblyName>
+    <RootNamespace>DustInTheWind.Dot.Demo</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ninject" Version="3.3.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dot.AdventureGame\Dot.AdventureGame.csproj" />
+    <ProjectReference Include="..\Dot.Application\Dot.Application.csproj" />
+    <ProjectReference Include="..\Dot.AudioSupport\Dot.AudioSupport.csproj" />
+    <ProjectReference Include="..\Dot.Domain\Dot.Domain.csproj" />
+    <ProjectReference Include="..\Dot.Presentation\Dot.Presentation.csproj" />
+  </ItemGroup>
+
+</Project>

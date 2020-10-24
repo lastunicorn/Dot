@@ -1,19 +1,18 @@
 ﻿using System;
-using DustInTheWind.Dot.Application.UseCases;
 using DustInTheWind.Dot.ConsoleHelpers.UIControls;
-using DustInTheWind.Dot.Domain;
+using DustInTheWind.Dot.Presentation.Views;
 
 namespace DustInTheWind.Dot.Presentation.Commands
 {
     internal class SettingsCommand : ICommand
     {
-        private readonly IUseCaseFactory useCaseFactory;
+        private readonly SettingsView view;
 
         public event EventHandler CanExecuteChanges;
 
-        public SettingsCommand(IUseCaseFactory useCaseFactory)
+        public SettingsCommand(SettingsView settingsView)
         {
-            this.useCaseFactory = useCaseFactory ?? throw new ArgumentNullException(nameof(useCaseFactory));
+            view = settingsView ?? throw new ArgumentNullException(nameof(settingsView));
         }
 
         public bool CanExecute()
@@ -23,8 +22,7 @@ namespace DustInTheWind.Dot.Presentation.Commands
 
         public void Execute()
         {
-            SettingsUseCase useCase = useCaseFactory.Create<SettingsUseCase>();
-            useCase.Execute();
+            view.DisplayMenu();
         }
     }
 }

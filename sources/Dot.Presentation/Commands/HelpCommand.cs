@@ -1,19 +1,18 @@
 ﻿using System;
-using DustInTheWind.Dot.Application.UseCases;
 using DustInTheWind.Dot.ConsoleHelpers.UIControls;
-using DustInTheWind.Dot.Domain;
+using DustInTheWind.Dot.Presentation.Views;
 
 namespace DustInTheWind.Dot.Presentation.Commands
 {
     internal class HelpCommand : ICommand
     {
-        private readonly IUseCaseFactory useCaseFactory;
+        private readonly HelpView helpView;
 
         public event EventHandler CanExecuteChanges;
 
-        public HelpCommand(IUseCaseFactory useCaseFactory)
+        public HelpCommand(HelpView helpView)
         {
-            this.useCaseFactory = useCaseFactory ?? throw new ArgumentNullException(nameof(useCaseFactory));
+            this.helpView = helpView ?? throw new ArgumentNullException(nameof(helpView));
         }
 
         public bool CanExecute()
@@ -23,8 +22,7 @@ namespace DustInTheWind.Dot.Presentation.Commands
 
         public void Execute()
         {
-            HelpUseCase useCase = useCaseFactory.Create<HelpUseCase>();
-            useCase.Execute();
+            helpView.DisplayHelpInformation();
         }
     }
 }

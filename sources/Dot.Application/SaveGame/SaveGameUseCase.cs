@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using DustInTheWind.Dot.Domain;
 using DustInTheWind.Dot.Domain.DataAccess;
 using DustInTheWind.Dot.Domain.GameModel;
-using DustInTheWind.Dot.Domain.SaveModel;
 
 namespace DustInTheWind.Dot.Application.UseCases
 {
@@ -13,17 +11,22 @@ namespace DustInTheWind.Dot.Application.UseCases
         private readonly ISaveGameView view;
         private readonly GameRepository gameRepository;
         private readonly GameSlotRepository gameSlotRepository;
+        private readonly IGameSettings gameSettings;
 
-        public SaveGameUseCase(ISaveGameView view, GameRepository gameRepository, GameSlotRepository gameSlotRepository)
+        public SaveGameUseCase(ISaveGameView saveGameView, GameRepository gameRepository, GameSlotRepository gameSlotRepository, IGameSettings gameSettings)
         {
-            this.view = view ?? throw new ArgumentNullException(nameof(view));
+            view = saveGameView ?? throw new ArgumentNullException(nameof(saveGameView));
             this.gameRepository = gameRepository ?? throw new ArgumentNullException(nameof(gameRepository));
             this.gameSlotRepository = gameSlotRepository ?? throw new ArgumentNullException(nameof(gameSlotRepository));
+            this.gameSettings = gameSettings ?? throw new ArgumentNullException(nameof(gameSettings));
         }
 
         public void Execute()
         {
             IGameBase game = gameRepository.Get();
+
+            if (game == null)
+                throw new Exception("There is no game to be saved.");
 
             IEnumerable<GameSlot> gameSlots = gameSlotRepository.GetAll();
             GameSlot gameSlot = view.AskToChooseGameSlot(gameSlots);
@@ -31,21 +34,10 @@ namespace DustInTheWind.Dot.Application.UseCases
             if (gameSlot == null)
                 throw new OperationCanceledException();
 
-            gameSlot.Data = new SaveData
-            {
-                SaveTime = DateTime.UtcNow,
-                Version = GetAssemblyVersion(),
-                Data = game.Save()
-            };
+            gameSlot.Data = game.Export();
             gameSlotRepository.AddOrReplace(gameSlot);
-        }
 
-        private static Version GetAssemblyVersion()
-        {
-            Assembly assembly = Assembly.GetEntryAssembly();
-            AssemblyName assemblyName = assembly.GetName();
-
-            return assemblyName.Version;
+            gameSettings.LastSavedGame = gameSlot.Id;
         }
     }
 }

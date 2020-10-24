@@ -77,17 +77,17 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
             };
         }
 
-        public virtual StorageNode Export()
+        public virtual StorageDataNode Export()
         {
-            return new StorageNode
+            return new StorageDataNode
             {
                 { "is-visible", isVisible }
             };
         }
 
-        public virtual void Import(StorageNode storageNode)
+        public virtual void Import(StorageDataNode storageDataNode)
         {
-            isVisible = (bool)storageNode["is-visible"];
+            isVisible = (bool)storageDataNode["is-visible"];
         }
 
         protected virtual void OnIsVisibleChanged()

@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using DustInTheWind.Dot.AdventureGame;
 using DustInTheWind.Dot.AdventureGame.ActionModel;
+using DustInTheWind.Dot.AdventureGame.ActionResultHandlers;
+using DustInTheWind.Dot.AdventureGame.ActionResults;
 using DustInTheWind.Dot.AdventureGame.GameModel;
 using DustInTheWind.Dot.Application;
 using DustInTheWind.Dot.Domain;
@@ -69,19 +72,29 @@ namespace DustInTheWind.Dot.Presentation.Presenters
 
     internal class GamePresenter
     {
-        private readonly GameView view;
+        private readonly GameView gameView;
         private readonly GameRepository gameRepository;
-        private readonly IUseCaseFactory useCaseFactory;
         private readonly ResultHandlersCollection resultHandlers;
 
         private volatile bool exitWasRequested;
 
-        public GamePresenter(GameView view, GameRepository gameRepository, IUseCaseFactory useCaseFactory, ResultHandlersCollection resultHandlers)
+        public GamePresenter(GameView gameView, GameRepository gameRepository, ResultHandlersCollection resultHandlers)
         {
-            this.view = view ?? throw new ArgumentNullException(nameof(view));
+            this.gameView = gameView ?? throw new ArgumentNullException(nameof(gameView));
             this.gameRepository = gameRepository ?? throw new ArgumentNullException(nameof(gameRepository));
-            this.useCaseFactory = useCaseFactory ?? throw new ArgumentNullException(nameof(useCaseFactory));
             this.resultHandlers = resultHandlers ?? throw new ArgumentNullException(nameof(resultHandlers));
+
+            this.resultHandlers.Add(typeof(ChangeLocationResult), typeof(ChangeLocationResultHandler));
+            this.resultHandlers.Add(typeof(AskCodeResult), typeof(AskCodeResultHandler));
+            this.resultHandlers.Add(typeof(DestroyObjectsResult), typeof(DestroyObjectsResultHandler));
+            this.resultHandlers.Add(typeof(AcquireObjectsResult), typeof(AcquireObjectsResultHandler));
+            this.resultHandlers.Add(typeof(HelpResult), typeof(HelpResultHandler));
+            this.resultHandlers.Add(typeof(StoryBlock), typeof(StoryBlockHandler));
+            this.resultHandlers.Add(typeof(string), typeof(StringHandler));
+            this.resultHandlers.Add(typeof(IEnumerable<string>), typeof(StringsHandler));
+            this.resultHandlers.Add(typeof(IAudioTextEnumerable), typeof(AudioTextHandler));
+            this.resultHandlers.Add(typeof(SuggestionBlock), typeof(SuggestionBlockHandler));
+            this.resultHandlers.Add(typeof(Action), typeof(ActionHandler));
         }
 
         public void Display()
@@ -96,16 +109,8 @@ namespace DustInTheWind.Dot.Presentation.Presenters
             {
                 while (!exitWasRequested)
                 {
-                    string command = view.GetUserCommand();
+                    string command = gameView.GetUserCommand();
                     Execute(command);
-
-                    //ExecuteCommandRequest request = new ExecuteCommandRequest
-                    //{
-                    //    CommandText = command
-                    //};
-
-                    //ExecuteCommandUseCase useCase = useCaseFactory.Create<ExecuteCommandUseCase>();
-                    //useCase.Execute(request);
                 }
             }
             finally
@@ -118,7 +123,7 @@ namespace DustInTheWind.Dot.Presentation.Presenters
         private void HandleCurrentLocationChanged(object sender, EventArgs e)
         {
             if (sender is GameBase game)
-                view.PrompterText = game.CurrentLocation.Name;
+                gameView.PrompterText = game.CurrentLocation.Name;
         }
 
         public void Execute(string commandText)

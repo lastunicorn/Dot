@@ -50,31 +50,31 @@ namespace DustInTheWind.Dot.AdventureGame.LocationModel
             addOns.ForEach(x => x.Stop());
         }
 
-        public override StorageNode Export()
+        public override StorageDataNode Export()
         {
-            StorageNode storageNode = base.Export();
+            StorageDataNode storageDataNode = base.Export();
 
             foreach (IAddOn addOn in addOns)
             {
-                StorageNode addOnStorageNode = addOn.Save();
-                storageNode.Add("addon." + addOn.Id, addOnStorageNode);
+                StorageDataNode addOnStorageDataNode = addOn.Export();
+                storageDataNode.Add("addon." + addOn.Id, addOnStorageDataNode);
             }
 
-            return storageNode;
+            return storageDataNode;
         }
 
-        public override void Import(StorageNode storageNode)
+        public override void Import(StorageDataNode storageDataNode)
         {
-            base.Import(storageNode);
+            base.Import(storageDataNode);
 
-            var saveNodes = storageNode
+            var saveNodes = storageDataNode
                 .Where(x => x.Key.StartsWith("addon."));
 
             foreach (KeyValuePair<string, object> pair in saveNodes)
             {
                 string addOnId = pair.Key.Substring("addon.".Length);
                 IAddOn addOn = addOns.Single(x => x.Id == addOnId);
-                addOn.Load((StorageNode)pair.Value);
+                addOn.Load((StorageDataNode)pair.Value);
             }
         }
 

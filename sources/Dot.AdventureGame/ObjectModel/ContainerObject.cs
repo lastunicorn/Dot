@@ -139,9 +139,9 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
             return default;
         }
 
-        public override StorageNode Export()
+        public override StorageDataNode Export()
         {
-            StorageNode storageNode = base.Export();
+            StorageDataNode storageDataNode = base.Export();
 
             IEnumerable<string> childrenTypes = children
                 .Where(x => x != null)
@@ -149,27 +149,27 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
 
             if (childrenTypes.Any())
             {
-                storageNode.Add("children", string.Join(";", childrenTypes));
+                storageDataNode.Add("children", string.Join(";", childrenTypes));
 
                 foreach (IObject child in children)
                 {
-                    StorageNode childStorageNode = child.Export();
-                    storageNode.Add("child." + child.Id, childStorageNode);
+                    StorageDataNode childStorageDataNode = child.Export();
+                    storageDataNode.Add("child." + child.Id, childStorageDataNode);
                 }
             }
 
-            return storageNode;
+            return storageDataNode;
         }
 
-        public override void Import(StorageNode storageNode)
+        public override void Import(StorageDataNode storageDataNode)
         {
-            base.Import(storageNode);
+            base.Import(storageDataNode);
 
             children.Clear();
 
-            if (storageNode.ContainsKey("children"))
+            if (storageDataNode.ContainsKey("children"))
             {
-                string[] childrenInformation = ((string)storageNode["children"]).Split(';');
+                string[] childrenInformation = ((string)storageDataNode["children"]).Split(';');
 
                 foreach (string childTypeName in childrenInformation)
                 {
@@ -183,14 +183,14 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
                 }
             }
 
-            var saveNodes = storageNode
+            var saveNodes = storageDataNode
                 .Where(x => x.Key.StartsWith("child."));
 
             foreach (KeyValuePair<string, object> pair in saveNodes)
             {
                 string childId = pair.Key.Substring("child.".Length);
                 IObject childObject = children.Single(x => x.Id == childId);
-                childObject.Import((StorageNode)pair.Value);
+                childObject.Import((StorageDataNode)pair.Value);
             }
         }
 

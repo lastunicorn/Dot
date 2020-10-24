@@ -1,12 +1,11 @@
 using System;
-using DustInTheWind.Dot.Application;
 using DustInTheWind.Dot.ConsoleHelpers.ConsoleUtil;
 using DustInTheWind.Dot.ConsoleHelpers.UIControls;
 using DustInTheWind.Dot.Presentation.Controls;
 
 namespace DustInTheWind.Dot.Presentation.Views
 {
-    public class SettingsView : ISettingsView
+    public class SettingsView
     {
         private readonly SelectableMenu<SettingsMenuItem> menu;
 

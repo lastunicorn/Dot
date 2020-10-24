@@ -38,12 +38,12 @@ namespace DustInTheWind.Dot.Domain
                 });
         }
 
-        private static SaveData Deserialize(string fileName)
+        private static StorageData Deserialize(string fileName)
         {
             using (FileStream fs = File.OpenRead(fileName))
             {
                 BinaryFormatter binaryFormatter = new BinaryFormatter();
-                return (SaveData)binaryFormatter.Deserialize(fs);
+                return (StorageData)binaryFormatter.Deserialize(fs);
             }
         }
 
@@ -57,12 +57,12 @@ namespace DustInTheWind.Dot.Domain
             Serialize(filePath, gameSlot.Data);
         }
 
-        private static void Serialize(string fileName, SaveData saveData)
+        private static void Serialize(string fileName, StorageData storageData)
         {
             using (FileStream fileStream = File.Create(fileName))
             {
                 BinaryFormatter binaryFormatter = new BinaryFormatter();
-                binaryFormatter.Serialize(fileStream, saveData);
+                binaryFormatter.Serialize(fileStream, storageData);
             }
         }
     }

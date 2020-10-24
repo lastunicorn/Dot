@@ -9,7 +9,7 @@ namespace DustInTheWind.Dot.Domain.SaveModel
     {
         public string FileName { get; private set; }
 
-        public SaveData SaveData { get; private set; }
+        public StorageData StorageData { get; private set; }
 
         private SaveFile()
         {
@@ -17,12 +17,12 @@ namespace DustInTheWind.Dot.Domain.SaveModel
 
         public void Save(string fileName)
         {
-            if (SaveData == null)
+            if (StorageData == null)
                 throw new Exception("No data to be saved");
 
             FileName = fileName;
-            SaveData.SaveTime = DateTime.Now;
-            SaveData.Version = GetAssemblyVersion();
+            StorageData.SaveTime = DateTime.Now;
+            StorageData.Version = GetAssemblyVersion();
 
             Serialize(fileName);
         }
@@ -40,16 +40,16 @@ namespace DustInTheWind.Dot.Domain.SaveModel
             using (FileStream fileStream = File.Create(fileName))
             {
                 BinaryFormatter binaryFormatter = new BinaryFormatter();
-                binaryFormatter.Serialize(fileStream, SaveData);
+                binaryFormatter.Serialize(fileStream, StorageData);
             }
         }
 
-        private static SaveData Deserialize(string fileName)
+        private static StorageData Deserialize(string fileName)
         {
             using (FileStream fs = File.OpenRead(fileName))
             {
                 BinaryFormatter binaryFormatter = new BinaryFormatter();
-                return (SaveData)binaryFormatter.Deserialize(fs);
+                return (StorageData)binaryFormatter.Deserialize(fs);
             }
         }
 
@@ -58,7 +58,7 @@ namespace DustInTheWind.Dot.Domain.SaveModel
             return new SaveFile
             {
                 FileName = fileName,
-                SaveData = Deserialize(fileName)
+                StorageData = Deserialize(fileName)
             };
         }
 
@@ -66,10 +66,7 @@ namespace DustInTheWind.Dot.Domain.SaveModel
         {
             return new SaveFile
             {
-                SaveData = new SaveData
-                {
-                    Name = name
-                }
+                StorageData = new StorageData()
             };
         }
     }

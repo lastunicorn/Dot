@@ -4,19 +4,24 @@ using DustInTheWind.Dot.Domain.GameModel;
 
 namespace DustInTheWind.Dot.Application.UseCases
 {
-    internal class CloseGameUseCase
+    public class CreateNewGameUseCase
     {
         private readonly GameRepository gameRepository;
+        private readonly IGameFactory gameFactory;
 
-        public CloseGameUseCase(GameRepository gameRepository)
+        public CreateNewGameUseCase(GameRepository gameRepository, IGameFactory gameFactory)
         {
             this.gameRepository = gameRepository ?? throw new ArgumentNullException(nameof(gameRepository));
+            this.gameFactory = gameFactory ?? throw new ArgumentNullException(nameof(gameFactory));
         }
 
         public void Execute()
         {
             IGameBase game = gameRepository.Get();
             game?.Close();
+
+            game = gameFactory.Create();
+            gameRepository.Add(game);
         }
     }
 }
