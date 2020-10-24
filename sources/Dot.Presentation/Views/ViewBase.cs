@@ -1,0 +1,107 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using DustInTheWind.Dot.AudioSupport;
+using DustInTheWind.Dot.ConsoleHelpers;
+using DustInTheWind.Dot.Domain.AudioTextModel;
+using DustInTheWind.Dot.Presentation.Controls;
+
+namespace DustInTheWind.Dot.Presentation.Views
+{
+    public class ViewBase
+    {
+        private readonly Audio audio;
+
+        public ViewBase(Audio audio)
+        {
+            this.audio = audio ?? throw new ArgumentNullException(nameof(audio));
+        }
+
+        protected void DisplayInfo(string text)
+        {
+            InfoBlock infoBlock = new InfoBlock(audio)
+            {
+                Text = text
+            };
+            infoBlock.Display();
+        }
+
+
+        protected void DisplayInfoBlock(IEnumerable<string> texts)
+        {
+            InfoBlock infoBlock = new InfoBlock(audio)
+            {
+                Texts = texts.ToList()
+            };
+            infoBlock.Display();
+        }
+
+        protected void DisplayStoryTeller(IAudioTextEnumerable audioTexts, string title = null)
+        {
+            if (audioTexts == null)
+                return;
+
+            AudioTextBox audioTextBox = new AudioTextBox(audio)
+            {
+                Margins = new Margins(3, 2),
+                Border = Border.CreateDoubleLineBorder(true, true, true, true),
+                Paddings = new Paddings(2, 1),
+                Color = DefaultTheme.Instance.StoryTellerColor,
+                ActionColor = DefaultTheme.Instance.ActionColor,
+                ObjectColor = DefaultTheme.Instance.ObjectColor
+            };
+            audioTextBox.Display(audioTexts, title);
+        }
+
+        protected void DisplaySuggestion(IEnumerable<string> texts)
+        {
+            if (texts == null)
+                return;
+
+            AudioTextBox audioTextBox = new AudioTextBox(audio)
+            {
+                Margins = new Margins(3, 0, 3, 2),
+                Border = Border.CreateSingleLineBorder(true, false, false, false),
+                Paddings = new Paddings(2, 1, 0, 1),
+                Color = DefaultTheme.Instance.SuggestionColor,
+                ActionColor = DefaultTheme.Instance.ActionColor,
+                ObjectColor = DefaultTheme.Instance.ObjectColor
+            };
+            audioTextBox.Display(texts);
+        }
+
+        protected void PlayBackgroundSound(string audioFileName, Action action)
+        {
+#if DEBUG_AUDIO_FILE
+            CustomConsole.WriteLine(audioFileName, ConsoleColor.Yellow);
+#endif
+            audio.PlayRepeat(audioFileName, AudioChannelType.Music);
+
+            try
+            {
+                action();
+            }
+            finally
+            {
+                audio.Stop(AudioChannelType.Music);
+            }
+        }
+
+        protected T PlayBackgroundSound<T>(string audioFileName, Func<T> action)
+        {
+#if DEBUG_AUDIO_FILE
+            CustomConsole.WriteLine(audioFileName, ConsoleColor.Yellow);
+#endif
+            audio.PlayRepeat(audioFileName, AudioChannelType.Music);
+
+            try
+            {
+                return action();
+            }
+            finally
+            {
+                audio.Stop(AudioChannelType.Music);
+            }
+        }
+    }
+}

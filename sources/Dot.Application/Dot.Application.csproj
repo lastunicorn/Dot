@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <RootNamespace>DustInTheWind.Dot.Application</RootNamespace>
+        <AssemblyName>DustInTheWind.Dot.Application</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Dot.Domain\Dot.Domain.csproj" />
+    </ItemGroup>
+
+</Project>

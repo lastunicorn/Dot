@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <RootNamespace>DustInTheWind.Dot.Presentation</RootNamespace>
+        <AssemblyName>DustInTheWind.Dot.Presentation</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Remove="Ascii\separator.ascii" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="Ascii\separator.ascii" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Dot.Application\Dot.Application.csproj" />
+        <ProjectReference Include="..\Dot.AudioSupport\Dot.AudioSupport.csproj" />
+        <ProjectReference Include="..\Dot.ConsoleHelpers\Dot.ConsoleHelpers.csproj" />
+        <ProjectReference Include="..\Dot.Domain\Dot.Domain.csproj" />
+        <ProjectReference Include="..\Dot.AdventureGame\Dot.AdventureGame.csproj" />
+        <ProjectReference Include="..\Dot.WindowsNative\Dot.WindowsNative.csproj" />
+    </ItemGroup>
+
+</Project>

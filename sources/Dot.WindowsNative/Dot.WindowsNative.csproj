@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <RootNamespace>DustInTheWind.Dot.WindowsNative</RootNamespace>
+        <AssemblyName>DustInTheWind.Dot.WindowsNative</AssemblyName>
+    </PropertyGroup>
+
+</Project>
