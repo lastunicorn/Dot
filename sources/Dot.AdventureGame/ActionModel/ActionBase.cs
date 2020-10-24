@@ -11,13 +11,13 @@ namespace DustInTheWind.Dot.AdventureGame.ActionModel
         public string Name => Names.Count > 0 ? Names[0] : null;
 
         public List<string> Names { get; }
-        
+
         public abstract string Description { get; }
-        
+
         public abstract List<string> Usage { get; }
-        
+
         public abstract ActionType ActionType { get; }
-        
+
         private List<Regex> matchers;
 
         private IEnumerable<Regex> Matchers

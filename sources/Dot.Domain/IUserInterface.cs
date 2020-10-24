@@ -26,5 +26,6 @@ namespace DustInTheWind.Dot.Domain
 
         //InfoBlock CreateInfoBlock();
         void DisplayInfoBlock(IEnumerable<string> texts);
+        string Question(string text);
     }
 }

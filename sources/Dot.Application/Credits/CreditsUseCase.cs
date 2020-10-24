@@ -1,12 +1,10 @@
-﻿using DustInTheWind.Dot.Domain;
-
-namespace DustInTheWind.Dot.Application.UseCases
+﻿namespace DustInTheWind.Dot.Application.Credits
 {
     public class CreditsUseCase
     {
-        public Credits Execute()
+        public Domain.Credits Execute()
         {
-            return new Credits
+            return new Domain.Credits
             {
                 Scenarist = "Alexandru Iuga",
                 Programmer = "Alexandru Iuga"

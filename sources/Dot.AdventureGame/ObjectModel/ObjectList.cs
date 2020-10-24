@@ -23,7 +23,7 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
 
                     string allButLast = string.Join(",", items);
 
-                    return allButLast + " and a {{" + Items[Items.Count - 1].Name + "}}";
+                    return allButLast + " and a {{" + Items[^1].Name + "}}";
             }
         }
     }

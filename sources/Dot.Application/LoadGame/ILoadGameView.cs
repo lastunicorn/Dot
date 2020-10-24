@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using DustInTheWind.Dot.Domain;
 
-namespace DustInTheWind.Dot.Application
+namespace DustInTheWind.Dot.Application.LoadGame
 {
     public interface ILoadGameView
     {

@@ -13,8 +13,8 @@ namespace DustInTheWind.Dot.AdventureGame.LocationModel
 
         void Stop();
 
-        StorageDataNode Export();
+        StorageNode Export();
 
-        void Load(StorageDataNode storageDataNode);
+        void Load(StorageNode storageNode);
     }
 }

@@ -27,7 +27,7 @@ namespace DustInTheWind.Dot.AdventureGame.GameModel
 
         public ActionSet Actions { get; } = new ActionSet();
 
-        protected List<IAddOn> AddOns { get; } = new List<IAddOn>();
+        protected HashSet<IAddOn> AddOns { get; } = new HashSet<IAddOn>();
 
         public GameState State
         {
@@ -93,7 +93,8 @@ namespace DustInTheWind.Dot.AdventureGame.GameModel
                 if (!isFinished)
                     gameTimer.Start();
 
-                AddOns.ForEach(x => x.Start());
+                foreach (IAddOn addOn in AddOns)
+                    addOn.Start();
 
                 if (lastLocation == null)
                     LocationEngine.MoveToFirst();
@@ -124,7 +125,9 @@ namespace DustInTheWind.Dot.AdventureGame.GameModel
                 {
                     gameTimer.Stop();
                     State = GameState.Closed;
-                    AddOns.ForEach(x => x.Stop());
+
+                    foreach (IAddOn addOn in AddOns)
+                        addOn.Stop();
                 }
 
                 OnClosed();
@@ -138,7 +141,9 @@ namespace DustInTheWind.Dot.AdventureGame.GameModel
                 if (!isFinished)
                 {
                     gameTimer.Stop();
-                    AddOns.ForEach(x => x.Stop());
+
+                    foreach (IAddOn addOn in AddOns)
+                        addOn.Stop();
                 }
 
                 State = GameState.Paused;
@@ -226,7 +231,7 @@ namespace DustInTheWind.Dot.AdventureGame.GameModel
         public virtual StorageData Export()
         {
             // Different Properties
-            StorageData storageDataNode = new StorageData
+            StorageData storageNode = new StorageData
             {
                 { "state", State },
                 { "is-new", isNew },
@@ -236,30 +241,30 @@ namespace DustInTheWind.Dot.AdventureGame.GameModel
                 { "inventory", Inventory.Export() }
             };
 
-            storageDataNode.SaveTime = DateTime.UtcNow;
-            storageDataNode.Version = GetAssemblyVersion();
+            storageNode.SaveTime = DateTime.UtcNow;
+            storageNode.Version = GetAssemblyVersion();
 
             // Locations
             IEnumerable<string> locationTypeNames = LocationEngine.Locations
                 .Where(x => x != null)
                 .Select(x => x.GetType().FullName);
 
-            storageDataNode.Add("locations", string.Join(";", locationTypeNames));
+            storageNode.Add("locations", string.Join(";", locationTypeNames));
 
             foreach (ILocation location in LocationEngine.Locations)
             {
-                StorageDataNode locationStorageDataNode = location.Export();
-                storageDataNode.Add("location." + location.Id, locationStorageDataNode);
+                StorageNode locationStorageNode = location.Export();
+                storageNode.Add("location." + location.Id, locationStorageNode);
             }
 
             // Add Ons
             foreach (IAddOn addOn in AddOns)
             {
-                StorageDataNode addOnStorageDataNode = addOn.Export();
-                storageDataNode.Add("addon." + addOn.Id, addOnStorageDataNode);
+                StorageNode addOnStorageNode = addOn.Export();
+                storageNode.Add("addon." + addOn.Id, addOnStorageNode);
             }
 
-            return storageDataNode;
+            return storageNode;
         }
 
         private static Version GetAssemblyVersion()
@@ -292,7 +297,7 @@ namespace DustInTheWind.Dot.AdventureGame.GameModel
             {
                 string locationId = pair.Key.Substring("location.".Length);
                 ILocation location = LocationEngine.Locations.FirstOrDefault(x => x.Id == locationId);
-                location?.Import((StorageDataNode)pair.Value);
+                location?.Import((StorageNode)pair.Value);
             }
 
             // Add Ons
@@ -303,7 +308,7 @@ namespace DustInTheWind.Dot.AdventureGame.GameModel
             {
                 string addOnId = pair.Key.Substring("addon.".Length);
                 IAddOn addOn = AddOns.Single(x => x.Id == addOnId);
-                addOn.Load((StorageDataNode)pair.Value);
+                addOn.Load((StorageNode)pair.Value);
             }
 
             // Current Location
@@ -311,8 +316,8 @@ namespace DustInTheWind.Dot.AdventureGame.GameModel
             LocationEngine.MoveTo(currentLocationId);
 
             // Inventory
-            StorageDataNode inventoryStorageDataNode = (StorageDataNode)storageData["inventory"];
-            Inventory.Import(inventoryStorageDataNode);
+            StorageNode inventoryStorageNode = (StorageNode)storageData["inventory"];
+            Inventory.Import(inventoryStorageNode);
         }
 
         protected virtual void OnStateChanged()

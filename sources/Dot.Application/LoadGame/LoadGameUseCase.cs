@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using DustInTheWind.Dot.Application.SaveGame;
 using DustInTheWind.Dot.Domain;
 using DustInTheWind.Dot.Domain.DataAccess;
 using DustInTheWind.Dot.Domain.GameModel;
+using DustInTheWind.Dot.Domain.SaveModel;
 
-namespace DustInTheWind.Dot.Application.UseCases
+namespace DustInTheWind.Dot.Application.LoadGame
 {
     public class LoadGameUseCase
     {
@@ -12,11 +14,11 @@ namespace DustInTheWind.Dot.Application.UseCases
         private readonly GameRepository gameRepository;
         private readonly IGameFactory gameFactory;
         private readonly IUseCaseFactory useCaseFactory;
-        private readonly GameSlotRepository gameSlotRepository;
+        private readonly IGameSlotRepository gameSlotRepository;
         private readonly IGameSettings gameSettings;
 
         public LoadGameUseCase(ILoadGameView loadGameView, GameRepository gameRepository, IGameFactory gameFactory,
-            IUseCaseFactory useCaseFactory, GameSlotRepository gameSlotRepository, IGameSettings gameSettings)
+            IUseCaseFactory useCaseFactory, IGameSlotRepository gameSlotRepository, IGameSettings gameSettings)
         {
             view = loadGameView ?? throw new ArgumentNullException(nameof(loadGameView));
             this.gameRepository = gameRepository ?? throw new ArgumentNullException(nameof(gameRepository));

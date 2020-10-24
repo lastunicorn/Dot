@@ -1,5 +1,5 @@
 ﻿using System;
-using DustInTheWind.Dot.Application.UseCases;
+using DustInTheWind.Dot.Application.Credits;
 using DustInTheWind.Dot.ConsoleHelpers.UIControls;
 using DustInTheWind.Dot.Domain;
 using DustInTheWind.Dot.Presentation.Views;

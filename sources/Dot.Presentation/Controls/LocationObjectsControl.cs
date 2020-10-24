@@ -1,19 +1,19 @@
 using System;
 using DustInTheWind.Dot.AdventureGame.LocationModel;
 using DustInTheWind.Dot.AdventureGame.ObjectModel;
-using DustInTheWind.Dot.Domain;
+using DustInTheWind.Dot.AudioSupport;
 
 namespace DustInTheWind.Dot.Presentation.Controls
 {
     public class LocationObjectsControl
     {
-        private readonly IUserInterface userInterface;
+        private readonly Audio audio;
 
         public ILocation Location { get; set; }
 
-        public LocationObjectsControl(IUserInterface userInterface)
+        public LocationObjectsControl(Audio audio)
         {
-            this.userInterface = userInterface ?? throw new ArgumentNullException(nameof(userInterface));
+            this.audio = audio ?? throw new ArgumentNullException(nameof(audio));
         }
 
         public void Display()
@@ -24,9 +24,18 @@ namespace DustInTheWind.Dot.Presentation.Controls
             string objectNames = Location.GetChildrenNames();
 
             if (string.IsNullOrEmpty(objectNames))
-                userInterface.DisplayInfo(Location.Name + ": <nothing>");
+                DisplayInfo(Location.Name + ": <nothing>");
             else
-                userInterface.DisplayInfo(Location.Name + ": {{" + objectNames + "}}");
+                DisplayInfo(Location.Name + ": {{" + objectNames + "}}");
+        }
+
+        public void DisplayInfo(string text)
+        {
+            InfoBlock infoBlock = new InfoBlock(audio)
+            {
+                Text = text
+            };
+            infoBlock.Display();
         }
     }
 }

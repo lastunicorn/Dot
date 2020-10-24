@@ -9,7 +9,7 @@ namespace DustInTheWind.Dot.AdventureGame.LocationModel
 {
     public abstract class LocationBase : ContainerObject, ILocation
     {
-        protected List<IAddOn> addOns;
+        protected HashSet<IAddOn> AddOns { get; } = new HashSet<IAddOn>();
 
         public virtual string[] AdditionalNames { get; } = new string[0];
 
@@ -20,14 +20,12 @@ namespace DustInTheWind.Dot.AdventureGame.LocationModel
 
         protected LocationBase()
         {
-            addOns = new List<IAddOn>();
-
             IsVisible = true;
         }
 
         public void AddAddOn(IAddOn addOn)
         {
-            addOns.Add(addOn);
+            AddOns.Add(addOn);
         }
 
         public bool HasName(string name)
@@ -38,7 +36,8 @@ namespace DustInTheWind.Dot.AdventureGame.LocationModel
 
         public void Enter()
         {
-            addOns.ForEach(x => x.Start());
+            foreach (IAddOn addOn in AddOns)
+                addOn.Start();
 
             OnEntered();
         }
@@ -47,34 +46,35 @@ namespace DustInTheWind.Dot.AdventureGame.LocationModel
         {
             OnExiting();
 
-            addOns.ForEach(x => x.Stop());
+            foreach (IAddOn addOn in AddOns)
+                addOn.Stop();
         }
 
-        public override StorageDataNode Export()
+        public override StorageNode Export()
         {
-            StorageDataNode storageDataNode = base.Export();
+            StorageNode storageNode = base.Export();
 
-            foreach (IAddOn addOn in addOns)
+            foreach (IAddOn addOn in AddOns)
             {
-                StorageDataNode addOnStorageDataNode = addOn.Export();
-                storageDataNode.Add("addon." + addOn.Id, addOnStorageDataNode);
+                StorageNode addOnStorageNode = addOn.Export();
+                storageNode.Add("addon." + addOn.Id, addOnStorageNode);
             }
 
-            return storageDataNode;
+            return storageNode;
         }
 
-        public override void Import(StorageDataNode storageDataNode)
+        public override void Import(StorageNode storageNode)
         {
-            base.Import(storageDataNode);
+            base.Import(storageNode);
 
-            var saveNodes = storageDataNode
+            IEnumerable<KeyValuePair<string, object>> storageNodes = storageNode
                 .Where(x => x.Key.StartsWith("addon."));
 
-            foreach (KeyValuePair<string, object> pair in saveNodes)
+            foreach (KeyValuePair<string, object> pair in storageNodes)
             {
                 string addOnId = pair.Key.Substring("addon.".Length);
-                IAddOn addOn = addOns.Single(x => x.Id == addOnId);
-                addOn.Load((StorageDataNode)pair.Value);
+                IAddOn addOn = AddOns.Single(x => x.Id == addOnId);
+                addOn.Load((StorageNode)pair.Value);
             }
         }
 

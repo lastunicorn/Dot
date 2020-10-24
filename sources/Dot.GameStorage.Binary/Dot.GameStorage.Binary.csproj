@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <AssemblyName>DustInTheWind.Dot.GameStorage.Binary</AssemblyName>
+        <RootNamespace>DustInTheWind.Dot.GameStorage.Binary</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Dot.Domain\Dot.Domain.csproj" />
+    </ItemGroup>
+
+</Project>

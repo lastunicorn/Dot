@@ -6,29 +6,9 @@ using DustInTheWind.Dot.Domain.SaveModel;
 
 namespace DustInTheWind.Dot.AdventureGame.ObjectModel
 {
-    public class ObjectAddingEventArgs : EventArgs
-    {
-        public IObject Object { get; }
-
-        public ObjectAddingEventArgs(IObject @object)
-        {
-            Object = @object;
-        }
-    }
-
-    public class ObjectAddedEventArgs : EventArgs
-    {
-        public IObject Object { get; }
-
-        public ObjectAddedEventArgs(IObject @object)
-        {
-            Object = @object;
-        }
-    }
-
     public abstract class ContainerObject : ObjectBase, IObjectContainer
     {
-        protected readonly List<IObject> children;
+        protected HashSet<IObject> Children { get; } = new HashSet<IObject>();
 
         public event EventHandler<ObjectAddingEventArgs> ObjectAdding;
         public event EventHandler<ObjectAddedEventArgs> ObjectAdded;
@@ -40,14 +20,18 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
 
         protected ContainerObject(IEnumerable<IObject> children)
         {
-            this.children = new List<IObject>();
-
             if (children != null)
             {
                 foreach (IObject child in children)
                 {
+                    if (child == null)
+                        continue;
+
+                    if (Children.Contains(child))
+                        continue;
+
                     child.Parent = this;
-                    this.children.Add(child);
+                    Children.Add(child);
                 }
             }
         }
@@ -58,7 +42,7 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
             OnObjectAdding(objectAddingEventArgs);
 
             @object.Parent = this;
-            children.Add(@object);
+            Children.Add(@object);
 
             ObjectAddedEventArgs objectAddedEventArgs = new ObjectAddedEventArgs(@object);
             OnObjectAdded(objectAddedEventArgs);
@@ -67,27 +51,27 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
         public void RemoveObject(IObject @object)
         {
             @object.Parent = null;
-            children.Remove(@object);
+            Children.Remove(@object);
         }
 
         public bool Contains(IObject @object)
         {
-            return children.Contains(@object);
+            return Children.Contains(@object);
         }
 
         public bool Contains<T>()
         {
-            return children.OfType<T>().Any();
+            return Children.OfType<T>().Any();
         }
 
         public T GetChild<T>()
         {
-            return children.OfType<T>().FirstOrDefault();
+            return Children.OfType<T>().FirstOrDefault();
         }
 
         public void MakeAllChildrenVisible()
         {
-            foreach (IObject @object in children)
+            foreach (IObject @object in Children)
                 @object.IsVisible = true;
         }
 
@@ -96,7 +80,7 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
             if (string.Equals(objectName, Name, StringComparison.CurrentCultureIgnoreCase))
                 return this;
 
-            foreach (IObject childObject in children)
+            foreach (IObject childObject in Children)
             {
                 if (!childObject.IsVisible)
                     continue;
@@ -139,37 +123,37 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
             return default;
         }
 
-        public override StorageDataNode Export()
+        public override StorageNode Export()
         {
-            StorageDataNode storageDataNode = base.Export();
+            StorageNode storageNode = base.Export();
 
-            IEnumerable<string> childrenTypes = children
+            IEnumerable<string> childrenTypes = Children
                 .Where(x => x != null)
                 .Select(x => x.GetType().AssemblyQualifiedName);
 
             if (childrenTypes.Any())
             {
-                storageDataNode.Add("children", string.Join(";", childrenTypes));
+                storageNode.Add("children", string.Join(";", childrenTypes));
 
-                foreach (IObject child in children)
+                foreach (IObject child in Children)
                 {
-                    StorageDataNode childStorageDataNode = child.Export();
-                    storageDataNode.Add("child." + child.Id, childStorageDataNode);
+                    StorageNode childStorageNode = child.Export();
+                    storageNode.Add("child." + child.Id, childStorageNode);
                 }
             }
 
-            return storageDataNode;
+            return storageNode;
         }
 
-        public override void Import(StorageDataNode storageDataNode)
+        public override void Import(StorageNode storageNode)
         {
-            base.Import(storageDataNode);
+            base.Import(storageNode);
 
-            children.Clear();
+            Children.Clear();
 
-            if (storageDataNode.ContainsKey("children"))
+            if (storageNode.ContainsKey("children"))
             {
-                string[] childrenInformation = ((string)storageDataNode["children"]).Split(';');
+                string[] childrenInformation = ((string)storageNode["children"]).Split(';');
 
                 foreach (string childTypeName in childrenInformation)
                 {
@@ -179,24 +163,24 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
                     Type type = Type.GetType(childTypeName);
                     IObject childObject = (IObject)Activator.CreateInstance(type);
                     childObject.Parent = this;
-                    children.Add(childObject);
+                    Children.Add(childObject);
                 }
             }
 
-            var saveNodes = storageDataNode
+            IEnumerable<KeyValuePair<string, object>> storageNodes = storageNode
                 .Where(x => x.Key.StartsWith("child."));
 
-            foreach (KeyValuePair<string, object> pair in saveNodes)
+            foreach (KeyValuePair<string, object> pair in storageNodes)
             {
                 string childId = pair.Key.Substring("child.".Length);
-                IObject childObject = children.Single(x => x.Id == childId);
-                childObject.Import((StorageDataNode)pair.Value);
+                IObject childObject = Children.Single(x => x.Id == childId);
+                childObject.Import((StorageNode)pair.Value);
             }
         }
 
         public IEnumerator<IObject> GetEnumerator()
         {
-            return children.GetEnumerator();
+            return Children.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()

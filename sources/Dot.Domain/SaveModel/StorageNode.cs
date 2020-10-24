@@ -5,13 +5,13 @@ using System.Runtime.Serialization;
 namespace DustInTheWind.Dot.Domain.SaveModel
 {
     [Serializable]
-    public class StorageDataNode : Dictionary<string, object>
+    public class StorageNode : Dictionary<string, object>
     {
-        public StorageDataNode()
+        public StorageNode()
         {
         }
 
-        public StorageDataNode(SerializationInfo info, StreamingContext context)
+        public StorageNode(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }

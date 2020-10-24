@@ -153,6 +153,11 @@ namespace DustInTheWind.Dot.Presentation
             infoBlock.Display();
         }
 
+        public string Question(string text)
+        {
+            return CommandLinePrompter.QuickDisplay(text);
+        }
+
         public void DisplayInfo(string text)
         {
             InfoBlock infoBlock = new InfoBlock(audio)

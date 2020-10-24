@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using DustInTheWind.Dot.Domain;
 using DustInTheWind.Dot.Domain.DataAccess;
 using DustInTheWind.Dot.Domain.GameModel;
+using DustInTheWind.Dot.Domain.SaveModel;
 
-namespace DustInTheWind.Dot.Application.UseCases
+namespace DustInTheWind.Dot.Application.SaveGame
 {
     public class SaveGameUseCase
     {
         private readonly ISaveGameView view;
         private readonly GameRepository gameRepository;
-        private readonly GameSlotRepository gameSlotRepository;
+        private readonly IGameSlotRepository gameSlotRepository;
         private readonly IGameSettings gameSettings;
 
-        public SaveGameUseCase(ISaveGameView saveGameView, GameRepository gameRepository, GameSlotRepository gameSlotRepository, IGameSettings gameSettings)
+        public SaveGameUseCase(ISaveGameView saveGameView, GameRepository gameRepository, IGameSlotRepository gameSlotRepository, IGameSettings gameSettings)
         {
             view = saveGameView ?? throw new ArgumentNullException(nameof(saveGameView));
             this.gameRepository = gameRepository ?? throw new ArgumentNullException(nameof(gameRepository));

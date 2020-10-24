@@ -2,7 +2,7 @@
 using DustInTheWind.Dot.Domain.DataAccess;
 using DustInTheWind.Dot.Domain.GameModel;
 
-namespace DustInTheWind.Dot.Application.UseCases
+namespace DustInTheWind.Dot.Application.NewGame
 {
     public class CreateNewGameUseCase
     {

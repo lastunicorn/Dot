@@ -22,7 +22,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.AdventureGame", "Dot.AdventureGame\Dot.AdventureGame.csproj", "{AD89C710-D8D4-4D77-B4C7-75FE6FD913C5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Demo", "Demo\Dot.Demo.csproj", "{97272D44-504B-422D-928F-50F0CCBC9C2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Demo", "Dot.Demo\Dot.Demo.csproj", "{97272D44-504B-422D-928F-50F0CCBC9C2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dot.GameStorage.Binary", "Dot.GameStorage.Binary\Dot.GameStorage.Binary.csproj", "{944619C8-D290-4278-832C-3DB434C86E3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dot.Tests", "Dot.Tests\Dot.Tests.csproj", "{33DFF2AA-ED29-4C04-8A90-29EDA1FA0876}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,6 +66,14 @@ Global
 		{97272D44-504B-422D-928F-50F0CCBC9C2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97272D44-504B-422D-928F-50F0CCBC9C2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97272D44-504B-422D-928F-50F0CCBC9C2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{944619C8-D290-4278-832C-3DB434C86E3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{944619C8-D290-4278-832C-3DB434C86E3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{944619C8-D290-4278-832C-3DB434C86E3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{944619C8-D290-4278-832C-3DB434C86E3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33DFF2AA-ED29-4C04-8A90-29EDA1FA0876}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33DFF2AA-ED29-4C04-8A90-29EDA1FA0876}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33DFF2AA-ED29-4C04-8A90-29EDA1FA0876}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33DFF2AA-ED29-4C04-8A90-29EDA1FA0876}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

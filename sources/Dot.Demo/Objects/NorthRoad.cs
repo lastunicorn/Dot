@@ -11,12 +11,14 @@ namespace DustInTheWind.Dot.Demo.Objects
 
         public override string Name { get; } = "north road";
 
+        public override string ImagePath { get; } = "DustInTheWind.Dot.Demo.Ascii.road.ascii";
+
         public override IEnumerable LookAt()
         {
-            return new AudioText
+            yield return CreateDescriptionStory(new AudioText
             {
                 Text = "The road goes to the north."
-            };
+            });
         }
 
         public IEnumerable Exit()

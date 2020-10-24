@@ -17,8 +17,8 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
 
         IEnumerable LookAt();
 
-        StorageDataNode Export();
+        StorageNode Export();
 
-        void Import(StorageDataNode storageDataNode);
+        void Import(StorageNode storageNode);
     }
 }

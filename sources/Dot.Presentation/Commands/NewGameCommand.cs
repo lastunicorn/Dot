@@ -1,5 +1,5 @@
 ﻿using System;
-using DustInTheWind.Dot.Application.UseCases;
+using DustInTheWind.Dot.Application.NewGame;
 using DustInTheWind.Dot.ConsoleHelpers.UIControls;
 using DustInTheWind.Dot.Domain;
 using DustInTheWind.Dot.Domain.ModuleModel;

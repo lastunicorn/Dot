@@ -3,11 +3,12 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
+using DustInTheWind.Dot.Domain;
 using DustInTheWind.Dot.Domain.SaveModel;
 
-namespace DustInTheWind.Dot.Domain
+namespace DustInTheWind.Dot.GameStorage.Binary
 {
-    public class GameSlotRepository
+    public class GameSlotRepository : IGameSlotRepository
     {
         private readonly string saveDirectory;
 
