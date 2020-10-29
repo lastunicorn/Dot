@@ -20,6 +20,6 @@ jobs:
     - name: Install dependencies
       run: dotnet restore ./sources/Dot.sln
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build ./sources/Dot.sln --configuration Release --no-restore
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test ./sources/Dot.sln --no-restore --verbosity normal
