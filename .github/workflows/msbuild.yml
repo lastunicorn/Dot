@@ -35,3 +35,6 @@ jobs:
       
       - name: Build the solution
         run: msbuild ./sources/Dot.sln
+      
+      - name: Running Tests
+        run: dotnet test
