@@ -79,10 +79,14 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
 
         public virtual StorageNode Export()
         {
-            return new StorageNode
+            StorageNode storageNode = new StorageNode
             {
                 { "is-visible", isVisible }
             };
+
+            storageNode.ObjectType = GetType();
+
+            return storageNode;
         }
 
         public virtual void Import(StorageNode storageNode)

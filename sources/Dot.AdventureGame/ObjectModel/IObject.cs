@@ -1,9 +1,8 @@
 using System.Collections;
-using DustInTheWind.Dot.Domain.SaveModel;
 
 namespace DustInTheWind.Dot.AdventureGame.ObjectModel
 {
-    public interface IObject
+    public interface IObject : IExportable
     {
         string Id { get; }
 
@@ -16,9 +15,5 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
         bool IsVisible { get; set; }
 
         IEnumerable LookAt();
-
-        StorageNode Export();
-
-        void Import(StorageNode storageNode);
     }
 }

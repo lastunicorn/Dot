@@ -13,8 +13,11 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
         T Find<T>();
 
         IObject FindVisibleObject(string objectName);
+        
         bool Contains<T>();
+        
         T GetChild<T>();
+        
         void MakeAllChildrenVisible();
     }
 }

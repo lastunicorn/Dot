@@ -3,9 +3,9 @@ using DustInTheWind.Dot.AdventureGame.Verbs;
 
 namespace DustInTheWind.Dot.AdventureGame.GameModel
 {
-    public class StandardGame : GameBase
+    public abstract class StandardGame : GameBase
     {
-        public StandardGame()
+        protected StandardGame()
         {
             Actions.Add(new LookAroundAction(this));
             Actions.Add(new LookAtAction());

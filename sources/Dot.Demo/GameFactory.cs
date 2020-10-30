@@ -1,5 +1,6 @@
 ﻿using System;
 using DustInTheWind.Dot.Domain.GameModel;
+using DustInTheWind.Dot.Domain.SaveModel;
 using Ninject;
 
 namespace DustInTheWind.Dot.Demo
@@ -13,9 +14,18 @@ namespace DustInTheWind.Dot.Demo
             this.kernel = kernel ?? throw new ArgumentNullException(nameof(kernel));
         }
 
-        public IGameBase Create()
+        public IGameBase CreateNew()
         {
-            return kernel.Get<Game>();
+            IGameBase game = kernel.Get<IGameBase>();
+            game.InitializeNew();
+            return game;
+        }
+
+        public IGameBase CreateFrom(StorageData gameSlotData)
+        {
+            IGameBase game = kernel.Get<IGameBase>();
+            game.Import(gameSlotData);
+            return game;
         }
     }
 }

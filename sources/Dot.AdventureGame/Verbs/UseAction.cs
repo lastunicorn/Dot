@@ -6,6 +6,7 @@ using DustInTheWind.Dot.AdventureGame.ActionModel;
 using DustInTheWind.Dot.AdventureGame.ObjectModel;
 using DustInTheWind.Dot.Domain;
 using DustInTheWind.Dot.Domain.AudioTextModel;
+using DustInTheWind.Dot.Domain.AudioTexts;
 
 namespace DustInTheWind.Dot.AdventureGame.Verbs
 {

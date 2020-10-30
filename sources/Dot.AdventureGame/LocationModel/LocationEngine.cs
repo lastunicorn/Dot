@@ -1,12 +1,16 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DustInTheWind.Dot.AdventureGame.ObjectModel;
+using DustInTheWind.Dot.Domain.SaveModel;
 
 namespace DustInTheWind.Dot.AdventureGame.LocationModel
 {
-    public class LocationEngine
+    public class LocationEngine : IEnumerable<ILocation>, IExportable
     {
-        public List<ILocation> Locations { get; } = new List<ILocation>();
+        private readonly HashSet<ILocation> locations  = new HashSet<ILocation>();
+
         private ILocation currentLocation;
 
         public ILocation CurrentLocation
@@ -27,9 +31,19 @@ namespace DustInTheWind.Dot.AdventureGame.LocationModel
         public event EventHandler CurrentLocationChanging;
         public event EventHandler CurrentLocationChanged;
 
+        public void Add(ILocation location)
+        {
+            locations.Add(location);
+        }
+
+        public void Clear()
+        {
+            locations.Clear();
+        }
+
         public void MoveToFirst()
         {
-            CurrentLocation = Locations.FirstOrDefault();
+            CurrentLocation = locations.FirstOrDefault();
         }
 
         public void Reset()
@@ -39,7 +53,7 @@ namespace DustInTheWind.Dot.AdventureGame.LocationModel
 
         public void MoveTo(string locationId)
         {
-            CurrentLocation = Locations.FirstOrDefault(x => x.Id == locationId);
+            CurrentLocation = locations.FirstOrDefault(x => x.Id == locationId);
         }
 
         public void MoveToNone()
@@ -47,53 +61,54 @@ namespace DustInTheWind.Dot.AdventureGame.LocationModel
             CurrentLocation = null;
         }
 
-        //public virtual StorageNode Save()
-        //{
-        //    StorageNode storageNode = new StorageNode();
+        public IEnumerator<ILocation> GetEnumerator()
+        {
+            return locations.GetEnumerator();
+        }
 
-        //    foreach (ILocation location in Locations)
-        //    {
-        //        StorageNode locationStorageNode = location.Save();
-        //        storageNode.Add(location.Id, locationStorageNode);
-        //    }
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
 
+        public StorageNode Export()
+        {
+            StorageNode storageNode = new StorageNode
+            {
+                { "current-location", CurrentLocation?.Id },
+            };
 
-        //    IEnumerable<string> locationTypeNames = Locations
-        //        .Where(x => x != null)
-        //        .Select(x => x.GetType().FullName);
+            storageNode.ObjectType = GetType();
 
-        //    storageNode.Add("locations", string.Join(";", locationTypeNames));
+            IEnumerable<StorageNode> locationStorageNodes = locations
+                .Select(x => x.Export());
 
-        //    foreach (ILocation location in Locations)
-        //    {
-        //        StorageNode locationStorageNode = location.Save();
-        //        storageNode.Add("location." + location.Id, locationStorageNode);
-        //    }
+            foreach (StorageNode locationStorageNode in locationStorageNodes) 
+                storageNode.Add("location", locationStorageNode);
 
-        //    return storageNode;
-        //}
+            return storageNode;
+        }
 
-        //public virtual void Load(StorageNode storageNode)
-        //{
-        //    State = (GameState)storageNode["state"];
-        //    TotalPlayTime = (TimeSpan)storageNode["total-play-time"];
+        public void Import(StorageNode storageNode)
+        {
+            IEnumerable<StorageNode> locationNodes = storageNode
+                .Where(x => x.Key == "location")
+                .Select(x => x.Value)
+                .Cast<StorageNode>();
 
-        //    var saveNodes = storageNode
-        //        .Where(x => x.Key.StartsWith("location."));
+            foreach (StorageNode locationNode in locationNodes)
+            {
+                Type locationType = locationNode.ObjectType;
+                
+                ILocation location = Activator.CreateInstance(locationType) as ILocation;
+                location?.Import(locationNode);
 
-        //    foreach (KeyValuePair<string, object> pair in saveNodes)
-        //    {
-        //        string locationId = pair.Key.Substring("location.".Length);
-        //        ILocation location = locationEngine.Locations.Single(x => x.Id == locationId);
-        //        location.Load((StorageNode)pair.Value);
-        //    }
+                locations.Add(location);
+            }
 
-        //    string currentLocationId = (string)storageNode["current-location"];
-        //    locationEngine.MoveTo(currentLocationId);
-
-        //    StorageNode inventoryStorageNode = (StorageNode)storageNode["inventory"];
-        //    Inventory.Load(inventoryStorageNode);
-        //}
+            string currentLocationId = (string)storageNode["current-location"];
+            CurrentLocation = locations.FirstOrDefault(x => x.Id == currentLocationId);
+        }
 
         protected virtual void OnCurrentLocationChanging()
         {

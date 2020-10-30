@@ -1,7 +1,11 @@
+using DustInTheWind.Dot.Domain.SaveModel;
+
 namespace DustInTheWind.Dot.Domain.GameModel
 {
     public interface IGameFactory
     {
-        IGameBase Create();
+        IGameBase CreateNew();
+
+        IGameBase CreateFrom(StorageData gameSlotData);
     }
 }

@@ -35,6 +35,7 @@ namespace DustInTheWind.Dot.Demo
             kernel.Bind<IGameSlotRepository>().To<GameSlotRepository>();
             kernel.Bind<ResultHandlersCollection>().ToSelf();
             kernel.Bind<ModuleEngine>().ToSelf().InSingletonScope();
+            kernel.Bind<IGameBase>().To<DemoGame>();
             kernel.Bind<IGameFactory>().To<GameFactory>();
             kernel.Bind<IUseCaseFactory>().To<UseCaseFactory>();
             kernel.Bind<IScreenFactory>().To<ScreenFactory>();

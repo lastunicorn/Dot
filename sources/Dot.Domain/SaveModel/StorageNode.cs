@@ -1,20 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace DustInTheWind.Dot.Domain.SaveModel
 {
-    [Serializable]
     public class StorageNode : Dictionary<string, object>
     {
-        public StorageNode()
-        {
-        }
-
-        public StorageNode(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+        public Type ObjectType { get; set; }
 
         public T Get<T>(string key, T defaultValue = default)
         {

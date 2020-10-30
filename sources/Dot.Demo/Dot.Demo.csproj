@@ -1,35 +1,35 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <AssemblyName>DustInTheWind.Dot.Demo</AssemblyName>
-    <RootNamespace>DustInTheWind.Dot.Demo</RootNamespace>
-  </PropertyGroup>
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <AssemblyName>DustInTheWind.Dot.Demo</AssemblyName>
+        <RootNamespace>DustInTheWind.Dot.Demo</RootNamespace>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Ascii\acorn.ascii" />
-    <None Remove="Ascii\oak.ascii" />
-    <None Remove="Ascii\road.ascii" />
-  </ItemGroup>
+    <ItemGroup>
+        <None Remove="Ascii\acorn.ascii" />
+        <None Remove="Ascii\oak.ascii" />
+        <None Remove="Ascii\road.ascii" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Include="Ascii\acorn.ascii" />
-    <EmbeddedResource Include="Ascii\oak.ascii" />
-    <EmbeddedResource Include="Ascii\road.ascii" />
-  </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Include="Ascii\acorn.ascii" />
+        <EmbeddedResource Include="Ascii\oak.ascii" />
+        <EmbeddedResource Include="Ascii\road.ascii" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Ninject" Version="3.3.4" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Ninject" Version="3.3.4" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Dot.AdventureGame\Dot.AdventureGame.csproj" />
-    <ProjectReference Include="..\Dot.Application\Dot.Application.csproj" />
-    <ProjectReference Include="..\Dot.AudioSupport\Dot.AudioSupport.csproj" />
-    <ProjectReference Include="..\Dot.Domain\Dot.Domain.csproj" />
-    <ProjectReference Include="..\Dot.GameStorage.Binary\Dot.GameStorage.Binary.csproj" />
-    <ProjectReference Include="..\Dot.Presentation\Dot.Presentation.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Dot.AdventureGame\Dot.AdventureGame.csproj" />
+        <ProjectReference Include="..\Dot.Application\Dot.Application.csproj" />
+        <ProjectReference Include="..\Dot.AudioSupport\Dot.AudioSupport.csproj" />
+        <ProjectReference Include="..\Dot.Domain\Dot.Domain.csproj" />
+        <ProjectReference Include="..\Dot.GameStorage.Binary\Dot.GameStorage.Binary.csproj" />
+        <ProjectReference Include="..\Dot.Presentation\Dot.Presentation.csproj" />
+    </ItemGroup>
 
 </Project>

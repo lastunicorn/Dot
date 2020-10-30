@@ -4,11 +4,15 @@ using DustInTheWind.Dot.Domain.AudioTextModel;
 
 namespace DustInTheWind.Dot.Demo.Objects
 {
-    internal class Crossroads : LocationBase
+    internal class CrossroadsLocation : LocationBase
     {
         public override string Id { get; } = "crossroads";
 
         public override string Name { get; } = "Crossroads";
+
+        public override void InitializeNew()
+        {
+        }
 
         public override IEnumerable LookAt()
         {

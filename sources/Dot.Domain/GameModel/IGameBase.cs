@@ -15,6 +15,8 @@ namespace DustInTheWind.Dot.Domain.GameModel
         event EventHandler Closing;
         event EventHandler Closed;
 
+        void InitializeNew();
+
         void Open();
 
         void Close();

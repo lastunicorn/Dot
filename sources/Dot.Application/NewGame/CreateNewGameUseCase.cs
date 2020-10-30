@@ -20,7 +20,7 @@ namespace DustInTheWind.Dot.Application.NewGame
             IGameBase game = gameRepository.Get();
             game?.Close();
 
-            game = gameFactory.Create();
+            game = gameFactory.CreateNew();
             gameRepository.Add(game);
         }
     }

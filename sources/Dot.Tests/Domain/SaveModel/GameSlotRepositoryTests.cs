@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.Dot.Domain;
 using DustInTheWind.Dot.Domain.SaveModel;
-using DustInTheWind.Dot.GameStorage;
 using DustInTheWind.Dot.GameStorage.Binary;
 using Xunit;
 
-namespace Dot.Tests
+namespace Dot.Tests.Domain.SaveModel
 {
     public class GameSlotRepositoryTests
     {

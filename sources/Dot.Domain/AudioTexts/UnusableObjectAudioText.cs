@@ -2,22 +2,21 @@ using System;
 using System.Collections.Generic;
 using DustInTheWind.Dot.Domain.AudioTextModel;
 
-namespace DustInTheWind.Dot.Domain
+namespace DustInTheWind.Dot.Domain.AudioTexts
 {
-    public class IncompatibleObjectAudioText : AudioText
+    public class UnusableObjectAudioText : AudioText
     {
         private static Random random;
         private static int lastRandomIndex;
 
         private static readonly List<Tuple<string, string>> Items = new List<Tuple<string, string>>
         {
-            new Tuple<string, string>("You cannot use them in that way.", "use-incompatibleobjects-1.mp3"),
-            new Tuple<string, string>("And.. how do you think I can use those two together?", "use-incompatibleobjects-2.mp3"),
-            new Tuple<string, string>("Nope.", "use-incompatibleobjects-3.mp3"),
-            new Tuple<string, string>("I was considering your suggestion, but no.", "use-incompatibleobjects-4.mp3")
+            new Tuple<string, string>("And... how do you want to use it?", "use-unusableobject-1.mp3"),
+            new Tuple<string, string>("I don't know a way to use it.", "use-unusableobject-2.mp3"),
+            new Tuple<string, string>("Use it... how?", "use-unusableobject-3.mp3")
         };
 
-        public IncompatibleObjectAudioText()
+        public UnusableObjectAudioText()
         {
             (Text, AudioFileName) = GetOneItem();
         }

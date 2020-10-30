@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using DustInTheWind.Dot.Domain;
 using DustInTheWind.Dot.Domain.AudioTextModel;
+using DustInTheWind.Dot.Domain.AudioTexts;
 
 namespace DustInTheWind.Dot.AdventureGame.ObjectModel
 {

@@ -1,10 +1,10 @@
-﻿namespace DustInTheWind.Dot.Domain
+﻿namespace DustInTheWind.Dot.Domain.GameModel
 {
     public class GameSettings : IGameSettings
     {
-        public int LastSavedGame
+        public int? LastSavedGame
         {
-            get => 0;
+            get => null;
             set
             {
                 //Settings.Default.LastSaveFileName = value;

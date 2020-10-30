@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DustInTheWind.Dot.ConsoleHelpers.UIControls;
 using DustInTheWind.Dot.Domain;
+using DustInTheWind.Dot.Domain.SaveModel;
 
 namespace DustInTheWind.Dot.Presentation.Controls
 {

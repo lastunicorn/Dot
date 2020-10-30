@@ -124,26 +124,6 @@ namespace DustInTheWind.Dot.Presentation
             }
         }
 
-        public void DisplayTalk(IAudioTextEnumerable audioTexts)
-        {
-            if (audioTexts == null)
-                return;
-
-            AudioTextBox audioTextBox = new AudioTextBox(audio)
-            {
-                Margins = new Margins(3, 1, 3, 1),
-                Color = DefaultTheme.Instance.DefaultColor,
-                ActionColor = DefaultTheme.Instance.ActionColor,
-                ObjectColor = DefaultTheme.Instance.ObjectColor
-            };
-            audioTextBox.Display(audioTexts);
-        }
-
-        public InfoBlock CreateInfoBlock()
-        {
-            return new InfoBlock(audio);
-        }
-
         public void DisplayInfoBlock(IEnumerable<string> texts)
         {
             InfoBlock infoBlock = new InfoBlock(audio)
@@ -295,29 +275,6 @@ namespace DustInTheWind.Dot.Presentation
             audioTextBox.Display(suggestionBlock.Texts);
         }
 
-        public void DisplayObjectAcquired(string objectName)
-        {
-            if (objectName == null)
-                return;
-
-            AudioTextBox audioTextBox = new AudioTextBox(audio)
-            {
-                Color = DefaultTheme.Instance.DefaultColor,
-                ActionColor = DefaultTheme.Instance.ActionColor,
-                ObjectColor = DefaultTheme.Instance.ObjectColor,
-                Border = Border.CreateSingleLineBorder(false, true, false, true),
-                Margins = new Margins(3, 0),
-                Paddings = new Paddings(2, 0),
-                CanSkipAudio = false
-            };
-
-            audioTextBox.Display(new AudioText
-            {
-                Text = "Object acquired: {{" + objectName + "}}",
-                AudioFileName = "object-obtained.mp3"
-            });
-        }
-
         public void PlayBackgroundSound(string audioFileName, Action action)
         {
 #if DEBUG_AUDIO_FILE
@@ -362,45 +319,6 @@ namespace DustInTheWind.Dot.Presentation
                 MarginBottom = marginBottom
             };
             asciiImageBox.Display();
-        }
-
-        public void DisplayChapterPicture(string imagePath)
-        {
-            AsciiImageBox asciiImageBox = new AsciiImageBox
-            {
-                AsciiPath = imagePath,
-                ForegroundColor = DefaultTheme.Instance.ChapterImageColor,
-                MarginTop = 2
-            };
-            asciiImageBox.Display();
-        }
-
-        public void DisplayChapterTitle(string text)
-        {
-            Console.CursorVisible = false;
-
-            try
-            {
-                CustomConsole.WriteLine();
-                CustomConsole.WriteLine();
-                CustomConsole.WriteLine(text, DefaultTheme.Instance.ChapterTitleColor);
-                CustomConsole.WriteLine();
-
-                Thread.Sleep(500);
-            }
-            finally
-            {
-                Console.CursorVisible = true;
-            }
-        }
-
-        public void DisplaySeparator()
-        {
-            Separator separator = new Separator
-            {
-                ForegroundColor = DefaultTheme.Instance.DefaultColor
-            };
-            separator.Display();
         }
     }
 }

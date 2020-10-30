@@ -5,6 +5,7 @@ using DustInTheWind.Dot.AudioSupport;
 using DustInTheWind.Dot.ConsoleHelpers.ConsoleUtil;
 using DustInTheWind.Dot.ConsoleHelpers.UIControls;
 using DustInTheWind.Dot.Domain;
+using DustInTheWind.Dot.Domain.SaveModel;
 using DustInTheWind.Dot.Presentation.Controls;
 
 namespace DustInTheWind.Dot.Presentation.Views

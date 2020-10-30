@@ -13,6 +13,8 @@ namespace DustInTheWind.Dot.AdventureGame.LocationModel
         event EventHandler Entered;
         event EventHandler Exiting;
 
+        void InitializeNew();
+
         bool HasName(string name);
 
         void Enter();

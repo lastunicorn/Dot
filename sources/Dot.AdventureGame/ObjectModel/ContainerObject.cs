@@ -13,29 +13,6 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
         public event EventHandler<ObjectAddingEventArgs> ObjectAdding;
         public event EventHandler<ObjectAddedEventArgs> ObjectAdded;
 
-        protected ContainerObject()
-            : this(null)
-        {
-        }
-
-        protected ContainerObject(IEnumerable<IObject> children)
-        {
-            if (children != null)
-            {
-                foreach (IObject child in children)
-                {
-                    if (child == null)
-                        continue;
-
-                    if (Children.Contains(child))
-                        continue;
-
-                    child.Parent = this;
-                    Children.Add(child);
-                }
-            }
-        }
-
         public void AddObject(IObject @object)
         {
             ObjectAddingEventArgs objectAddingEventArgs = new ObjectAddingEventArgs(@object);
@@ -80,11 +57,11 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
             if (string.Equals(objectName, Name, StringComparison.CurrentCultureIgnoreCase))
                 return this;
 
-            foreach (IObject childObject in Children)
-            {
-                if (!childObject.IsVisible)
-                    continue;
+            IEnumerable<IObject> visibleChildren = Children
+                .Where(x => x.IsVisible);
 
+            foreach (IObject childObject in visibleChildren)
+            {
                 if (childObject.Name.Equals(objectName, StringComparison.InvariantCultureIgnoreCase))
                     return childObject;
 
@@ -127,20 +104,11 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
         {
             StorageNode storageNode = base.Export();
 
-            IEnumerable<string> childrenTypes = Children
-                .Where(x => x != null)
-                .Select(x => x.GetType().AssemblyQualifiedName);
+            IEnumerable<StorageNode> storageNodes = Children
+                .Select(x => x.Export());
 
-            if (childrenTypes.Any())
-            {
-                storageNode.Add("children", string.Join(";", childrenTypes));
-
-                foreach (IObject child in Children)
-                {
-                    StorageNode childStorageNode = child.Export();
-                    storageNode.Add("child." + child.Id, childStorageNode);
-                }
-            }
+            foreach (StorageNode childStorageNode in storageNodes)
+                storageNode.Add("child", childStorageNode);
 
             return storageNode;
         }
@@ -149,33 +117,32 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
         {
             base.Import(storageNode);
 
-            Children.Clear();
+            IEnumerable<StorageNode> childrenNodes = storageNode
+                .Where(x => x.Key == "child")
+                .Select(x => x.Value)
+                .Cast<StorageNode>();
 
-            if (storageNode.ContainsKey("children"))
+            foreach (StorageNode childNode in childrenNodes)
             {
-                string[] childrenInformation = ((string)storageNode["children"]).Split(';');
+                Type childType = childNode.ObjectType;
 
-                foreach (string childTypeName in childrenInformation)
+                IObject child = Activator.CreateInstance(childType) as IObject;
+
+                if (child != null)
                 {
-                    if (childTypeName.Length == 0)
-                        continue;
+                    if (child is ContainerObject containerObjectChild)
+                        containerObjectChild.Clear();
 
-                    Type type = Type.GetType(childTypeName);
-                    IObject childObject = (IObject)Activator.CreateInstance(type);
-                    childObject.Parent = this;
-                    Children.Add(childObject);
+                    child.Import(childNode);
+                    child.Parent = this;
+                    Children.Add(child);
                 }
             }
+        }
 
-            IEnumerable<KeyValuePair<string, object>> storageNodes = storageNode
-                .Where(x => x.Key.StartsWith("child."));
-
-            foreach (KeyValuePair<string, object> pair in storageNodes)
-            {
-                string childId = pair.Key.Substring("child.".Length);
-                IObject childObject = Children.Single(x => x.Id == childId);
-                childObject.Import((StorageNode)pair.Value);
-            }
+        public void Clear()
+        {
+            Children.Clear();
         }
 
         public IEnumerator<IObject> GetEnumerator()

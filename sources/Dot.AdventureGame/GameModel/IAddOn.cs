@@ -1,7 +1,6 @@
-using DustInTheWind.Dot.AdventureGame.GameModel;
 using DustInTheWind.Dot.Domain.SaveModel;
 
-namespace DustInTheWind.Dot.AdventureGame.LocationModel
+namespace DustInTheWind.Dot.AdventureGame.GameModel
 {
     public interface IAddOn
     {
@@ -15,6 +14,6 @@ namespace DustInTheWind.Dot.AdventureGame.LocationModel
 
         StorageNode Export();
 
-        void Load(StorageNode storageNode);
+        void Import(StorageNode storageNode);
     }
 }

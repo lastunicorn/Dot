@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using DustInTheWind.Dot.Domain.AudioTextModel;
 
-namespace DustInTheWind.Dot.Domain
+namespace DustInTheWind.Dot.Domain.AudioTexts
 {
     public class NoObjectToUseAudioText : AudioText
     {

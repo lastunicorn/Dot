@@ -1,16 +1,17 @@
 ﻿using System.Collections;
+using DustInTheWind.Dot.AdventureGame.GameModel;
 using DustInTheWind.Dot.AdventureGame.LocationModel;
 using DustInTheWind.Dot.Domain.AudioTextModel;
 
 namespace DustInTheWind.Dot.Demo.Objects
 {
-    internal class Park : LocationBase
+    internal class ParkLocation : LocationBase
     {
         public override string Id { get; } = "park";
 
         public override string Name { get; } = "Park";
 
-        public Park()
+        public override void InitializeNew()
         {
             Oak oak = new Oak();
             AddObject(oak);
@@ -18,7 +19,7 @@ namespace DustInTheWind.Dot.Demo.Objects
             NorthRoad northRoad = new NorthRoad();
             AddObject(northRoad);
         }
-
+        
         public override IEnumerable LookAt()
         {
             yield return CreateDescriptionStory(new AudioTextList

@@ -39,6 +39,7 @@ $projectDirs = @(
 "$rootDirectory\sources\Dot.AudioSupport",
 "$rootDirectory\sources\Dot.ConsoleHelpers",
 "$rootDirectory\sources\Dot.Domain",
+"$rootDirectory\sources\Dot.GameStorage.Binary",
 "$rootDirectory\sources\Dot.Presentation",
 "$rootDirectory\sources\Dot.WindowsNative"
 )

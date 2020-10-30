@@ -70,6 +70,23 @@ namespace DustInTheWind.Dot.Presentation.Views
             audioTextBox.Display(texts);
         }
 
+        protected void DisplaySuggestion(string text)
+        {
+            if (text == null)
+                return;
+
+            AudioTextBox audioTextBox = new AudioTextBox(audio)
+            {
+                Margins = new Margins(3, 0, 3, 2),
+                Border = Border.CreateSingleLineBorder(true, false, false, false),
+                Paddings = new Paddings(2, 1, 0, 1),
+                Color = DefaultTheme.Instance.SuggestionColor,
+                ActionColor = DefaultTheme.Instance.ActionColor,
+                ObjectColor = DefaultTheme.Instance.ObjectColor
+            };
+            audioTextBox.Display(text);
+        }
+
         protected void PlayBackgroundSound(string audioFileName, Action action)
         {
 #if DEBUG_AUDIO_FILE
@@ -102,6 +119,18 @@ namespace DustInTheWind.Dot.Presentation.Views
             {
                 audio.Stop(AudioChannelType.Music);
             }
+        }
+
+        protected void DisplayAsciiArt(string id, int marginTop = 0, int marginBottom = 0)
+        {
+            AsciiImageBox asciiImageBox = new AsciiImageBox
+            {
+                AsciiPath = id,
+                ForegroundColor = DefaultTheme.Instance.DefaultColor,
+                MarginTop = marginTop,
+                MarginBottom = marginBottom
+            };
+            asciiImageBox.Display();
         }
     }
 }

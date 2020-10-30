@@ -1,6 +1,4 @@
-﻿using DustInTheWind.Dot.Domain.SaveModel;
-
-namespace DustInTheWind.Dot.Domain
+﻿namespace DustInTheWind.Dot.Domain.SaveModel
 {
     public class GameSlot
     {

@@ -1,6 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using DustInTheWind.Dot.AdventureGame.GameModel;
 using DustInTheWind.Dot.AdventureGame.ObjectModel;
 using DustInTheWind.Dot.Domain.AudioTextModel;
 using DustInTheWind.Dot.Domain.SaveModel;
@@ -9,7 +9,7 @@ namespace DustInTheWind.Dot.AdventureGame.LocationModel
 {
     public abstract class LocationBase : ContainerObject, ILocation
     {
-        protected HashSet<IAddOn> AddOns { get; } = new HashSet<IAddOn>();
+        protected AddOnCollection AddOns { get; } = new AddOnCollection();
 
         public virtual string[] AdditionalNames { get; } = new string[0];
 
@@ -23,11 +23,8 @@ namespace DustInTheWind.Dot.AdventureGame.LocationModel
             IsVisible = true;
         }
 
-        public void AddAddOn(IAddOn addOn)
-        {
-            AddOns.Add(addOn);
-        }
-
+        public abstract void InitializeNew();
+        
         public bool HasName(string name)
         {
             return string.Equals(Name, name, StringComparison.CurrentCultureIgnoreCase) ||
@@ -54,11 +51,7 @@ namespace DustInTheWind.Dot.AdventureGame.LocationModel
         {
             StorageNode storageNode = base.Export();
 
-            foreach (IAddOn addOn in AddOns)
-            {
-                StorageNode addOnStorageNode = addOn.Export();
-                storageNode.Add("addon." + addOn.Id, addOnStorageNode);
-            }
+            storageNode.Add("addons", AddOns.Export());
 
             return storageNode;
         }
@@ -67,15 +60,9 @@ namespace DustInTheWind.Dot.AdventureGame.LocationModel
         {
             base.Import(storageNode);
 
-            IEnumerable<KeyValuePair<string, object>> storageNodes = storageNode
-                .Where(x => x.Key.StartsWith("addon."));
-
-            foreach (KeyValuePair<string, object> pair in storageNodes)
-            {
-                string addOnId = pair.Key.Substring("addon.".Length);
-                IAddOn addOn = AddOns.Single(x => x.Id == addOnId);
-                addOn.Load((StorageNode)pair.Value);
-            }
+            StorageNode addOnsStorageNode = (StorageNode)storageNode["addons"];
+            AddOns.Clear();
+            AddOns.Import(addOnsStorageNode);
         }
 
         protected virtual void OnEntered()
