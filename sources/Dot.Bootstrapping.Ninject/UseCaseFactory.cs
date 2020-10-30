@@ -1,11 +1,10 @@
 ﻿using System;
 using DustInTheWind.Dot.Application;
-using DustInTheWind.Dot.Domain;
 using Ninject;
 
-namespace DustInTheWind.Dot.Demo
+namespace DustInTheWind.Dot.Bootstrapping.Ninject
 {
-    internal class UseCaseFactory : IUseCaseFactory
+    public class UseCaseFactory : IUseCaseFactory
     {
         private readonly IKernel kernel;
 

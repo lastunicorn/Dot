@@ -24,9 +24,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.AdventureGame", "Dot.Ad
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Demo", "Dot.Demo\Dot.Demo.csproj", "{97272D44-504B-422D-928F-50F0CCBC9C2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dot.GameStorage.Binary", "Dot.GameStorage.Binary\Dot.GameStorage.Binary.csproj", "{944619C8-D290-4278-832C-3DB434C86E3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.GameStorage.Binary", "Dot.GameStorage.Binary\Dot.GameStorage.Binary.csproj", "{944619C8-D290-4278-832C-3DB434C86E3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dot.Tests", "Dot.Tests\Dot.Tests.csproj", "{33DFF2AA-ED29-4C04-8A90-29EDA1FA0876}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Tests", "Dot.Tests\Dot.Tests.csproj", "{33DFF2AA-ED29-4C04-8A90-29EDA1FA0876}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Bootstrapping.Ninject", "Dot.Bootstrapping.Ninject\Dot.Bootstrapping.Ninject.csproj", "{5B6350FD-D055-4636-814E-11D187215EAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dot.Bootstrapping", "Dot.Bootstrapping\Dot.Bootstrapping.csproj", "{17A5419B-21DF-434E-8EF2-9AF48EC27531}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Bootstrapping.MicrosoftDependencyInjection", "Dot.Bootstrapping.MicrosoftDependencyInjection\Dot.Bootstrapping.MicrosoftDependencyInjection.csproj", "{090B77D0-4AB7-4B8D-AF60-1C40BABB741B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -74,6 +80,18 @@ Global
 		{33DFF2AA-ED29-4C04-8A90-29EDA1FA0876}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33DFF2AA-ED29-4C04-8A90-29EDA1FA0876}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33DFF2AA-ED29-4C04-8A90-29EDA1FA0876}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B6350FD-D055-4636-814E-11D187215EAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B6350FD-D055-4636-814E-11D187215EAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B6350FD-D055-4636-814E-11D187215EAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B6350FD-D055-4636-814E-11D187215EAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17A5419B-21DF-434E-8EF2-9AF48EC27531}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17A5419B-21DF-434E-8EF2-9AF48EC27531}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17A5419B-21DF-434E-8EF2-9AF48EC27531}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17A5419B-21DF-434E-8EF2-9AF48EC27531}.Release|Any CPU.Build.0 = Release|Any CPU
+		{090B77D0-4AB7-4B8D-AF60-1C40BABB741B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{090B77D0-4AB7-4B8D-AF60-1C40BABB741B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{090B77D0-4AB7-4B8D-AF60-1C40BABB741B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{090B77D0-4AB7-4B8D-AF60-1C40BABB741B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -9,6 +9,7 @@ namespace DustInTheWind.Dot.Presentation
     public class StandardGameApplication : IGameApplication
     {
         private readonly IScreenFactory screenFactory;
+
         protected ApplicationView View { get; }
 
         protected ModuleEngine ModuleEngine { get; }

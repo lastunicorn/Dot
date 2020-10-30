@@ -1,21 +1,21 @@
 ﻿using System;
-using DustInTheWind.Dot.Application;
-using DustInTheWind.Dot.Domain;
+using DustInTheWind.Dot.ConsoleHelpers.UIControls;
+using DustInTheWind.Dot.Presentation;
 using Ninject;
 
-namespace DustInTheWind.Dot.Demo
+namespace DustInTheWind.Dot.Bootstrapping.Ninject
 {
-    internal class UseCaseFactory : IUseCaseFactory
+    public class CommandFactory : ICommandFactory
     {
         private readonly IKernel kernel;
 
-        public UseCaseFactory(IKernel kernel)
+        public CommandFactory(IKernel kernel)
         {
             this.kernel = kernel ?? throw new ArgumentNullException(nameof(kernel));
         }
 
         public T Create<T>()
-            where T : class
+            where T : ICommand
         {
             return kernel.Get<T>();
         }

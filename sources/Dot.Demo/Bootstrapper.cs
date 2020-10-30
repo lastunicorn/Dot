@@ -1,4 +1,5 @@
 ﻿using DustInTheWind.Dot.AdventureGame;
+using DustInTheWind.Dot.Application;
 using DustInTheWind.Dot.Application.LoadGame;
 using DustInTheWind.Dot.Application.SaveGame;
 using DustInTheWind.Dot.AudioSupport;
@@ -7,7 +8,6 @@ using DustInTheWind.Dot.Domain.DataAccess;
 using DustInTheWind.Dot.Domain.GameModel;
 using DustInTheWind.Dot.Domain.ModuleModel;
 using DustInTheWind.Dot.Domain.SaveModel;
-using DustInTheWind.Dot.GameStorage;
 using DustInTheWind.Dot.GameStorage.Binary;
 using DustInTheWind.Dot.Presentation;
 using DustInTheWind.Dot.Presentation.Views;

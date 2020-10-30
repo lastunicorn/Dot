@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <RootNamespace>DustInTheWind.Dot.Bootstrapping</RootNamespace>
+        <AssemblyName>DustInTheWind.Dot.Bootstrapping</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Dot.GameStorage.Binary\Dot.GameStorage.Binary.csproj" />
+        <ProjectReference Include="..\Dot.Presentation\Dot.Presentation.csproj" />
+    </ItemGroup>
+
+</Project>
