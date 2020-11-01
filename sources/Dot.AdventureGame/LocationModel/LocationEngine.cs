@@ -84,19 +84,14 @@ namespace DustInTheWind.Dot.AdventureGame.LocationModel
                 .Select(x => x.Export());
 
             foreach (StorageNode locationStorageNode in locationStorageNodes) 
-                storageNode.Add("location", locationStorageNode);
+                storageNode.Children.Add(locationStorageNode);
 
             return storageNode;
         }
 
         public void Import(StorageNode storageNode)
         {
-            IEnumerable<StorageNode> locationNodes = storageNode
-                .Where(x => x.Key == "location")
-                .Select(x => x.Value)
-                .Cast<StorageNode>();
-
-            foreach (StorageNode locationNode in locationNodes)
+            foreach (StorageNode locationNode in storageNode.Children)
             {
                 Type locationType = locationNode.ObjectType;
                 

@@ -6,7 +6,7 @@ namespace DustInTheWind.Dot.AdventureGame.GameModel
     {
         string Id { get; }
 
-        GameBase Game { get; set; }
+        Game Game { get; set; }
 
         void Start();
 

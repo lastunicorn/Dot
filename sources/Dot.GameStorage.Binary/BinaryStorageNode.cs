@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 using DustInTheWind.Dot.Domain.SaveModel;
 
@@ -10,6 +11,8 @@ namespace DustInTheWind.Dot.GameStorage.Binary
     {
         public Type ObjectType { get; set; }
 
+        public List<BinaryStorageNode> Children { get; } = new List<BinaryStorageNode>();
+
         public BinaryStorageNode()
         {
         }
@@ -18,12 +21,17 @@ namespace DustInTheWind.Dot.GameStorage.Binary
         {
             ObjectType = storageNode.ObjectType;
 
+            IEnumerable<BinaryStorageNode> children = storageNode.Children
+                .Select(x => new BinaryStorageNode(x));
+
+            Children.AddRange(children);
+
             foreach ((string key, object value) in storageNode)
             {
                 if (value is StorageNode childStorageNode)
                 {
-                    BinaryStorageNode binaryStorageNode = new BinaryStorageNode(childStorageNode);
-                    Add(key, binaryStorageNode);
+                    BinaryStorageNode childBinaryStorageNode = new BinaryStorageNode(childStorageNode);
+                    Add(key, childBinaryStorageNode);
                 }
                 else
                 {
@@ -58,6 +66,11 @@ namespace DustInTheWind.Dot.GameStorage.Binary
             {
                 ObjectType = ObjectType
             };
+
+            IEnumerable<StorageNode> childStorageNodes = Children
+                .Select(x => x.ToEntity());
+
+            storageNode.Children.AddRange(childStorageNodes);
 
             foreach ((string key, object value) in this)
             {

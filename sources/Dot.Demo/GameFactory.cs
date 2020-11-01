@@ -14,16 +14,16 @@ namespace DustInTheWind.Dot.Demo
             this.kernel = kernel ?? throw new ArgumentNullException(nameof(kernel));
         }
 
-        public IGameBase CreateNew()
+        public IGame CreateNew()
         {
-            IGameBase game = kernel.Get<IGameBase>();
+            IGame game = kernel.Get<IGame>();
             game.InitializeNew();
             return game;
         }
 
-        public IGameBase CreateFrom(StorageData gameSlotData)
+        public IGame CreateFrom(StorageData gameSlotData)
         {
-            IGameBase game = kernel.Get<IGameBase>();
+            IGame game = kernel.Get<IGame>();
             game.Import(gameSlotData);
             return game;
         }

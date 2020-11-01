@@ -4,14 +4,14 @@ namespace DustInTheWind.Dot.Domain.DataAccess
 {
     public class GameRepository
     {
-        private IGameBase game;
+        private IGame game;
 
-        public IGameBase Get()
+        public IGame Get()
         {
             return game;
         }
 
-        public void Add(IGameBase game)
+        public void Add(IGame game)
         {
             this.game = game;
         }

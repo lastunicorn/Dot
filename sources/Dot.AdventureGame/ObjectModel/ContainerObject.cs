@@ -108,7 +108,7 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
                 .Select(x => x.Export());
 
             foreach (StorageNode childStorageNode in storageNodes)
-                storageNode.Add("child", childStorageNode);
+                storageNode.Children.Add(childStorageNode);
 
             return storageNode;
         }
@@ -117,12 +117,7 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
         {
             base.Import(storageNode);
 
-            IEnumerable<StorageNode> childrenNodes = storageNode
-                .Where(x => x.Key == "child")
-                .Select(x => x.Value)
-                .Cast<StorageNode>();
-
-            foreach (StorageNode childNode in childrenNodes)
+            foreach (StorageNode childNode in storageNode.Children)
             {
                 Type childType = childNode.ObjectType;
 

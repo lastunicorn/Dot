@@ -20,19 +20,14 @@ namespace DustInTheWind.Dot.AdventureGame.GameModel
                 .Select(x => x.Export());
 
             foreach (StorageNode addOnStorageNode in addOnStorageNodes)
-                storageNode.Add("addon", addOnStorageNode);
+                storageNode.Children.Add(addOnStorageNode);
 
             return storageNode;
         }
 
         public void Import(StorageNode storageNode)
         {
-            IEnumerable<StorageNode> addOnNodes = storageNode
-                .Where(x => x.Key == "addon")
-                .Select(x => x.Value)
-                .Cast<StorageNode>();
-
-            foreach (StorageNode addOnNode in addOnNodes)
+            foreach (StorageNode addOnNode in storageNode.Children)
             {
                 Type addOnType = addOnNode.ObjectType;
 

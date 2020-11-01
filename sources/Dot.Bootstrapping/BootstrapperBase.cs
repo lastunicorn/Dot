@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.Dot.AdventureGame;
 using DustInTheWind.Dot.Application.LoadGame;
@@ -11,7 +12,7 @@ using DustInTheWind.Dot.Domain.ModuleModel;
 using DustInTheWind.Dot.Domain.SaveModel;
 using DustInTheWind.Dot.GameStorage.Binary;
 using DustInTheWind.Dot.Presentation;
-using DustInTheWind.Dot.Presentation.Presenters;
+using DustInTheWind.Dot.Presentation.Modules;
 using DustInTheWind.Dot.Presentation.Views;
 
 namespace DustInTheWind.Dot.Bootstrapping
@@ -43,10 +44,12 @@ namespace DustInTheWind.Dot.Bootstrapping
             servicesContainer.AddTransient<IUserInterface, UserInterface>();
             servicesContainer.AddTransient<ILoadGameView, LoadGameView>();
             servicesContainer.AddTransient<ISaveGameView, SaveGameView>();
-            servicesContainer.AddTransient<MainMenuPresenter>();
             servicesContainer.AddTransient<MainMenuView>();
-            
+
             servicesContainer.AddTransient<CreateNewGameUseCase>();
+
+            servicesContainer.AddTransient<IModule, MenuModule>();
+            servicesContainer.AddTransient<IModule, GameModule>();
 
             Type applicationType = RetrieveApplicationType();
             if (applicationType != null)
@@ -54,23 +57,26 @@ namespace DustInTheWind.Dot.Bootstrapping
 
             Type gameType = RetrieveGameType();
             if (gameType != null)
-                servicesContainer.AddTransient(typeof(IGameBase), gameType);
+                servicesContainer.AddTransient(typeof(IGame), gameType);
         }
 
         private static Type RetrieveApplicationType()
         {
-            return AppDomain.CurrentDomain.GetAssemblies()
-                .Where(x => !x.FullName.StartsWith("DustInTheWind.Dot"))
-                .SelectMany(x => x.GetTypes())
+            return GetAllClientTypes()
                 .FirstOrDefault(x => typeof(IGameApplication).IsAssignableFrom(x) && x.IsClass && !x.IsAbstract);
         }
 
         private static Type RetrieveGameType()
         {
+            return GetAllClientTypes()
+                .FirstOrDefault(x => typeof(IGame).IsAssignableFrom(x) && x.IsClass && !x.IsAbstract);
+        }
+
+        private static IEnumerable<Type> GetAllClientTypes()
+        {
             return AppDomain.CurrentDomain.GetAssemblies()
-                .Where(x => !x.FullName.StartsWith("DustInTheWind.Dot"))
-                .SelectMany(x => x.GetTypes())
-                .FirstOrDefault(x => typeof(IGameBase).IsAssignableFrom(x) && x.IsClass && !x.IsAbstract);
+                .Where(x => x.FullName.StartsWith("DustInTheWind.Dot.Demo") || !x.FullName.StartsWith("DustInTheWind.Dot"))
+                .SelectMany(x => x.GetTypes());
         }
     }
 }

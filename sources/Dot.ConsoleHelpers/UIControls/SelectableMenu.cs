@@ -164,20 +164,20 @@ namespace DustInTheWind.Dot.ConsoleHelpers.UIControls
                         break;
 
                     default:
-                    {
-                        IMenuItem<T> selectedItem = visibleMenuItems.FirstOrDefault(x => x.Key != null && x.Key == keyInfo.Key);
-
-                        if (selectedItem != null)
                         {
-                            bool allow = selectedItem.IsSelectable && selectedItem.BeforeSelect();
-                            if (allow)
+                            IMenuItem<T> selectedItem = visibleMenuItems.FirstOrDefault(x => x.Key != null && x.Key == keyInfo.Key);
+
+                            if (selectedItem != null)
                             {
-                                SelectedIndex = currentIndex - visibleMenuItems.Take(currentIndex).OfType<SpaceMenuItem<T>>().Count();
-                                SelectedItem = selectedItem;
-                                return selectedItem.Value;
+                                bool allow = selectedItem.IsSelectable && selectedItem.BeforeSelect();
+                                if (allow)
+                                {
+                                    SelectedIndex = currentIndex - visibleMenuItems.Take(currentIndex).OfType<SpaceMenuItem<T>>().Count();
+                                    SelectedItem = selectedItem;
+                                    return selectedItem.Value;
+                                }
                             }
                         }
-                    }
                         break;
                 }
             }

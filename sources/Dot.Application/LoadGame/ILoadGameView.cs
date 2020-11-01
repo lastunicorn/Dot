@@ -10,6 +10,6 @@ namespace DustInTheWind.Dot.Application.LoadGame
 
         GameSlot AskToChooseGameSlot(IEnumerable<GameSlot> gameSlots);
 
-        void DisplaySuccessMessage();
+        void AnnounceSuccess();
     }
 }

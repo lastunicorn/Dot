@@ -1,5 +1,4 @@
 ﻿using System;
-using DustInTheWind.Dot.Domain;
 using DustInTheWind.Dot.Presentation;
 using Ninject;
 

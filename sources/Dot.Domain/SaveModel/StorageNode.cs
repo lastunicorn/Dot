@@ -7,6 +7,8 @@ namespace DustInTheWind.Dot.Domain.SaveModel
     {
         public Type ObjectType { get; set; }
 
+        public List<StorageNode> Children { get; } = new List<StorageNode>();
+
         public T Get<T>(string key, T defaultValue = default)
         {
             if (!ContainsKey(key))

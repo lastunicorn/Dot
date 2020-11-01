@@ -1,22 +1,21 @@
 ﻿using System;
+using DustInTheWind.Dot.ConsoleHelpers.ConsoleUtil;
 using DustInTheWind.Dot.Domain;
 using DustInTheWind.Dot.Domain.ModuleModel;
-using DustInTheWind.Dot.Presentation.Presenters;
 using DustInTheWind.Dot.Presentation.Views;
 
 namespace DustInTheWind.Dot.Presentation
 {
     public class StandardGameApplication : IGameApplication
     {
-        private readonly IScreenFactory screenFactory;
+        private volatile bool closeWasRequested;
 
         protected ApplicationView View { get; }
 
         protected ModuleEngine ModuleEngine { get; }
 
-        public StandardGameApplication(ApplicationView view, ModuleEngine moduleEngine, IScreenFactory screenFactory)
+        public StandardGameApplication(ApplicationView view, ModuleEngine moduleEngine)
         {
-            this.screenFactory = screenFactory ?? throw new ArgumentNullException(nameof(screenFactory));
             View = view ?? throw new ArgumentNullException(nameof(view));
             ModuleEngine = moduleEngine ?? throw new ArgumentNullException(nameof(moduleEngine));
 
@@ -49,15 +48,29 @@ namespace DustInTheWind.Dot.Presentation
             View.ResetConsoleWindow();
             View.DisplayApplicationHeader();
 
-            MainMenuPresenter presenter = screenFactory.Create<MainMenuPresenter>();
-            presenter.Display();
-            //ModuleEngine.Run();
+            closeWasRequested = false;
+
+            while (!closeWasRequested)
+            {
+                try
+                {
+                    ModuleEngine.Run();
+                }
+                catch (OperationCanceledException)
+                {
+                }
+                catch (Exception ex)
+                {
+                    CustomConsole.WriteError(ex);
+                }
+            }
 
             View.DisplayGoodByeMessage();
         }
 
         public void Close()
         {
+            closeWasRequested = true;
             ModuleEngine.Close();
         }
     }

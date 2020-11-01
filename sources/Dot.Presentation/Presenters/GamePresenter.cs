@@ -6,10 +6,13 @@ using DustInTheWind.Dot.AdventureGame.ActionModel;
 using DustInTheWind.Dot.AdventureGame.ActionResultHandlers;
 using DustInTheWind.Dot.AdventureGame.ActionResults;
 using DustInTheWind.Dot.AdventureGame.GameModel;
+using DustInTheWind.Dot.Application;
+using DustInTheWind.Dot.Application.Actions;
 using DustInTheWind.Dot.Domain;
 using DustInTheWind.Dot.Domain.AudioTextModel;
 using DustInTheWind.Dot.Domain.DataAccess;
 using DustInTheWind.Dot.Domain.GameModel;
+using DustInTheWind.Dot.Domain.ModuleModel;
 using DustInTheWind.Dot.Presentation.Views;
 
 namespace DustInTheWind.Dot.Presentation.Presenters
@@ -77,8 +80,15 @@ namespace DustInTheWind.Dot.Presentation.Presenters
 
         private volatile bool exitWasRequested;
 
-        public GamePresenter(GameView gameView, GameRepository gameRepository, ResultHandlersCollection resultHandlers)
+        private readonly ActionSet actions = new ActionSet();
+
+        public GamePresenter(GameView gameView, GameRepository gameRepository, ResultHandlersCollection resultHandlers,
+            IGameApplication gameApplication, IUseCaseFactory useCaseFactory, ModuleEngine moduleEngine)
         {
+            if (gameApplication == null) throw new ArgumentNullException(nameof(gameApplication));
+            if (useCaseFactory == null) throw new ArgumentNullException(nameof(useCaseFactory));
+            if (moduleEngine == null) throw new ArgumentNullException(nameof(moduleEngine));
+         
             this.gameView = gameView ?? throw new ArgumentNullException(nameof(gameView));
             this.gameRepository = gameRepository ?? throw new ArgumentNullException(nameof(gameRepository));
             this.resultHandlers = resultHandlers ?? throw new ArgumentNullException(nameof(resultHandlers));
@@ -94,13 +104,20 @@ namespace DustInTheWind.Dot.Presentation.Presenters
             this.resultHandlers.Add(typeof(IAudioTextEnumerable), typeof(AudioTextHandler));
             this.resultHandlers.Add(typeof(SuggestionBlock), typeof(SuggestionBlockHandler));
             this.resultHandlers.Add(typeof(Action), typeof(ActionHandler));
+
+
+            actions.Add(new MainMenuAction(moduleEngine));
+            actions.Add(new ExitAction(gameApplication));
+            actions.Add(new NewGameAction(useCaseFactory));
+            actions.Add(new LoadGameAction(useCaseFactory));
+            actions.Add(new SaveGameAction(useCaseFactory));
         }
 
         public void Display()
         {
             exitWasRequested = false;
 
-            IGameBase game = gameRepository.Get();
+            IGame game = gameRepository.Get();
             game.CurrentLocationChanged += HandleCurrentLocationChanged;
             game.Open();
 
@@ -109,7 +126,7 @@ namespace DustInTheWind.Dot.Presentation.Presenters
                 while (!exitWasRequested)
                 {
                     string command = gameView.GetUserCommand();
-                    Execute(command);
+                    ExecuteCommand(command);
                 }
             }
             finally
@@ -121,15 +138,15 @@ namespace DustInTheWind.Dot.Presentation.Presenters
 
         private void HandleCurrentLocationChanged(object sender, EventArgs e)
         {
-            if (sender is GameBase game)
+            if (sender is Game game)
                 gameView.PrompterText = game.CurrentLocation.Name;
         }
 
-        public void Execute(string commandText)
+        private void ExecuteCommand(string commandText)
         {
-            GameBase game = gameRepository.Get() as GameBase;
+            Game game = gameRepository.Get() as Game;
 
-            ActionInfo? actionInfo = game?.FindMatchingAction(commandText);
+            ActionInfo? actionInfo = game?.FindMatchingAction(commandText) ?? actions.FindMatchingAction(commandText);
 
             if (actionInfo.HasValue)
             {

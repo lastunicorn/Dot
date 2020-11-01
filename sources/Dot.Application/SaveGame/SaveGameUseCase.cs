@@ -23,7 +23,7 @@ namespace DustInTheWind.Dot.Application.SaveGame
 
         public void Execute()
         {
-            IGameBase game = gameRepository.Get();
+            IGame game = gameRepository.Get();
 
             if (game == null)
                 throw new Exception("There is no game to be saved.");

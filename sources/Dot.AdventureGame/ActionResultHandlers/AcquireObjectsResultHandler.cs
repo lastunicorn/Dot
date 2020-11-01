@@ -26,7 +26,7 @@ namespace DustInTheWind.Dot.AdventureGame.ActionResultHandlers
             IEnumerable<IObject> objects = acquireObjectsResult.Objects
                 .Where(x => x != null);
 
-            GameBase game = gameRepository.Get() as GameBase;
+            Game game = gameRepository.Get() as Game;
 
             if (game == null)
             {

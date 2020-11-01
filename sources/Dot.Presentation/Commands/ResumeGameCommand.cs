@@ -1,38 +1,36 @@
 ﻿using System;
 using DustInTheWind.Dot.Application;
+using DustInTheWind.Dot.Application.LoadGame;
+using DustInTheWind.Dot.Application.ResumeGame;
 using DustInTheWind.Dot.ConsoleHelpers.UIControls;
-using DustInTheWind.Dot.Domain;
 using DustInTheWind.Dot.Domain.DataAccess;
 using DustInTheWind.Dot.Domain.GameModel;
-using DustInTheWind.Dot.Presentation.Presenters;
 
 namespace DustInTheWind.Dot.Presentation.Commands
 {
     internal class ResumeGameCommand : ICommand
     {
-        private readonly IUseCaseFactory useCaseFactory;
         private readonly GameRepository gameRepository;
-        private readonly IScreenFactory screenFactory;
+        private readonly IUseCaseFactory useCaseFactory;
 
         public event EventHandler CanExecuteChanges;
 
-        public ResumeGameCommand(IUseCaseFactory useCaseFactory, GameRepository gameRepository, IScreenFactory screenFactory)
+        public ResumeGameCommand(GameRepository gameRepository, IUseCaseFactory useCaseFactory)
         {
-            this.useCaseFactory = useCaseFactory ?? throw new ArgumentNullException(nameof(useCaseFactory));
             this.gameRepository = gameRepository ?? throw new ArgumentNullException(nameof(gameRepository));
-            this.screenFactory = screenFactory ?? throw new ArgumentNullException(nameof(screenFactory));
+            this.useCaseFactory = useCaseFactory ?? throw new ArgumentNullException(nameof(useCaseFactory));
         }
 
         public bool CanExecute()
         {
-            IGameBase game = gameRepository.Get();
+            IGame game = gameRepository.Get();
             return game != null;
         }
 
         public void Execute()
         {
-            GamePresenter gamePresenter = screenFactory.Create<GamePresenter>();
-            gamePresenter.Display();
+            ResumeGameUseCase useCase = useCaseFactory.Create<ResumeGameUseCase>();
+            useCase.Execute();
         }
 
         protected virtual void OnCanExecuteChanges()

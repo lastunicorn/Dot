@@ -3,7 +3,7 @@ using DustInTheWind.Dot.AdventureGame.Verbs;
 
 namespace DustInTheWind.Dot.AdventureGame.GameModel
 {
-    public abstract class StandardGame : GameBase
+    public abstract class StandardGame : Game
     {
         protected StandardGame()
         {

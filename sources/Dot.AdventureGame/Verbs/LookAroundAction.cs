@@ -11,7 +11,7 @@ namespace DustInTheWind.Dot.AdventureGame.Verbs
 {
     public class LookAroundAction : ActionBase
     {
-        private readonly GameBase game;
+        private readonly Game game;
 
         public override string Description => "Describes the location where you are.";
 
@@ -19,7 +19,7 @@ namespace DustInTheWind.Dot.AdventureGame.Verbs
 
         public override ActionType ActionType => ActionType.Verb;
 
-        public LookAroundAction(GameBase game)
+        public LookAroundAction(Game game)
             : base("look around", "look")
         {
             this.game = game ?? throw new ArgumentNullException(nameof(game));

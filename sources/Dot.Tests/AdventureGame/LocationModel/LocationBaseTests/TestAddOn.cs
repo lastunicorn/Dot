@@ -9,7 +9,7 @@ namespace Dot.Tests.AdventureGame.LocationModel.LocationBaseTests
     {
         public string Id { get; } = "test-addon";
 
-        public GameBase Game { get; set; }
+        public Game Game { get; set; }
 
         public void Start()
         {

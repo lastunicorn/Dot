@@ -1,6 +1,5 @@
 ﻿using System;
 using DustInTheWind.Dot.Application;
-using DustInTheWind.Dot.Domain;
 using Ninject;
 
 namespace DustInTheWind.Dot.Demo

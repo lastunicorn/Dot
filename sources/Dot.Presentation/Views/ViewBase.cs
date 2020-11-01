@@ -26,16 +26,6 @@ namespace DustInTheWind.Dot.Presentation.Views
             infoBlock.Display();
         }
 
-
-        protected void DisplayInfoBlock(IEnumerable<string> texts)
-        {
-            InfoBlock infoBlock = new InfoBlock(audio)
-            {
-                Texts = texts.ToList()
-            };
-            infoBlock.Display();
-        }
-
         protected void DisplayStoryTeller(IAudioTextEnumerable audioTexts, string title = null)
         {
             if (audioTexts == null)

@@ -23,4 +23,8 @@
         <ProjectReference Include="..\Dot.WindowsNative\Dot.WindowsNative.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Presenters\" />
+    </ItemGroup>
+
 </Project>

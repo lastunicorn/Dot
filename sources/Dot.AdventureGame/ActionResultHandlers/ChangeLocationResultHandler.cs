@@ -17,7 +17,7 @@ namespace DustInTheWind.Dot.AdventureGame.ActionResultHandlers
 
         public override void Handle(ChangeLocationResult changeLocationResult)
         {
-            GameBase game = gameRepository.Get() as GameBase;
+            Game game = gameRepository.Get() as Game;
 
             if (game == null)
                 throw new Exception("Cannot change location. There is no game in progress.");

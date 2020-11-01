@@ -13,7 +13,7 @@ namespace DustInTheWind.Dot.AdventureGame.Actions
 {
     public class ObjectsAction : ActionBase
     {
-        private readonly GameBase game;
+        private readonly Game game;
 
         public override string Description => "Displays a list with the objects from the current location with which you can interact.";
 
@@ -21,7 +21,7 @@ namespace DustInTheWind.Dot.AdventureGame.Actions
 
         public override ActionType ActionType => ActionType.GameCommand;
 
-        public ObjectsAction(GameBase game)
+        public ObjectsAction(Game game)
             : base("objects", "o")
         {
             this.game = game ?? throw new ArgumentNullException(nameof(game));

@@ -2,7 +2,7 @@ using DustInTheWind.Dot.Presentation.Controls;
 
 namespace DustInTheWind.Dot.Presentation.Views
 {
-    internal class GameView
+    public class GameView
     {
         private readonly CommandLinePrompter prompter;
 

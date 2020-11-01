@@ -9,15 +9,15 @@ namespace DustInTheWind.Dot.Presentation.Commands
 {
     internal class CreditsCommand : ICommand
     {
-        private readonly IUseCaseFactory useCaseFactory;
         private readonly CreditsView creditsView;
+        private readonly IUseCaseFactory useCaseFactory;
 
         public event EventHandler CanExecuteChanges;
 
-        public CreditsCommand(IUseCaseFactory useCaseFactory, CreditsView creditsView)
+        public CreditsCommand(CreditsView creditsView, IUseCaseFactory useCaseFactory)
         {
-            this.useCaseFactory = useCaseFactory ?? throw new ArgumentNullException(nameof(useCaseFactory));
             this.creditsView = creditsView ?? throw new ArgumentNullException(nameof(creditsView));
+            this.useCaseFactory = useCaseFactory ?? throw new ArgumentNullException(nameof(useCaseFactory));
         }
 
         public bool CanExecute()

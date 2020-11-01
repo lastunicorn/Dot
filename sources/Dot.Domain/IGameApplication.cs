@@ -1,4 +1,4 @@
-﻿namespace DustInTheWind.Dot.Presentation
+﻿namespace DustInTheWind.Dot.Domain
 {
     public interface IGameApplication
     {

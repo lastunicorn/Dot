@@ -8,11 +8,11 @@ namespace DustInTheWind.Dot.AdventureGame.ActionResultHandlers
     {
         public override void Handle(DestroyObjectsResult destroyObjectsResult)
         {
-            if (destroyObjectsResult.Objects != null)
-            {
-                foreach (IObject obj in destroyObjectsResult.Objects)
-                    obj.Parent.RemoveObject(obj);
-            }
+            if (destroyObjectsResult.Objects == null)
+                return;
+
+            foreach (IObject obj in destroyObjectsResult.Objects)
+                obj.Parent.RemoveObject(obj);
         }
     }
 }

@@ -2,7 +2,6 @@
 using DustInTheWind.Dot.Application;
 using DustInTheWind.Dot.Application.SaveGame;
 using DustInTheWind.Dot.ConsoleHelpers.UIControls;
-using DustInTheWind.Dot.Domain;
 using DustInTheWind.Dot.Domain.DataAccess;
 using DustInTheWind.Dot.Domain.GameModel;
 
@@ -23,7 +22,7 @@ namespace DustInTheWind.Dot.Presentation.Commands
 
         public bool CanExecute()
         {
-            IGameBase game = gameRepository.Get();
+            IGame game = gameRepository.Get();
             return game != null;
         }
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using DustInTheWind.Dot.AudioSupport;
 using DustInTheWind.Dot.ConsoleHelpers;
 using DustInTheWind.Dot.ConsoleHelpers.ConsoleUtil;

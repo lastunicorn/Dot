@@ -12,7 +12,7 @@ using DustInTheWind.Dot.Domain.SaveModel;
 
 namespace DustInTheWind.Dot.AdventureGame.GameModel
 {
-    public abstract class GameBase : IGameBase
+    public abstract class Game : IGame
     {
         private readonly GameTimer gameTimer = new GameTimer();
 
@@ -53,7 +53,7 @@ namespace DustInTheWind.Dot.AdventureGame.GameModel
         public event EventHandler Closing;
         public event EventHandler Closed;
 
-        protected GameBase()
+        protected Game()
         {
             locationEngine.CurrentLocationChanged += HandleCurrentLocationChanged;
         }

@@ -13,16 +13,16 @@ namespace DustInTheWind.Dot.Bootstrapping.MicrosoftDependencyInjection
             this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
         }
 
-        public IGameBase CreateNew()
+        public IGame CreateNew()
         {
-            IGameBase game = (IGameBase)serviceProvider.GetService(typeof(IGameBase));
+            IGame game = (IGame)serviceProvider.GetService(typeof(IGame));
             game.InitializeNew();
             return game;
         }
 
-        public IGameBase CreateFrom(StorageData gameSlotData)
+        public IGame CreateFrom(StorageData gameSlotData)
         {
-            IGameBase game = (IGameBase)serviceProvider.GetService(typeof(IGameBase));
+            IGame game = (IGame)serviceProvider.GetService(typeof(IGame));
             game.Import(gameSlotData);
             return game;
         }

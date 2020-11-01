@@ -4,8 +4,8 @@ namespace DustInTheWind.Dot.Domain.GameModel
 {
     public interface IGameFactory
     {
-        IGameBase CreateNew();
+        IGame CreateNew();
 
-        IGameBase CreateFrom(StorageData gameSlotData);
+        IGame CreateFrom(StorageData gameSlotData);
     }
 }

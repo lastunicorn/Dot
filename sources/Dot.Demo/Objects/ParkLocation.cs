@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using DustInTheWind.Dot.AdventureGame.GameModel;
 using DustInTheWind.Dot.AdventureGame.LocationModel;
 using DustInTheWind.Dot.Domain.AudioTextModel;
 

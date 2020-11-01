@@ -35,16 +35,24 @@ namespace DustInTheWind.Dot.GameStorage.Binary
                 .Select(x => new GameSlot
                 {
                     Id = int.Parse(Path.GetFileNameWithoutExtension(x).Substring(4)),
-                    Data = Deserialize(x).ToEntity()
-                });
+                    Data = Deserialize(x)?.ToEntity()
+                })
+                .Where(x => x.Data != null);
         }
 
         private static BinaryStorageData Deserialize(string fileName)
         {
-            using (FileStream fs = File.OpenRead(fileName))
+            try
             {
-                BinaryFormatter binaryFormatter = new BinaryFormatter();
-                return (BinaryStorageData)binaryFormatter.Deserialize(fs);
+                using (FileStream fs = File.OpenRead(fileName))
+                {
+                    BinaryFormatter binaryFormatter = new BinaryFormatter();
+                    return (BinaryStorageData)binaryFormatter.Deserialize(fs);
+                }
+            }
+            catch
+            {
+                return null;
             }
         }
 
