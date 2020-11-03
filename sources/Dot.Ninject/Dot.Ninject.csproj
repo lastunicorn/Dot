@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <AssemblyName>DustInTheWind.Dot.Ninject</AssemblyName>
+        <RootNamespace>DustInTheWind.Dot.Ninject</RootNamespace>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Ninject" Version="3.3.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Dot.AdventureGame\Dot.AdventureGame.csproj" />
+      <ProjectReference Include="..\Dot.Bootstrapping\Dot.Bootstrapping.csproj" />
+      <ProjectReference Include="..\Dot.Presentation\Dot.Presentation.csproj" />
+    </ItemGroup>
+
+</Project>

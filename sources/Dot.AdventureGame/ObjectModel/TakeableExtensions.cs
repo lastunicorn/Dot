@@ -5,7 +5,7 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
 {
     public static class TakeableExtensions
     {
-        public static StoryBlock CreateTakeStory(this ITakeable takeableObject, IAudioTextEnumerable audioTexts)
+        public static StoryBlock CreateTakeStory(this ITakeable takeableObject, IAudioText audioTexts)
         {
             return new StoryBlock
             {

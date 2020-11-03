@@ -5,7 +5,7 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
 {
     public static class PushableExtensions
     {
-        public static StoryBlock CreatePushStory(this IPushable pushableObject, IAudioTextEnumerable audioTexts)
+        public static StoryBlock CreatePushStory(this IPushable pushableObject, IAudioText audioTexts)
         {
             return new StoryBlock
             {

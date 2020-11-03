@@ -173,7 +173,7 @@ namespace DustInTheWind.Dot.Presentation
             audioTextBox.Display(texts);
         }
 
-        public void DisplayInfo(IAudioTextEnumerable audioTexts)
+        public void DisplayInfo(IAudioText audioTexts)
         {
             if (audioTexts == null)
                 return;
@@ -188,7 +188,7 @@ namespace DustInTheWind.Dot.Presentation
             audioTextBox.Display(audioTexts);
         }
 
-        public void DisplayStoryTeller(IAudioTextEnumerable audioTexts, string title = null)
+        public void DisplayStoryTeller(IAudioText audioTexts, string title = null)
         {
             if (audioTexts == null)
                 return;

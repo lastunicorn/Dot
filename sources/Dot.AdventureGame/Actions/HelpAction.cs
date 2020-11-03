@@ -70,7 +70,7 @@ namespace DustInTheWind.Dot.AdventureGame.Actions
                 {
                     "Objects that you take from the room goes into your pocket. Type <<inventory>> or just <<i>> to see that list.",
                     "The list of objects that you already discovered in the room can be displayed by typing <<objects>> or just <<o>>.",
-                    "Note: <<o>> and <<i>> are two of the most important commands to keep in mind."
+                    "Note: <<o>> and <<i>> are two of the most useful commands. Remember them."
                 }
             };
 
@@ -78,8 +78,8 @@ namespace DustInTheWind.Dot.AdventureGame.Actions
             {
                 Texts = new List<string>
                 {
-                    "When you want to type commands addressed to the application (not the game), use a semicolon \":\" before the command:",
-                    "Example: <<:menu>>, <<:save>>, <<:load>>, <<:exit>>, etc."
+                    "When you want to type commands addressed to the host of the game, use a semicolon \":\" before the command:",
+                    "Example: <<:menu>>, <<:save>>, <<:load>>, <<:exit>>."
                 }
             };
         }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DustInTheWind.Dot.Domain.AudioTextModel
 {
-    public class AudioText : IAudioTextEnumerable
+    public class AudioText : IAudioText
     {
         public string Text { get; set; }
 
@@ -13,7 +13,7 @@ namespace DustInTheWind.Dot.Domain.AudioTextModel
 
         public static AudioText Empty => new AudioText { Text = string.Empty };
 
-        public IEnumerator<AudioText> GetEnumerator()
+        public IEnumerator<IAudioText> GetEnumerator()
         {
             yield return this;
         }

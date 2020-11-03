@@ -67,7 +67,7 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
             return null;
         }
 
-        protected StoryBlock CreateDescriptionStory(IAudioTextEnumerable audioText)
+        protected StoryBlock CreateDescriptionStory(IAudioText audioText)
         {
             return new StoryBlock
             {

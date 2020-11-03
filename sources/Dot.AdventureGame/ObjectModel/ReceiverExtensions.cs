@@ -7,7 +7,7 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
 {
     public static class ReceiverExtensions
     {
-        public static StoryBlock CreateReceiveStory(this IReceiver receiverObject, IObject receivedObject, IAudioTextEnumerable audioTexts)
+        public static StoryBlock CreateReceiveStory(this IReceiver receiverObject, IObject receivedObject, IAudioText audioTexts)
         {
             return new StoryBlock
             {

@@ -7,7 +7,7 @@ using DustInTheWind.Dot.AdventureGame.ActionResultHandlers;
 using DustInTheWind.Dot.AdventureGame.ActionResults;
 using DustInTheWind.Dot.AdventureGame.GameModel;
 using DustInTheWind.Dot.Application;
-using DustInTheWind.Dot.Application.Actions;
+using DustInTheWind.Dot.Application.GameHostActions;
 using DustInTheWind.Dot.Domain;
 using DustInTheWind.Dot.Domain.AudioTextModel;
 using DustInTheWind.Dot.Domain.DataAccess;
@@ -49,23 +49,18 @@ namespace DustInTheWind.Dot.Presentation.Presenters
      *               +   walk on        road
      *               +   walk           door
      * 
-     * objects       +   :objects                                           -   ILocation : IObject
-     *               +   :o
+     * objects       +   objects                                            -   ILocation : IObject
+     *               +   o
      * 
-     * inventory     +   :inventory                                         -   Inventory
-     *               +   :i
-     * 
-     * actions       +   :actions                                           -   ---
-     *               +   :a
+     * inventory     +   inventory                                          -   Inventory
+     *               +   i
      * 
      * menu          +   :menu
      *               +   :m
      * 
-     * new           -   :new
+     * load          +   :load
      * 
-     * load          -   :load
-     * 
-     * save          -   :save
+     * save          +   :save
      * 
      * exit          +   :exit
      *               +   :quit
@@ -88,7 +83,7 @@ namespace DustInTheWind.Dot.Presentation.Presenters
             if (gameApplication == null) throw new ArgumentNullException(nameof(gameApplication));
             if (useCaseFactory == null) throw new ArgumentNullException(nameof(useCaseFactory));
             if (moduleEngine == null) throw new ArgumentNullException(nameof(moduleEngine));
-         
+
             this.gameView = gameView ?? throw new ArgumentNullException(nameof(gameView));
             this.gameRepository = gameRepository ?? throw new ArgumentNullException(nameof(gameRepository));
             this.resultHandlers = resultHandlers ?? throw new ArgumentNullException(nameof(resultHandlers));
@@ -101,7 +96,7 @@ namespace DustInTheWind.Dot.Presentation.Presenters
             this.resultHandlers.Add(typeof(StoryBlock), typeof(StoryBlockHandler));
             this.resultHandlers.Add(typeof(string), typeof(StringHandler));
             this.resultHandlers.Add(typeof(IEnumerable<string>), typeof(StringsHandler));
-            this.resultHandlers.Add(typeof(IAudioTextEnumerable), typeof(AudioTextHandler));
+            this.resultHandlers.Add(typeof(IAudioText), typeof(AudioTextHandler));
             this.resultHandlers.Add(typeof(SuggestionBlock), typeof(SuggestionBlockHandler));
             this.resultHandlers.Add(typeof(Action), typeof(ActionHandler));
 

@@ -5,7 +5,7 @@ using DustInTheWind.Dot.Domain.AudioTextModel;
 
 namespace DustInTheWind.Dot.AdventureGame.ActionResultHandlers
 {
-    public class AudioTextHandler : ResultHandlerBase<IAudioTextEnumerable>
+    public class AudioTextHandler : ResultHandlerBase<IAudioText>
     {
         private readonly IUserInterface userInterface;
 
@@ -14,7 +14,7 @@ namespace DustInTheWind.Dot.AdventureGame.ActionResultHandlers
             this.userInterface = userInterface ?? throw new ArgumentNullException(nameof(userInterface));
         }
 
-        public override void Handle(IAudioTextEnumerable audioText)
+        public override void Handle(IAudioText audioText)
         {
             userInterface.DisplayInfo(audioText);
         }

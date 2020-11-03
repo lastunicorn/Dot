@@ -1,6 +1,6 @@
 ﻿using System;
 using DustInTheWind.Dot.Application;
-using DustInTheWind.Dot.Application.NewGame;
+using DustInTheWind.Dot.Application.UseCases.NewGame;
 using DustInTheWind.Dot.ConsoleHelpers.UIControls;
 
 namespace DustInTheWind.Dot.Presentation.Commands

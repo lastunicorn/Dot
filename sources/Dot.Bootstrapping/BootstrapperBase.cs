@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.Dot.AdventureGame;
-using DustInTheWind.Dot.Application.LoadGame;
-using DustInTheWind.Dot.Application.NewGame;
-using DustInTheWind.Dot.Application.SaveGame;
+using DustInTheWind.Dot.AdventureGame.ActionModel;
+using DustInTheWind.Dot.Application.UseCases.LoadGame;
+using DustInTheWind.Dot.Application.UseCases.NewGame;
+using DustInTheWind.Dot.Application.UseCases.SaveGame;
 using DustInTheWind.Dot.Domain;
 using DustInTheWind.Dot.Domain.DataAccess;
 using DustInTheWind.Dot.Domain.GameModel;

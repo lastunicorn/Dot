@@ -8,6 +8,6 @@ namespace DustInTheWind.Dot.Domain
 
         public string Title { get; set; }
 
-        public IAudioTextEnumerable AudioTexts { get; set; }
+        public IAudioText AudioTexts { get; set; }
     }
 }

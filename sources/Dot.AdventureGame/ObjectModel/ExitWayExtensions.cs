@@ -5,7 +5,7 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
 {
     public static class ExitWayExtensions
     {
-        public static StoryBlock CreateExitStory(this IExitWay exitWayObject, IAudioTextEnumerable audioTexts)
+        public static StoryBlock CreateExitStory(this IExitWay exitWayObject, IAudioText audioTexts)
         {
             return new StoryBlock
             {

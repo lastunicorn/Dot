@@ -1,7 +1,6 @@
 ﻿using System;
 using DustInTheWind.Dot.Application;
-using DustInTheWind.Dot.Application.LoadGame;
-using DustInTheWind.Dot.Application.ResumeGame;
+using DustInTheWind.Dot.Application.UseCases.ResumeGame;
 using DustInTheWind.Dot.ConsoleHelpers.UIControls;
 using DustInTheWind.Dot.Domain.DataAccess;
 using DustInTheWind.Dot.Domain.GameModel;

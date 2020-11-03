@@ -5,7 +5,7 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
 {
     public static class MovableExtensions
     {
-        public static StoryBlock CreateMoveStory(this IMovable movableObject, IAudioTextEnumerable audioTexts)
+        public static StoryBlock CreateMoveStory(this IMovable movableObject, IAudioText audioTexts)
         {
             return new StoryBlock
             {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using DustInTheWind.Dot.Application.LoadGame;
+using DustInTheWind.Dot.Application.UseCases.LoadGame;
 using DustInTheWind.Dot.AudioSupport;
 using DustInTheWind.Dot.ConsoleHelpers.ConsoleUtil;
 using DustInTheWind.Dot.ConsoleHelpers.UIControls;

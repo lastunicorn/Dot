@@ -27,33 +27,54 @@ namespace DustInTheWind.Dot.Presentation.Controls
         {
             Stream asciiStream = AsciiResources.GetAsciiStream(AsciiPath);
 
+            HideCursor(() =>
+            {
+                WriteTopMargin();
+
+                if (asciiStream != null)
+                    WriteContent(asciiStream);
+
+                WriteBottomMargin();
+            });
+        }
+
+        private static void HideCursor(Action action)
+        {
             Console.CursorVisible = false;
 
             try
             {
-                for (int i = 0; i < MarginTop; i++)
-                    CustomConsole.WriteLine();
-
-                if (asciiStream != null)
-                {
-                    using (StreamReader sr = new StreamReader(asciiStream))
-                    {
-                        while (!sr.EndOfStream)
-                        {
-                            string line = sr.ReadLine();
-                            CustomConsole.WriteLine(line, ForegroundColor);
-                            Thread.Sleep(10);
-                        }
-                    }
-                }
-
-                for (int i = 0; i < MarginBottom; i++)
-                    CustomConsole.WriteLine();
+                action();
             }
             finally
             {
                 Console.CursorVisible = true;
             }
+        }
+
+        private void WriteTopMargin()
+        {
+            for (int i = 0; i < MarginTop; i++)
+                CustomConsole.WriteLine();
+        }
+
+        private void WriteContent(Stream asciiStream)
+        {
+            using (StreamReader sr = new StreamReader(asciiStream))
+            {
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+                    CustomConsole.WriteLine(line, ForegroundColor);
+                    Thread.Sleep(10);
+                }
+            }
+        }
+
+        private void WriteBottomMargin()
+        {
+            for (int i = 0; i < MarginBottom; i++)
+                CustomConsole.WriteLine();
         }
     }
 }

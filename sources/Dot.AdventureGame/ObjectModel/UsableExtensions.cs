@@ -6,7 +6,7 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
 {
     public static class UsableExtensions
     {
-        public static StoryBlock CreateUseStory(this IUsable usableObject, IAudioTextEnumerable audioTexts)
+        public static StoryBlock CreateUseStory(this IUsable usableObject, IAudioText audioTexts)
         {
             return new StoryBlock
             {

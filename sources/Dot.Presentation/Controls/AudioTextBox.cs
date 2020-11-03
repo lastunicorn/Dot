@@ -50,7 +50,7 @@ namespace DustInTheWind.Dot.Presentation.Controls
             Display(audioMultiText, title);
         }
 
-        public void Display(IAudioTextEnumerable audioTexts, string title = null)
+        public void Display(IAudioText audioTexts, string title = null)
         {
             Console.CursorVisible = false;
 
@@ -141,7 +141,7 @@ namespace DustInTheWind.Dot.Presentation.Controls
                 WriteLineEmptyLine();
         }
 
-        private void WriteContent(IAudioTextEnumerable audioTexts)
+        private void WriteContent(IAudioText audioTexts)
         {
             bool isFirstLine = true;
 

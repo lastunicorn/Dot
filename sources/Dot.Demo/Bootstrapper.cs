@@ -1,5 +1,5 @@
 ﻿using DustInTheWind.Dot.Bootstrapping;
-using DustInTheWind.Dot.Bootstrapping.Ninject;
+using DustInTheWind.Dot.Ninject;
 
 namespace DustInTheWind.Dot.Demo
 {

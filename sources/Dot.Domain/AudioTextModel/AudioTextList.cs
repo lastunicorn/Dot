@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace DustInTheWind.Dot.Domain.AudioTextModel
 {
-    public class AudioTextList : List<AudioText>, IAudioTextEnumerable
+    public class AudioTextList : List<IAudioText>, IAudioText
     {
         private Random random;
         private int lastRandomIndex;
@@ -22,7 +22,7 @@ namespace DustInTheWind.Dot.Domain.AudioTextModel
         {
         }
 
-        public AudioText GetOne()
+        public IAudioText GetOne()
         {
             if (random == null)
                 random = new Random();

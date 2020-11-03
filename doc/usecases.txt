@@ -1,0 +1,20 @@
+Start New Game
+--------------------------------------------------------------------------------
+actor: user
+steps:
+	- save current game (use case)
+	- close current game
+	- create new game
+
+
+Save Game
+--------------------------------------------------------------------------------
+actor: user
+steps:
+	- retrieve list of game slots
+	- ask user to select slot
+	- save game in selected slot
+	- save slot id in settings
+alternate:
+	- if there is no active game -> error
+	- if user cancels the saveing process instead of selecting a slot -> end use case

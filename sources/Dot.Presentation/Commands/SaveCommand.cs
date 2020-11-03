@@ -1,6 +1,6 @@
 ﻿using System;
 using DustInTheWind.Dot.Application;
-using DustInTheWind.Dot.Application.SaveGame;
+using DustInTheWind.Dot.Application.UseCases.SaveGame;
 using DustInTheWind.Dot.ConsoleHelpers.UIControls;
 using DustInTheWind.Dot.Domain.DataAccess;
 using DustInTheWind.Dot.Domain.GameModel;

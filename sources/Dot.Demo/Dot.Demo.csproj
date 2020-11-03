@@ -27,7 +27,7 @@
         <ProjectReference Include="..\Dot.AdventureGame\Dot.AdventureGame.csproj" />
         <ProjectReference Include="..\Dot.Application\Dot.Application.csproj" />
         <ProjectReference Include="..\Dot.AudioSupport\Dot.AudioSupport.csproj" />
-        <ProjectReference Include="..\Dot.Bootstrapping.Ninject\Dot.Bootstrapping.Ninject.csproj" />
+        <ProjectReference Include="..\Dot.Ninject\Dot.Ninject.csproj" />
         <ProjectReference Include="..\Dot.Bootstrapping\Dot.Bootstrapping.csproj" />
         <ProjectReference Include="..\Dot.Domain\Dot.Domain.csproj" />
         <ProjectReference Include="..\Dot.GameStorage.Binary\Dot.GameStorage.Binary.csproj" />

@@ -26,7 +26,7 @@ namespace DustInTheWind.Dot.Presentation.Views
             infoBlock.Display();
         }
 
-        protected void DisplayStoryTeller(IAudioTextEnumerable audioTexts, string title = null)
+        protected void DisplayStoryTeller(IAudioText audioTexts, string title = null)
         {
             if (audioTexts == null)
                 return;

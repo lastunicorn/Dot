@@ -5,7 +5,7 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
 {
     public static class LockableExtensions
     {
-        public static StoryBlock CreateUnlockStory(this ILockable lockableObject, IAudioTextEnumerable audioTexts)
+        public static StoryBlock CreateUnlockStory(this ILockable lockableObject, IAudioText audioTexts)
         {
             return new StoryBlock
             {

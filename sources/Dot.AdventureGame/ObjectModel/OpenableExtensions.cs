@@ -5,7 +5,7 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
 {
     public static class OpenableExtensions
     {
-        public static StoryBlock CreateOpenStory(this IOpenable openableObject, IAudioTextEnumerable audioTexts)
+        public static StoryBlock CreateOpenStory(this IOpenable openableObject, IAudioText audioTexts)
         {
             return new StoryBlock
             {
@@ -14,7 +14,7 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
             };
         }
 
-        public static StoryBlock CreateCloseStory(this IOpenable openableObject, IAudioTextEnumerable audioTexts)
+        public static StoryBlock CreateCloseStory(this IOpenable openableObject, IAudioText audioTexts)
         {
             return new StoryBlock
             {
