@@ -1,9 +1,7 @@
 ﻿using System;
 using DustInTheWind.Dot.ConsoleHelpers.ConsoleUtil;
 using DustInTheWind.Dot.Domain.ModuleModel;
-using DustInTheWind.Dot.Presentation.Commands;
 using DustInTheWind.Dot.Presentation.Presenters;
-using DustInTheWind.Dot.Presentation.Views;
 
 namespace DustInTheWind.Dot.Presentation.Modules
 {

@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TargetFramework>net6</TargetFramework>
         <AssemblyName>DustInTheWind.Dot.Demo</AssemblyName>
         <RootNamespace>DustInTheWind.Dot.Demo</RootNamespace>
     </PropertyGroup>
