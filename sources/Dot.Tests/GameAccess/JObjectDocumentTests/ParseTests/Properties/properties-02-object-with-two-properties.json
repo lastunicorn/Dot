@@ -1,0 +1,12 @@
+{
+  "Properties": [
+    {
+      "Name": "prop1",
+      "Type": "int"
+    },
+    {
+      "Name": "prop2",
+      "Type": "text"
+    }
+  ]
+}

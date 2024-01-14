@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net6</TargetFramework>
@@ -6,6 +6,65 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <None Remove="GameAccess\id-01-object-with-id.json" />
+        <None Remove="GameAccess\id-02-object-with-no-id.json" />
+        <None Remove="GameAccess\JObjectDocumentTests\names-02-object-with-two-names.json" />
+        <None Remove="GameAccess\JObjectDocumentTests\names-03-object-with-no-names-in-array.json" />
+        <None Remove="GameAccess\JObjectDocumentTests\names-04-object-with-no-names-array.json" />
+        <None Remove="GameAccess\JObjectDocumentTests\ParseTests\CharacterStates\character-states-01-object-with-one-character-state.json" />
+        <None Remove="GameAccess\JObjectDocumentTests\ParseTests\CharacterStates\character-states-02-object-with-two-character-states.json" />
+        <None Remove="GameAccess\JObjectDocumentTests\ParseTests\CharacterStates\character-states-03-object-with-no-character-states-in-array.json" />
+        <None Remove="GameAccess\JObjectDocumentTests\ParseTests\CharacterStates\character-states-04-object-with-no-character-states-array.json" />
+        <None Remove="GameAccess\JObjectDocumentTests\ParseTests\Objects\objects-01-object-with-one-object.json" />
+        <None Remove="GameAccess\JObjectDocumentTests\ParseTests\Objects\objects-02-object-with-two-objects.json" />
+        <None Remove="GameAccess\JObjectDocumentTests\ParseTests\Objects\objects-03-object-with-no-objects-in-array.json" />
+        <None Remove="GameAccess\JObjectDocumentTests\ParseTests\Objects\objects-04-object-with-no-objects-array.json" />
+        <None Remove="GameAccess\JObjectDocumentTests\ParseTests\Properties\properties-01-object-with-one-property.json" />
+        <None Remove="GameAccess\JObjectDocumentTests\ParseTests\Properties\properties-02-object-with-two-properties.json" />
+        <None Remove="GameAccess\JObjectDocumentTests\ParseTests\Properties\properties-03-object-with-no-properties-in-array.json" />
+        <None Remove="GameAccess\JObjectDocumentTests\ParseTests\Properties\properties-04-object-with-no-properties-array.json" />
+        <None Remove="GameAccess\JObjectDocumentTests\ParseTests\States\states-01-object-with-one-state.json" />
+        <None Remove="GameAccess\JObjectDocumentTests\ParseTests\States\states-02-object-with-two-states.json" />
+        <None Remove="GameAccess\JObjectDocumentTests\ParseTests\States\states-03-object-with-no-states-in-array.json" />
+        <None Remove="GameAccess\JObjectDocumentTests\ParseTests\States\states-04-object-with-no-states-array.json" />
+        <None Remove="GameAccess\JObjectDocumentTests\type-01-object-with-type.json" />
+        <None Remove="GameAccess\JObjectDocumentTests\type-02-object-with-no-type.json" />
+        <None Remove="GameAccess\name-01-object-with-name.json" />
+        <None Remove="GameAccess\name-02-object-with-no-name.json" />
+        <None Remove="GameAccess\names-01-object-with-one-name.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="GameAccess\JObjectDocumentTests\ParseTests\Objects\objects-01-object-with-one-object.json" />
+        <EmbeddedResource Include="GameAccess\JObjectDocumentTests\ParseTests\Objects\objects-02-object-with-two-objects.json" />
+        <EmbeddedResource Include="GameAccess\JObjectDocumentTests\ParseTests\Objects\objects-03-object-with-no-objects-in-array.json" />
+        <EmbeddedResource Include="GameAccess\JObjectDocumentTests\ParseTests\Objects\objects-04-object-with-no-objects-array.json" />
+        <EmbeddedResource Include="GameAccess\JObjectDocumentTests\ParseTests\Properties\properties-01-object-with-one-property.json" />
+        <EmbeddedResource Include="GameAccess\JObjectDocumentTests\ParseTests\Properties\properties-02-object-with-two-properties.json" />
+        <EmbeddedResource Include="GameAccess\JObjectDocumentTests\ParseTests\Properties\properties-03-object-with-no-properties-in-array.json" />
+        <EmbeddedResource Include="GameAccess\JObjectDocumentTests\ParseTests\Properties\properties-04-object-with-no-properties-array.json" />
+        <EmbeddedResource Include="GameAccess\JObjectDocumentTests\ParseTests\States\states-01-object-with-one-state.json" />
+        <EmbeddedResource Include="GameAccess\JObjectDocumentTests\ParseTests\States\states-02-object-with-two-states.json" />
+        <EmbeddedResource Include="GameAccess\JObjectDocumentTests\ParseTests\States\states-03-object-with-no-states-in-array.json" />
+        <EmbeddedResource Include="GameAccess\JObjectDocumentTests\ParseTests\States\states-04-object-with-no-states-array.json" />
+        <EmbeddedResource Include="GameAccess\JObjectDocumentTests\ParseTests\CharacterStates\character-states-01-object-with-one-character-state.json" />
+        <EmbeddedResource Include="GameAccess\JObjectDocumentTests\ParseTests\CharacterStates\character-states-02-object-with-two-character-states.json" />
+        <EmbeddedResource Include="GameAccess\JObjectDocumentTests\ParseTests\CharacterStates\character-states-03-object-with-no-character-states-in-array.json" />
+        <EmbeddedResource Include="GameAccess\JObjectDocumentTests\ParseTests\CharacterStates\character-states-04-object-with-no-character-states-array.json" />
+        <EmbeddedResource Include="GameAccess\JObjectDocumentTests\ParseTests\Names\names-04-object-with-no-names-array.json" />
+        <EmbeddedResource Include="GameAccess\JObjectDocumentTests\ParseTests\Names\names-03-object-with-no-names-in-array.json" />
+        <EmbeddedResource Include="GameAccess\JObjectDocumentTests\ParseTests\Names\names-02-object-with-two-names.json" />
+        <EmbeddedResource Include="GameAccess\JObjectDocumentTests\ParseTests\Type\type-02-object-with-no-type.json" />
+        <EmbeddedResource Include="GameAccess\JObjectDocumentTests\ParseTests\Type\type-01-object-with-type.json" />
+        <EmbeddedResource Include="GameAccess\JObjectDocumentTests\ParseTests\Id\id-02-object-with-no-id.json" />
+        <EmbeddedResource Include="GameAccess\JObjectDocumentTests\ParseTests\Id\id-01-object-with-id.json" />
+        <EmbeddedResource Include="GameAccess\JObjectDocumentTests\ParseTests\Names\names-01-object-with-one-name.json" />
+        <EmbeddedResource Include="GameAccess\JObjectDocumentTests\ParseTests\Name\name-02-object-with-no-name.json" />
+        <EmbeddedResource Include="GameAccess\JObjectDocumentTests\ParseTests\Name\name-01-object-with-name.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentAssertions" Version="6.12.0" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
         <PackageReference Include="Moq" Version="4.14.7" />
         <PackageReference Include="xunit" Version="2.4.0" />
@@ -14,8 +73,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Dot.AdventureGame\Dot.AdventureGame.csproj" />
-        <ProjectReference Include="..\Dot.GameStorage.Binary\Dot.GameSavesAccess.csproj" />
+        <ProjectReference Include="..\Dot.AdventureGame\Dot.AdventureGame.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\Dot.GameAccess\Dot.GameAccess.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\Dot.GameStorage.Binary\Dot.GameSavesAccess.csproj" PrivateAssets="All" />
     </ItemGroup>
 
 </Project>
