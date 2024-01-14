@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Runtime.InteropServices;
 
-namespace DustInTheWind.Dot.ConsoleHelpers.ConsoleUtil
+namespace DustInTheWind.Dot.Presentation.ConsoleHelpers.ConsoleUtil
 {
     public class ScreenColors
     {

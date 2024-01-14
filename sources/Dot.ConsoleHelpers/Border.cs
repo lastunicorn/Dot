@@ -1,4 +1,4 @@
-﻿namespace DustInTheWind.Dot.ConsoleHelpers
+﻿namespace DustInTheWind.Dot.Presentation.ConsoleHelpers
 {
     // ╔═════════╦═════════╗        201--205--203--205--187
     // ║         ║         ║         |         |         |

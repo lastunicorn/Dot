@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DustInTheWind.Dot.ConsoleHelpers.ConsoleUtil;
+using DustInTheWind.Dot.Presentation.ConsoleHelpers.ConsoleUtil;
 
-namespace DustInTheWind.Dot.ConsoleHelpers.UIControls
+namespace DustInTheWind.Dot.Presentation.ConsoleHelpers.UIControls
 {
     public class SelectableMenu<T> : List<IMenuItem<T>>
     {

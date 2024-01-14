@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.Dot.Domain;
-using DustInTheWind.Dot.Domain.SaveModel;
-using DustInTheWind.Dot.GameStorage.Binary;
+using DustInTheWind.Dot.GameSavesAccess;
+using DustInTheWind.Dot.Ports.GameSavesAccess;
 using Xunit;
 
 namespace Dot.Tests.Domain.SaveModel

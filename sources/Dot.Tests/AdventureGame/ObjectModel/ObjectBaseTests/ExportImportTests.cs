@@ -1,4 +1,4 @@
-﻿using DustInTheWind.Dot.Domain.SaveModel;
+﻿using DustInTheWind.Dot.Ports.GameSavesAccess;
 using Xunit;
 
 namespace Dot.Tests.AdventureGame.ObjectModel.ObjectBaseTests

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Threading;
-using DustInTheWind.Dot.ConsoleHelpers.ConsoleUtil;
 using DustInTheWind.Dot.Presentation.AsciiModel;
+using DustInTheWind.Dot.Presentation.ConsoleHelpers.ConsoleUtil;
 
 namespace DustInTheWind.Dot.Presentation.Controls
 {

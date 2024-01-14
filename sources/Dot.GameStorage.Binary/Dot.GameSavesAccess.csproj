@@ -2,12 +2,11 @@
 
     <PropertyGroup>
         <TargetFramework>net6</TargetFramework>
-        <AssemblyName>DustInTheWind.Dot.AdventureGame</AssemblyName>
-        <RootNamespace>DustInTheWind.Dot.AdventureGame</RootNamespace>
+        <AssemblyName>DustInTheWind.Dot.GameSavesAccess</AssemblyName>
+        <RootNamespace>DustInTheWind.Dot.GameSavesAccess</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Dot.Domain\Dot.Domain.csproj" />
         <ProjectReference Include="..\Dot.Ports.SaveAccess\Dot.Ports.GameSavesAccess.csproj" />
     </ItemGroup>
 

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace DustInTheWind.Dot.ConsoleHelpers
+namespace DustInTheWind.Dot.Presentation.ConsoleHelpers
 {
     public class TextBlock : IEnumerable<TextBlockLine>
     {

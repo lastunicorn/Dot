@@ -1,4 +1,4 @@
-﻿namespace DustInTheWind.Dot.ConsoleHelpers
+﻿namespace DustInTheWind.Dot.Presentation.ConsoleHelpers
 {
     public enum ChipType
     {

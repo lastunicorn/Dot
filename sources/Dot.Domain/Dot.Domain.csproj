@@ -6,4 +6,8 @@
         <AssemblyName>DustInTheWind.Dot.Domain</AssemblyName>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Dot.Ports.SaveAccess\Dot.Ports.GameSavesAccess.csproj" />
+    </ItemGroup>
+
 </Project>

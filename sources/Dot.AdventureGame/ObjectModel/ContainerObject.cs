@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using DustInTheWind.Dot.Domain.SaveModel;
+using DustInTheWind.Dot.Ports.GameSavesAccess;
 
 namespace DustInTheWind.Dot.AdventureGame.ObjectModel
 {

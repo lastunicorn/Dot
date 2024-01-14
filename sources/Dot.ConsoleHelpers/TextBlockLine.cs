@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace DustInTheWind.Dot.ConsoleHelpers
+namespace DustInTheWind.Dot.Presentation.ConsoleHelpers
 {
     public class TextBlockLine : List<Chip>
     {

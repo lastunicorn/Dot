@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.Dot.AudioSupport;
-using DustInTheWind.Dot.ConsoleHelpers;
+using DustInTheWind.Dot.Presentation.ConsoleHelpers;
 
 namespace DustInTheWind.Dot.Presentation.Controls
 {

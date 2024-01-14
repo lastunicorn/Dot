@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using DustInTheWind.Dot.ConsoleHelpers.UIControls;
-using DustInTheWind.Dot.Domain.SaveModel;
+using DustInTheWind.Dot.Ports.GameSavesAccess;
+using DustInTheWind.Dot.Presentation.ConsoleHelpers.UIControls;
 
 namespace DustInTheWind.Dot.Presentation.Controls
 {

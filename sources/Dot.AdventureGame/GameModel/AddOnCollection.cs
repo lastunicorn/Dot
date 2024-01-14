@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.Dot.AdventureGame.LocationModel;
 using DustInTheWind.Dot.AdventureGame.ObjectModel;
-using DustInTheWind.Dot.Domain.SaveModel;
+using DustInTheWind.Dot.Ports.GameSavesAccess;
 
 namespace DustInTheWind.Dot.AdventureGame.GameModel
 {

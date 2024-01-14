@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace DustInTheWind.Dot.WindowsNative
+namespace DustInTheWind.Dot.Presentation.WindowsNative
 {
-    public static class NativeMethods
+    internal static class NativeMethods
     {
         public const int MONITOR_DEFAULTTOPRIMERTY = 0x00000001;
         public const int MONITOR_DEFAULTTONEAREST = 0x00000002;

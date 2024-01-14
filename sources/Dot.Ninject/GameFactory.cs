@@ -1,6 +1,6 @@
 ﻿using System;
 using DustInTheWind.Dot.Domain.GameModel;
-using DustInTheWind.Dot.Domain.SaveModel;
+using DustInTheWind.Dot.Ports.GameSavesAccess;
 using Ninject;
 
 namespace DustInTheWind.Dot.Ninject

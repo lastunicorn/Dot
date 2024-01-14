@@ -1,6 +1,6 @@
 ﻿using System;
-using DustInTheWind.Dot.ConsoleHelpers.ConsoleUtil;
 using DustInTheWind.Dot.Domain.ModuleModel;
+using DustInTheWind.Dot.Presentation.ConsoleHelpers.ConsoleUtil;
 using DustInTheWind.Dot.Presentation.Presenters;
 
 namespace DustInTheWind.Dot.Presentation.Modules

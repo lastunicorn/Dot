@@ -1,6 +1,6 @@
 ﻿using System;
-using DustInTheWind.Dot.ConsoleHelpers.UIControls;
 using DustInTheWind.Dot.Presentation;
+using DustInTheWind.Dot.Presentation.ConsoleHelpers.UIControls;
 
 namespace DustInTheWind.Dot.MicrosoftDependencyInjection
 {

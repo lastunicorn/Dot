@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading;
 using DustInTheWind.Dot.AudioSupport;
-using DustInTheWind.Dot.ConsoleHelpers.ConsoleUtil;
+using DustInTheWind.Dot.Presentation.ConsoleHelpers.ConsoleUtil;
 using DustInTheWind.Dot.Presentation.Controls;
-using DustInTheWind.Dot.WindowsNative;
+using DustInTheWind.Dot.Presentation.WindowsNative;
 
 namespace DustInTheWind.Dot.Presentation.Views
 {

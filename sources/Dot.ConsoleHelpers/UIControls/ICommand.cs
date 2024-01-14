@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DustInTheWind.Dot.ConsoleHelpers.UIControls
+namespace DustInTheWind.Dot.Presentation.ConsoleHelpers.UIControls
 {
     public interface ICommand
     {

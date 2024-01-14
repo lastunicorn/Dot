@@ -1,5 +1,5 @@
 ﻿using System;
-using DustInTheWind.Dot.ConsoleHelpers.ConsoleUtil;
+using DustInTheWind.Dot.Presentation.ConsoleHelpers.ConsoleUtil;
 
 namespace DustInTheWind.Dot.Presentation.Controls
 {

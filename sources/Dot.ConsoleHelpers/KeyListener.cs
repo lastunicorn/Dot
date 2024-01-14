@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DustInTheWind.Dot.ConsoleHelpers
+namespace DustInTheWind.Dot.Presentation.ConsoleHelpers
 {
     public class KeyListener
     {

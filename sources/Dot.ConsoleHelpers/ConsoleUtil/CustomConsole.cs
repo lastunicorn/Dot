@@ -1,7 +1,7 @@
 ﻿using System;
-using DustInTheWind.Dot.ConsoleHelpers.UIControls;
+using DustInTheWind.Dot.Presentation.ConsoleHelpers.UIControls;
 
-namespace DustInTheWind.Dot.ConsoleHelpers.ConsoleUtil
+namespace DustInTheWind.Dot.Presentation.ConsoleHelpers.ConsoleUtil
 {
     public static class CustomConsole
     {

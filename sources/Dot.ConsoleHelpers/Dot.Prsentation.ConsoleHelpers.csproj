@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6</TargetFramework>
+        <RootNamespace>DustInTheWind.Dot.Presentation.ConsoleHelpers</RootNamespace>
+        <AssemblyName>DustInTheWind.Dot.Presentation.ConsoleHelpers</AssemblyName>
+    </PropertyGroup>
+
+</Project>

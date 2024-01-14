@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using DustInTheWind.Dot.Application.UseCases.LoadGame;
 using DustInTheWind.Dot.AudioSupport;
-using DustInTheWind.Dot.ConsoleHelpers.ConsoleUtil;
-using DustInTheWind.Dot.ConsoleHelpers.UIControls;
-using DustInTheWind.Dot.Domain.SaveModel;
+using DustInTheWind.Dot.Ports.GameSavesAccess;
+using DustInTheWind.Dot.Presentation.ConsoleHelpers.ConsoleUtil;
+using DustInTheWind.Dot.Presentation.ConsoleHelpers.UIControls;
 using DustInTheWind.Dot.Presentation.Controls;
 
 namespace DustInTheWind.Dot.Presentation.Views

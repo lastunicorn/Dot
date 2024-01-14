@@ -4,7 +4,7 @@ using DustInTheWind.Dot.Application.UseCases.SaveGame;
 using DustInTheWind.Dot.Domain.DataAccess;
 using DustInTheWind.Dot.Domain.GameModel;
 using DustInTheWind.Dot.Domain.ModuleModel;
-using DustInTheWind.Dot.Domain.SaveModel;
+using DustInTheWind.Dot.Ports.GameSavesAccess;
 
 namespace DustInTheWind.Dot.Application.UseCases.LoadGame
 {

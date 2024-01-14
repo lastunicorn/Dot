@@ -1,7 +1,7 @@
 ﻿using System;
 using DustInTheWind.Dot.Application;
 using DustInTheWind.Dot.Application.UseCases.LoadGame;
-using DustInTheWind.Dot.ConsoleHelpers.UIControls;
+using DustInTheWind.Dot.Presentation.ConsoleHelpers.UIControls;
 
 namespace DustInTheWind.Dot.Presentation.Commands
 {

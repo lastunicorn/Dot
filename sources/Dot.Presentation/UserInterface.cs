@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.Dot.AudioSupport;
-using DustInTheWind.Dot.ConsoleHelpers;
-using DustInTheWind.Dot.ConsoleHelpers.ConsoleUtil;
 using DustInTheWind.Dot.Domain;
 using DustInTheWind.Dot.Domain.AudioTextModel;
+using DustInTheWind.Dot.Presentation.ConsoleHelpers;
+using DustInTheWind.Dot.Presentation.ConsoleHelpers.ConsoleUtil;
 using DustInTheWind.Dot.Presentation.Controls;
 
 namespace DustInTheWind.Dot.Presentation

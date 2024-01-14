@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Dot.GameStorage.Binary\Dot.GameStorage.Binary.csproj" />
+        <ProjectReference Include="..\Dot.GameStorage.Binary\Dot.GameSavesAccess.csproj" />
         <ProjectReference Include="..\Dot.Presentation\Dot.Presentation.csproj" />
     </ItemGroup>
 

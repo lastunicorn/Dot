@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DustInTheWind.Dot.ConsoleHelpers
+namespace DustInTheWind.Dot.Presentation.ConsoleHelpers
 {
     public class ActionChipBuilder : IChipBuilder
     {

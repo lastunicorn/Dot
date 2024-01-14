@@ -1,7 +1,7 @@
 ﻿using System;
 using DustInTheWind.Dot.AdventureGame.GameModel;
 using DustInTheWind.Dot.AdventureGame.LocationModel;
-using DustInTheWind.Dot.Domain.SaveModel;
+using DustInTheWind.Dot.Ports.GameSavesAccess;
 
 namespace Dot.Tests.AdventureGame.LocationModel.LocationBaseTests
 {

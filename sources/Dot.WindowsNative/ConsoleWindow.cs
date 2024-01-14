@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DustInTheWind.Dot.WindowsNative
+namespace DustInTheWind.Dot.Presentation.WindowsNative
 {
     public class ConsoleWindow
     {

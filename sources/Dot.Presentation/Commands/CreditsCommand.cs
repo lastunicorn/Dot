@@ -1,8 +1,8 @@
 ﻿using System;
 using DustInTheWind.Dot.Application;
 using DustInTheWind.Dot.Application.UseCases.Credits;
-using DustInTheWind.Dot.ConsoleHelpers.UIControls;
 using DustInTheWind.Dot.Domain;
+using DustInTheWind.Dot.Presentation.ConsoleHelpers.UIControls;
 using DustInTheWind.Dot.Presentation.Views;
 
 namespace DustInTheWind.Dot.Presentation.Commands
