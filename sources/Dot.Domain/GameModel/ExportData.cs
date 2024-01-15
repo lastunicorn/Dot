@@ -16,7 +16,7 @@
 
 using System;
 
-namespace DustInTheWind.Dot.AdventureGame.ExportModel;
+namespace DustInTheWind.Dot.Domain.GameModel;
 
 public class ExportData : ExportNode
 {

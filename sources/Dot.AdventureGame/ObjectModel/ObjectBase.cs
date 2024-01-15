@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
-using DustInTheWind.Dot.AdventureGame.ExportModel;
 using DustInTheWind.Dot.AdventureGame.LocationModel;
 using DustInTheWind.Dot.Domain;
 using DustInTheWind.Dot.Domain.AudioTextModel;
+using DustInTheWind.Dot.Domain.GameModel;
 
 namespace DustInTheWind.Dot.AdventureGame.ObjectModel
 {

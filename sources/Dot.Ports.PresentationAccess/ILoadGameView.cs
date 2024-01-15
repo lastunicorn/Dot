@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace DustInTheWind.Dot.Application.UseCases.LoadGame
+﻿namespace DustInTheWind.Dot.Ports.PresentationAccess
 {
     public interface ILoadGameView
     {

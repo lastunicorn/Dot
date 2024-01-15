@@ -16,7 +16,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using DustInTheWind.Dot.AdventureGame.ExportModel;
+using DustInTheWind.Dot.Domain.GameModel;
 using DustInTheWind.Dot.Ports.GameSavesAccess;
 
 namespace DustInTheWind.Dot.Application;

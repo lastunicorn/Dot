@@ -2,8 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using DustInTheWind.Dot.AdventureGame.ExportModel;
 using DustInTheWind.Dot.AdventureGame.ObjectModel;
+using DustInTheWind.Dot.Domain.GameModel;
 
 namespace DustInTheWind.Dot.AdventureGame.LocationModel
 {

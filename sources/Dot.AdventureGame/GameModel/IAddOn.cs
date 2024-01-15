@@ -1,4 +1,4 @@
-using DustInTheWind.Dot.AdventureGame.ExportModel;
+using DustInTheWind.Dot.Domain.GameModel;
 
 namespace DustInTheWind.Dot.AdventureGame.GameModel
 {

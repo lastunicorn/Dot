@@ -8,11 +8,11 @@ using DustInTheWind.Dot.AdventureGame.ActionResultHandlers;
 using DustInTheWind.Dot.AdventureGame.ActionResults;
 using DustInTheWind.Dot.AdventureGame.GameModel;
 using DustInTheWind.Dot.Application;
-using DustInTheWind.Dot.Application.GameHostActions;
 using DustInTheWind.Dot.Domain;
 using DustInTheWind.Dot.Domain.AudioTextModel;
 using DustInTheWind.Dot.Domain.DataAccess;
 using DustInTheWind.Dot.Domain.GameModel;
+using DustInTheWind.Dot.Presentation.GameHostActions;
 using DustInTheWind.Dot.Presentation.Views;
 
 namespace DustInTheWind.Dot.Presentation.Presenters

@@ -17,7 +17,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace DustInTheWind.Dot.AdventureGame.ExportModel;
+namespace DustInTheWind.Dot.Domain.GameModel;
 
 public class ExportNode : Dictionary<string, object>
 {

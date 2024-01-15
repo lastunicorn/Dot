@@ -20,9 +20,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using DustInTheWind.Dot.AdventureGame.ActionModel;
+using DustInTheWind.Dot.Application;
 using DustInTheWind.Dot.Application.UseCases.MainMenu;
 
-namespace DustInTheWind.Dot.Application.GameHostActions;
+namespace DustInTheWind.Dot.Presentation.GameHostActions;
 
 public class MainMenuAction : ActionBase
 {

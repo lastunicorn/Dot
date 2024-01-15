@@ -20,9 +20,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using DustInTheWind.Dot.AdventureGame.ActionModel;
+using DustInTheWind.Dot.Application;
 using DustInTheWind.Dot.Application.UseCases.LoadGame;
 
-namespace DustInTheWind.Dot.Application.GameHostActions;
+namespace DustInTheWind.Dot.Presentation.GameHostActions;
 
 public class LoadGameAction : ActionBase
 {

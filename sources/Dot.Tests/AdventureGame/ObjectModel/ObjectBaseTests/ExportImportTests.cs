@@ -1,4 +1,4 @@
-﻿using DustInTheWind.Dot.AdventureGame.ExportModel;
+﻿using DustInTheWind.Dot.Domain.GameModel;
 using DustInTheWind.Dot.Ports.GameSavesAccess;
 using Xunit;
 
