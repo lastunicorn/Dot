@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using DustInTheWind.Dot.AdventureGame.ExportModel;
 using DustInTheWind.Dot.Ports.GameSavesAccess;
 using Xunit;
 
@@ -11,7 +12,7 @@ namespace Dot.Tests.AdventureGame.LocationModel.LocationBaseTests
         {
             TestLocation testLocation1 = new TestLocation();
             testLocation1.InitializeNew();
-            StorageNode storageNode = testLocation1.Export();
+            ExportNode storageNode = testLocation1.Export();
 
             TestLocation testLocation2 = new TestLocation();
             testLocation2.Import(storageNode);
@@ -25,7 +26,7 @@ namespace Dot.Tests.AdventureGame.LocationModel.LocationBaseTests
         {
             TestLocation testLocation1 = new TestLocation();
             testLocation1.InitializeNew();
-            StorageNode storageNode = testLocation1.Export();
+            ExportNode storageNode = testLocation1.Export();
 
             TestLocation testLocation2 = new TestLocation();
             testLocation2.Import(storageNode);

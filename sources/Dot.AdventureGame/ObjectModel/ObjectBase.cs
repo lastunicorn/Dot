@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
+using DustInTheWind.Dot.AdventureGame.ExportModel;
 using DustInTheWind.Dot.AdventureGame.LocationModel;
 using DustInTheWind.Dot.Domain;
 using DustInTheWind.Dot.Domain.AudioTextModel;
-using DustInTheWind.Dot.Ports.GameSavesAccess;
 
 namespace DustInTheWind.Dot.AdventureGame.ObjectModel
 {
@@ -77,21 +77,21 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
             };
         }
 
-        public virtual StorageNode Export()
+        public virtual ExportNode Export()
         {
-            StorageNode storageNode = new StorageNode
+            ExportNode exportNode = new ExportNode
             {
                 { "is-visible", isVisible }
             };
 
-            storageNode.ObjectType = GetType();
+            exportNode.ObjectType = GetType();
 
-            return storageNode;
+            return exportNode;
         }
 
-        public virtual void Import(StorageNode storageNode)
+        public virtual void Import(ExportNode exportNode)
         {
-            isVisible = (bool)storageNode["is-visible"];
+            isVisible = (bool)exportNode["is-visible"];
         }
 
         protected virtual void OnIsVisibleChanged()

@@ -1,4 +1,4 @@
-using DustInTheWind.Dot.Ports.GameSavesAccess;
+using DustInTheWind.Dot.AdventureGame.ExportModel;
 
 namespace DustInTheWind.Dot.AdventureGame.GameModel
 {
@@ -12,8 +12,8 @@ namespace DustInTheWind.Dot.AdventureGame.GameModel
 
         void Stop();
 
-        StorageNode Export();
+        ExportNode Export();
 
-        void Import(StorageNode storageNode);
+        void Import(ExportNode exportNode);
     }
 }

@@ -1,11 +1,11 @@
-using DustInTheWind.Dot.Ports.GameSavesAccess;
+using DustInTheWind.Dot.AdventureGame.ExportModel;
 
 namespace DustInTheWind.Dot.AdventureGame.ObjectModel
 {
     public interface IExportable
     {
-        StorageNode Export();
+        ExportNode Export();
 
-        void Import(StorageNode storageNode);
+        void Import(ExportNode exportNode);
     }
 }

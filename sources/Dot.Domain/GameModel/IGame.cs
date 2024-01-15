@@ -1,5 +1,5 @@
 using System;
-using DustInTheWind.Dot.Ports.GameSavesAccess;
+using DustInTheWind.Dot.AdventureGame.ExportModel;
 
 namespace DustInTheWind.Dot.Domain.GameModel
 {
@@ -25,8 +25,8 @@ namespace DustInTheWind.Dot.Domain.GameModel
 
         void Finish();
 
-        StorageData Export();
+        ExportData Export();
 
-        void Import(StorageData storageData);
+        void Import(ExportData storageData);
     }
 }

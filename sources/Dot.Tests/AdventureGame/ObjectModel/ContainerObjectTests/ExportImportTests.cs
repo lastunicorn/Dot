@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using DustInTheWind.Dot.AdventureGame.ExportModel;
 using DustInTheWind.Dot.AdventureGame.ObjectModel;
 using DustInTheWind.Dot.Ports.GameSavesAccess;
 using Xunit;
@@ -14,7 +15,7 @@ namespace Dot.Tests.AdventureGame.ObjectModel.ContainerObjectTests
             TestObject obj = new TestObject();
             containerObject1.AddObject(obj);
 
-            StorageNode storageNode = containerObject1.Export();
+            ExportNode storageNode = containerObject1.Export();
 
             TestContainerObject containerObject2 = new TestContainerObject();
             containerObject2.Import(storageNode);

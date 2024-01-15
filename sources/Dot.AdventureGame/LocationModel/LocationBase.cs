@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
+using DustInTheWind.Dot.AdventureGame.ExportModel;
 using DustInTheWind.Dot.AdventureGame.GameModel;
 using DustInTheWind.Dot.AdventureGame.ObjectModel;
 using DustInTheWind.Dot.Domain.AudioTextModel;
-using DustInTheWind.Dot.Ports.GameSavesAccess;
 
 namespace DustInTheWind.Dot.AdventureGame.LocationModel
 {
@@ -47,22 +47,22 @@ namespace DustInTheWind.Dot.AdventureGame.LocationModel
                 addOn.Stop();
         }
 
-        public override StorageNode Export()
+        public override ExportNode Export()
         {
-            StorageNode storageNode = base.Export();
+            ExportNode exportNode = base.Export();
 
-            storageNode.Add("addons", AddOns.Export());
+            exportNode.Add("addons", AddOns.Export());
 
-            return storageNode;
+            return exportNode;
         }
 
-        public override void Import(StorageNode storageNode)
+        public override void Import(ExportNode exportNode)
         {
-            base.Import(storageNode);
+            base.Import(exportNode);
 
-            StorageNode addOnsStorageNode = (StorageNode)storageNode["addons"];
+            ExportNode addOnsExportNode = (ExportNode)exportNode["addons"];
             AddOns.Clear();
-            AddOns.Import(addOnsStorageNode);
+            AddOns.Import(addOnsExportNode);
         }
 
         protected virtual void OnEntered()

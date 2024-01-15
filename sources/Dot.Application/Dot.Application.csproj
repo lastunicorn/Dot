@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net6</TargetFramework>
@@ -7,8 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Dot.AdventureGame\Dot.AdventureGame.csproj" />
-        <ProjectReference Include="..\Dot.Domain\Dot.Domain.csproj" />
+        <ProjectReference Include="..\Dot.AdventureGame\Dot.AdventureGame.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\Dot.Domain\Dot.Domain.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\Dot.Ports.SaveAccess\Dot.Ports.GameSavesAccess.csproj" PrivateAssets="All" />
     </ItemGroup>
 
 </Project>

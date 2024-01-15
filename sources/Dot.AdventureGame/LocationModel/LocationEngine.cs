@@ -2,8 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DustInTheWind.Dot.AdventureGame.ExportModel;
 using DustInTheWind.Dot.AdventureGame.ObjectModel;
-using DustInTheWind.Dot.Ports.GameSavesAccess;
 
 namespace DustInTheWind.Dot.AdventureGame.LocationModel
 {
@@ -71,27 +71,27 @@ namespace DustInTheWind.Dot.AdventureGame.LocationModel
             return GetEnumerator();
         }
 
-        public StorageNode Export()
+        public ExportNode Export()
         {
-            StorageNode storageNode = new StorageNode
+            ExportNode exportNode = new ExportNode
             {
                 { "current-location", CurrentLocation?.Id },
             };
 
-            storageNode.ObjectType = GetType();
+            exportNode.ObjectType = GetType();
 
-            IEnumerable<StorageNode> locationStorageNodes = locations
+            IEnumerable<ExportNode> locationStorageNodes = locations
                 .Select(x => x.Export());
 
-            foreach (StorageNode locationStorageNode in locationStorageNodes) 
-                storageNode.Children.Add(locationStorageNode);
+            foreach (ExportNode locationStorageNode in locationStorageNodes) 
+                exportNode.Children.Add(locationStorageNode);
 
-            return storageNode;
+            return exportNode;
         }
 
-        public void Import(StorageNode storageNode)
+        public void Import(ExportNode exportNode)
         {
-            foreach (StorageNode locationNode in storageNode.Children)
+            foreach (ExportNode locationNode in exportNode.Children)
             {
                 Type locationType = locationNode.ObjectType;
                 
@@ -101,7 +101,7 @@ namespace DustInTheWind.Dot.AdventureGame.LocationModel
                 locations.Add(location);
             }
 
-            string currentLocationId = (string)storageNode["current-location"];
+            string currentLocationId = (string)exportNode["current-location"];
             CurrentLocation = locations.FirstOrDefault(x => x.Id == currentLocationId);
         }
 

@@ -1,4 +1,4 @@
-﻿// Dot
+// Dot
 // Copyright (C) 2020-2024 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -15,21 +15,12 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Dot.Domain.GameModel;
 
-namespace DustInTheWind.Dot.MicrosoftDependencyInjection;
+namespace DustInTheWind.Dot.AdventureGame.ExportModel;
 
-public class GameFactory : IGameFactory
+public class ExportData : ExportNode
 {
-    private readonly IServiceProvider serviceProvider;
+    public Version Version { get; set; }
 
-    public GameFactory(IServiceProvider serviceProvider)
-    {
-        this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
-    }
-
-    public IGame Create()
-    {
-        return (IGame)serviceProvider.GetService(typeof(IGame));
-    }
+    public DateTime SaveTime { get; set; }
 }

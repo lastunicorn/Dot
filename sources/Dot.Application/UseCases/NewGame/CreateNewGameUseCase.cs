@@ -23,7 +23,9 @@ namespace DustInTheWind.Dot.Application.UseCases.NewGame
             IGame game = gameRepository.Get();
             game?.Close();
 
-            game = gameFactory.CreateNew();
+            IGame newGame = gameFactory.Create();
+            newGame.InitializeNew();
+            game = newGame;
             gameRepository.Add(game);
 
             moduleEngine.RequestToChangeModule("game");

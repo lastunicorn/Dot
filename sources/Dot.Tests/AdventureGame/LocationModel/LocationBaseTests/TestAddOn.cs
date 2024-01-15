@@ -1,4 +1,5 @@
 ﻿using System;
+using DustInTheWind.Dot.AdventureGame.ExportModel;
 using DustInTheWind.Dot.AdventureGame.GameModel;
 using DustInTheWind.Dot.AdventureGame.LocationModel;
 using DustInTheWind.Dot.Ports.GameSavesAccess;
@@ -21,15 +22,15 @@ namespace Dot.Tests.AdventureGame.LocationModel.LocationBaseTests
             throw new NotImplementedException();
         }
 
-        public StorageNode Export()
+        public ExportNode Export()
         {
-            return new StorageNode
+            return new ExportNode
             {
                 ObjectType = GetType()
             };
         }
 
-        public void Import(StorageNode storageNode)
+        public void Import(ExportNode storageNode)
         {
         }
     }

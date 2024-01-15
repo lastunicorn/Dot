@@ -15,21 +15,15 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Dot.Domain.GameModel;
 
-namespace DustInTheWind.Dot.MicrosoftDependencyInjection;
+namespace DustInTheWind.Dot.Domain.ModuleModel;
 
-public class GameFactory : IGameFactory
+public class NoModulesException : Exception
 {
-    private readonly IServiceProvider serviceProvider;
+    private const string DefaultMessage = "There are no modules configured.";
 
-    public GameFactory(IServiceProvider serviceProvider)
+    public NoModulesException()
+        : base(DefaultMessage)
     {
-        this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
-    }
-
-    public IGame Create()
-    {
-        return (IGame)serviceProvider.GetService(typeof(IGame));
     }
 }

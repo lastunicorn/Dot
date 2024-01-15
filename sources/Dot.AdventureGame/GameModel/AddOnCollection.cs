@@ -1,33 +1,33 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DustInTheWind.Dot.AdventureGame.ExportModel;
 using DustInTheWind.Dot.AdventureGame.LocationModel;
 using DustInTheWind.Dot.AdventureGame.ObjectModel;
-using DustInTheWind.Dot.Ports.GameSavesAccess;
 
 namespace DustInTheWind.Dot.AdventureGame.GameModel
 {
     public class AddOnCollection : HashSet<IAddOn>, IExportable
     {
-        public StorageNode Export()
+        public ExportNode Export()
         {
-            StorageNode storageNode = new StorageNode
+            ExportNode exportNode = new ExportNode
             {
                 ObjectType = GetType()
             };
 
-            IEnumerable<StorageNode> addOnStorageNodes = this
+            IEnumerable<ExportNode> addOnStorageNodes = this
                 .Select(x => x.Export());
 
-            foreach (StorageNode addOnStorageNode in addOnStorageNodes)
-                storageNode.Children.Add(addOnStorageNode);
+            foreach (ExportNode addOnStorageNode in addOnStorageNodes)
+                exportNode.Children.Add(addOnStorageNode);
 
-            return storageNode;
+            return exportNode;
         }
 
-        public void Import(StorageNode storageNode)
+        public void Import(ExportNode exportNode)
         {
-            foreach (StorageNode addOnNode in storageNode.Children)
+            foreach (ExportNode addOnNode in exportNode.Children)
             {
                 Type addOnType = addOnNode.ObjectType;
 

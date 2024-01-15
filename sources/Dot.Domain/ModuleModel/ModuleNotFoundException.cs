@@ -15,21 +15,15 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Dot.Domain.GameModel;
 
-namespace DustInTheWind.Dot.MicrosoftDependencyInjection;
+namespace DustInTheWind.Dot.Domain.ModuleModel;
 
-public class GameFactory : IGameFactory
+public class ModuleNotFoundException : Exception
 {
-    private readonly IServiceProvider serviceProvider;
+    private const string DefaultMessage = "Module not found: {0}";
 
-    public GameFactory(IServiceProvider serviceProvider)
+    public ModuleNotFoundException(string moduleId)
+        : base(string.Format(DefaultMessage, moduleId))
     {
-        this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
-    }
-
-    public IGame Create()
-    {
-        return (IGame)serviceProvider.GetService(typeof(IGame));
     }
 }

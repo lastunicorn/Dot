@@ -20,6 +20,7 @@
         <ProjectReference Include="..\Dot.AudioSupport\Dot.AudioSupport.csproj" />
         <ProjectReference Include="..\Dot.ConsoleHelpers\Dot.Prsentation.ConsoleHelpers.csproj" />
         <ProjectReference Include="..\Dot.Domain\Dot.Domain.csproj" />
+        <ProjectReference Include="..\Dot.Ports.SaveAccess\Dot.Ports.GameSavesAccess.csproj" />
         <ProjectReference Include="..\Dot.WindowsNative\Dot.Presentation.WindowsNative.csproj" />
     </ItemGroup>
 

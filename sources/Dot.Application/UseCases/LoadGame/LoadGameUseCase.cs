@@ -44,7 +44,10 @@ namespace DustInTheWind.Dot.Application.UseCases.LoadGame
 
             GameSlot gameSlot = ChooseGameSlot();
 
-            game = gameFactory.CreateFrom(gameSlot.Data);
+            IGame newGame = gameFactory.Create();
+            newGame.Import(gameSlot.Data.ToExportData());
+            game = newGame;
+            
             gameRepository.Add(game);
 
             game.Open();

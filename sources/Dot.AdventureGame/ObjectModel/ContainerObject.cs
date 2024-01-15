@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using DustInTheWind.Dot.Ports.GameSavesAccess;
+using DustInTheWind.Dot.AdventureGame.ExportModel;
 
 namespace DustInTheWind.Dot.AdventureGame.ObjectModel
 {
@@ -100,24 +100,24 @@ namespace DustInTheWind.Dot.AdventureGame.ObjectModel
             return default;
         }
 
-        public override StorageNode Export()
+        public override ExportNode Export()
         {
-            StorageNode storageNode = base.Export();
+            ExportNode exportNode = base.Export();
 
-            IEnumerable<StorageNode> storageNodes = Children
+            IEnumerable<ExportNode> storageNodes = Children
                 .Select(x => x.Export());
 
-            foreach (StorageNode childStorageNode in storageNodes)
-                storageNode.Children.Add(childStorageNode);
+            foreach (ExportNode childStorageNode in storageNodes)
+                exportNode.Children.Add(childStorageNode);
 
-            return storageNode;
+            return exportNode;
         }
 
-        public override void Import(StorageNode storageNode)
+        public override void Import(ExportNode exportNode)
         {
-            base.Import(storageNode);
+            base.Import(exportNode);
 
-            foreach (StorageNode childNode in storageNode.Children)
+            foreach (ExportNode childNode in exportNode.Children)
             {
                 Type childType = childNode.ObjectType;
 

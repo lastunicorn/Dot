@@ -4,11 +4,11 @@ using System.Linq;
 using System.Reflection;
 using DustInTheWind.Dot.AdventureGame.ActionModel;
 using DustInTheWind.Dot.AdventureGame.Actions;
+using DustInTheWind.Dot.AdventureGame.ExportModel;
 using DustInTheWind.Dot.AdventureGame.LocationModel;
 using DustInTheWind.Dot.AdventureGame.ObjectModel;
 using DustInTheWind.Dot.AdventureGame.Verbs;
 using DustInTheWind.Dot.Domain.GameModel;
-using DustInTheWind.Dot.Ports.GameSavesAccess;
 
 namespace DustInTheWind.Dot.AdventureGame.GameModel
 {
@@ -229,9 +229,9 @@ namespace DustInTheWind.Dot.AdventureGame.GameModel
             }
         }
 
-        public virtual StorageData Export()
+        public virtual ExportData Export()
         {
-            StorageData storageNode = new StorageData
+            ExportData storageNode = new ExportData
             {
                 { "state", State },
                 { "is-new", isNew },
@@ -257,7 +257,7 @@ namespace DustInTheWind.Dot.AdventureGame.GameModel
             return assemblyName.Version;
         }
 
-        public virtual void Import(StorageData storageData)
+        public virtual void Import(ExportData storageData)
         {
             Version currentVersion = GetAssemblyVersion();
             int comparisonResult = currentVersion.CompareTo(storageData.Version, 2);
@@ -270,17 +270,17 @@ namespace DustInTheWind.Dot.AdventureGame.GameModel
             isFinished = (bool)storageData["is-finished"];
             gameTimer.TotalPlayTime = (TimeSpan)storageData["total-play-time"];
 
-            StorageNode locationsStorageNode = (StorageNode)storageData["locations"];
+            ExportNode locationsExportNode = (ExportNode)storageData["locations"];
             locationEngine.Clear();
-            locationEngine.Import(locationsStorageNode);
+            locationEngine.Import(locationsExportNode);
 
-            StorageNode addOnsStorageNode = (StorageNode)storageData["addons"];
+            ExportNode addOnsExportNode = (ExportNode)storageData["addons"];
             addOns.Clear();
-            addOns.Import(addOnsStorageNode);
+            addOns.Import(addOnsExportNode);
 
-            StorageNode inventoryStorageNode = (StorageNode)storageData["inventory"];
+            ExportNode inventoryExportNode = (ExportNode)storageData["inventory"];
             Inventory.Clear();
-            Inventory.Import(inventoryStorageNode);
+            Inventory.Import(inventoryExportNode);
         }
 
         protected virtual void OnStateChanged()

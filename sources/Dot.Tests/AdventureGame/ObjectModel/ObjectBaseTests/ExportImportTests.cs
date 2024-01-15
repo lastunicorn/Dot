@@ -1,4 +1,5 @@
-﻿using DustInTheWind.Dot.Ports.GameSavesAccess;
+﻿using DustInTheWind.Dot.AdventureGame.ExportModel;
+using DustInTheWind.Dot.Ports.GameSavesAccess;
 using Xunit;
 
 namespace Dot.Tests.AdventureGame.ObjectModel.ObjectBaseTests
@@ -11,7 +12,7 @@ namespace Dot.Tests.AdventureGame.ObjectModel.ObjectBaseTests
             TestObject objectBase1 = new TestObject();
             objectBase1.IsVisible = true;
 
-            StorageNode storageNode = objectBase1.Export();
+            ExportNode storageNode = objectBase1.Export();
 
             TestObject objectBase2 = new TestObject();
             objectBase2.Import(storageNode);
@@ -25,7 +26,7 @@ namespace Dot.Tests.AdventureGame.ObjectModel.ObjectBaseTests
             TestObject objectBase1 = new TestObject();
             objectBase1.IsVisible = false;
 
-            StorageNode storageNode = objectBase1.Export();
+            ExportNode storageNode = objectBase1.Export();
 
             TestObject objectBase2 = new TestObject();
             objectBase2.Import(storageNode);

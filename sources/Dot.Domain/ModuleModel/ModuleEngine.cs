@@ -1,97 +1,114 @@
-﻿using System;
+﻿// Dot
+// Copyright (C) 2020-2024 Dust in the Wind
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DustInTheWind.Dot.Domain.ModuleModel
+namespace DustInTheWind.Dot.Domain.ModuleModel;
+
+public class ModuleEngine
 {
-    public class ModuleEngine
+    private readonly List<IModule> modules = new();
+
+    private IModule currentModule;
+    private volatile bool closeWasRequested;
+    private string requestedNextModuleId;
+
+    public event EventHandler<ModuleRunExceptionEventArgs> ModuleRunException;
+
+    public ModuleEngine()
     {
-        private readonly List<IModule> modules = new List<IModule>();
+    }
 
-        private IModule currentModule;
-        private volatile bool closeWasRequested;
-        private string requestedNextModuleId;
+    public ModuleEngine(IEnumerable<IModule> modules)
+    {
+        if (modules != null)
+            this.modules.AddRange(modules);
+    }
 
-        public event EventHandler<ModuleRunExceptionEventArgs> ModuleRunException;
+    public void AddModule(IModule module)
+    {
+        if (module == null) throw new ArgumentNullException(nameof(module));
 
-        public ModuleEngine()
+        modules.Add(module);
+    }
+
+    public void Run()
+    {
+        closeWasRequested = false;
+        string nextModuleId = GetDefaultModuleId();
+
+        while (!closeWasRequested)
         {
-        }
-
-        public ModuleEngine(IEnumerable<IModule> modules)
-        {
-            if (modules != null)
-                this.modules.AddRange(modules);
-        }
-
-        public void AddModule(IModule module)
-        {
-            if (module == null) throw new ArgumentNullException(nameof(module));
-
-            modules.Add(module);
-        }
-
-        public void Run()
-        {
-            closeWasRequested = false;
-
-            IModule firstModule = modules.FirstOrDefault();
-
-            if (firstModule == null)
-                throw new Exception("There are no modules configured.");
-
-            string nextModuleId = firstModule.Id;
-
-            while (!closeWasRequested)
+            try
             {
-                try
-                {
-                    currentModule = CalculateNextModule(nextModuleId);
-                    nextModuleId = currentModule?.Run();
+                currentModule = ComputeNextModule(nextModuleId);
+                nextModuleId = currentModule?.Run();
 
-                    if (requestedNextModuleId != null)
-                    {
-                        nextModuleId = requestedNextModuleId;
-                        requestedNextModuleId = null;
-                    }
-                }
-                catch (Exception ex)
+                if (requestedNextModuleId != null)
                 {
-                    ModuleRunExceptionEventArgs eventArgs = new ModuleRunExceptionEventArgs(ex);
-                    OnModuleRunException(eventArgs);
-
-                    nextModuleId = eventArgs.NextModule ?? modules.FirstOrDefault()?.Id;
+                    nextModuleId = requestedNextModuleId;
+                    requestedNextModuleId = null;
                 }
             }
+            catch (Exception ex)
+            {
+                ModuleRunExceptionEventArgs eventArgs = new(ex);
+                OnModuleRunException(eventArgs);
+
+                nextModuleId = eventArgs.NextModule ?? GetDefaultModuleId();
+            }
         }
+    }
 
-        private IModule CalculateNextModule(string nextModuleId)
-        {
-            IModule nextModule = modules.FirstOrDefault(x => x.Id == nextModuleId);
+    private string GetDefaultModuleId()
+    {
+        IModule firstModule = modules.FirstOrDefault();
 
-            if (nextModule == null)
-                throw new Exception("Module not found.");
+        if (firstModule == null)
+            throw new NoModulesException();
 
-            return nextModule;
-        }
+        return firstModule.Id;
+    }
 
-        public void RequestToChangeModule(string moduleId)
-        {
-            requestedNextModuleId = moduleId;
-            currentModule?.RequestExit();
-        }
+    private IModule ComputeNextModule(string nextModuleId)
+    {
+        IModule nextModule = modules
+            .FirstOrDefault(x => x.Id == nextModuleId);
 
-        public bool Close()
-        {
-            closeWasRequested = true;
-            currentModule?.RequestExit();
+        return nextModule ?? throw new ModuleNotFoundException(nextModuleId);
+    }
 
-            return true;
-        }
+    public void RequestToChangeModule(string moduleId)
+    {
+        requestedNextModuleId = moduleId;
+        currentModule?.RequestExit();
+    }
 
-        protected virtual void OnModuleRunException(ModuleRunExceptionEventArgs e)
-        {
-            ModuleRunException?.Invoke(this, e);
-        }
+    public bool Close()
+    {
+        closeWasRequested = true;
+        currentModule?.RequestExit();
+
+        return true;
+    }
+
+    protected virtual void OnModuleRunException(ModuleRunExceptionEventArgs e)
+    {
+        ModuleRunException?.Invoke(this, e);
     }
 }

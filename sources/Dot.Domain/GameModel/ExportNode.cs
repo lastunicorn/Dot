@@ -1,4 +1,4 @@
-﻿// Dot
+// Dot
 // Copyright (C) 2020-2024 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -15,21 +15,28 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Dot.Domain.GameModel;
+using System.Collections.Generic;
 
-namespace DustInTheWind.Dot.MicrosoftDependencyInjection;
+namespace DustInTheWind.Dot.AdventureGame.ExportModel;
 
-public class GameFactory : IGameFactory
+public class ExportNode : Dictionary<string, object>
 {
-    private readonly IServiceProvider serviceProvider;
+    public Type ObjectType { get; set; }
 
-    public GameFactory(IServiceProvider serviceProvider)
+    public List<ExportNode> Children { get; } = new();
+
+    public T Get<T>(string key, T defaultValue = default)
     {
-        this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+        if (!ContainsKey(key))
+            return defaultValue;
+
+        object rawValue = this[key];
+
+        return (T)Convert.ChangeType(rawValue, typeof(T));
     }
 
-    public IGame Create()
+    public void Set<T>(string key, T value)
     {
-        return (IGame)serviceProvider.GetService(typeof(IGame));
+        this[key] = value;
     }
 }
