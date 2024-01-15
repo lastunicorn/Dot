@@ -12,6 +12,7 @@ using DustInTheWind.Dot.Domain.DataAccess;
 using DustInTheWind.Dot.Domain.GameModel;
 using DustInTheWind.Dot.GameSavesAccess;
 using DustInTheWind.Dot.Ports.GameSavesAccess;
+using DustInTheWind.Dot.Ports.PresentationAccess;
 using DustInTheWind.Dot.Presentation;
 using DustInTheWind.Dot.Presentation.Modules;
 using DustInTheWind.Dot.Presentation.Views;
@@ -39,6 +40,7 @@ namespace DustInTheWind.Dot.Bootstrapping
             servicesContainer.AddTransient<ResultHandlersCollection>();
             servicesContainer.AddSingleton<ModuleEngine>();
 
+            servicesContainer.AddTransient<IPresentation, ApplicationView>();
             servicesContainer.AddTransient<IGameSlotRepository, GameSlotRepository>();
             servicesContainer.AddTransient<IGameSettings, GameSettings>();
 

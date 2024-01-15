@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using DustInTheWind.Dot.Ports.GameSavesAccess;
 
 namespace DustInTheWind.Dot.Application.UseCases.LoadGame
 {
@@ -7,7 +6,7 @@ namespace DustInTheWind.Dot.Application.UseCases.LoadGame
     {
         bool AskToSavePreviousGame();
 
-        GameSlot AskToChooseGameSlot(IEnumerable<GameSlot> gameSlots);
+        GameSlotId AskToChooseGameSlot(IEnumerable<GameSlotId> gameSlotIds);
 
         void AnnounceSuccess();
     }

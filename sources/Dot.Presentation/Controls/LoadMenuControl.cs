@@ -1,27 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using DustInTheWind.Dot.Ports.GameSavesAccess;
+using DustInTheWind.Dot.Application.UseCases.LoadGame;
 using DustInTheWind.Dot.Presentation.ConsoleHelpers.UIControls;
 
 namespace DustInTheWind.Dot.Presentation.Controls
 {
-    internal class LoadMenuControl : SelectableMenu<GameSlot>
+    internal class LoadMenuControl : SelectableMenu<GameSlotId>
     {
         private const int TotalSlotCount = 10;
 
-        public void Populate(IEnumerable<GameSlot> gameSlots)
+        public void Populate(IEnumerable<GameSlotId> gameSlotIds)
         {
-            IEnumerable<IMenuItem<GameSlot>> menuItems = CreateMenuItems(gameSlots);
+            IEnumerable<IMenuItem<GameSlotId>> menuItems = CreateMenuItems(gameSlotIds);
             AddRange(menuItems);
         }
 
-        private static IEnumerable<IMenuItem<GameSlot>> CreateMenuItems(IEnumerable<GameSlot> gameSlots)
+        private static IEnumerable<IMenuItem<GameSlotId>> CreateMenuItems(IEnumerable<GameSlotId> gameSlotIds)
         {
             int count = 0;
 
-            foreach (GameSlot gameSlot in gameSlots)
+            foreach (GameSlotId gameSlotId in gameSlotIds)
             {
-                while (count < gameSlot.Id - 1 && count < TotalSlotCount)
+                while (count < gameSlotId.Id - 1 && count < TotalSlotCount)
                 {
                     count++;
                     yield return CreateEmptyMenuItem(count);
@@ -31,7 +31,7 @@ namespace DustInTheWind.Dot.Presentation.Controls
                     yield break;
 
                 count++;
-                yield return CreateMenuItem(gameSlot);
+                yield return CreateMenuItem(gameSlotId);
             }
 
             while (count < TotalSlotCount)
@@ -40,38 +40,35 @@ namespace DustInTheWind.Dot.Presentation.Controls
                 yield return CreateEmptyMenuItem(count);
             }
 
-            yield return new SpaceMenuItem<GameSlot>();
+            yield return new SpaceMenuItem<GameSlotId>();
 
             yield return CreateCancelMenuItem();
         }
 
-        private static IMenuItem<GameSlot> CreateMenuItem(GameSlot gameSlot)
+        private static IMenuItem<GameSlotId> CreateMenuItem(GameSlotId gameSlotId)
         {
-            return new LabelMenuItem<GameSlot>
+            return new LabelMenuItem<GameSlotId>
             {
-                Text = string.Format("Saved Game {0}", gameSlot.Id),
-                Value = gameSlot,
+                Text = $"Saved Game {gameSlotId.Id}",
+                Value = gameSlotId,
                 HorizontalAlign = HorizontalAlign.Center
             };
         }
 
-        private static IMenuItem<GameSlot> CreateEmptyMenuItem(int id)
+        private static IMenuItem<GameSlotId> CreateEmptyMenuItem(int id)
         {
-            return new LabelMenuItem<GameSlot>
+            return new LabelMenuItem<GameSlotId>
             {
                 Text = $"< Empty Slot {id} >",
-                Value = new GameSlot
-                {
-                    Id = id
-                },
+                Value = new GameSlotId(id),
                 HorizontalAlign = HorizontalAlign.Center,
                 IsSelectable = false
             };
         }
 
-        private static IMenuItem<GameSlot> CreateCancelMenuItem()
+        private static IMenuItem<GameSlotId> CreateCancelMenuItem()
         {
-            return new LabelMenuItem<GameSlot>
+            return new LabelMenuItem<GameSlotId>
             {
                 Text = "Cancel",
                 Value = null,

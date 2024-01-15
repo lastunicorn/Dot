@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using DustInTheWind.Dot.Application.UseCases.LoadGame;
 using DustInTheWind.Dot.Domain.DataAccess;
 using DustInTheWind.Dot.Domain.GameModel;
 using DustInTheWind.Dot.Ports.GameSavesAccess;
@@ -28,11 +30,13 @@ public class SaveGameUseCase
         if (game == null)
             throw new Exception("There is no game to be saved.");
 
-        IEnumerable<GameSlot> gameSlots = gameSlotRepository.GetAll();
-        GameSlot gameSlot = saveGameView.SelectGameSlot(gameSlots);
+        List<GameSlot> gameSlots = gameSlotRepository.GetAll().ToList();
+        GameSlotId gameSlotId = saveGameView.SelectGameSlot(gameSlots.Select(x => new GameSlotId(x.Id)));
 
-        if (gameSlot == null)
+        if (gameSlotId == null)
             throw new OperationCanceledException();
+
+        GameSlot gameSlot = gameSlots.FirstOrDefault(x => x.Id == gameSlotId.Id);
 
         gameSlot.Data = game.Export().ToStorageData();
         gameSlotRepository.AddOrReplace(gameSlot);

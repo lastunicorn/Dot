@@ -7,9 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Dot.GameHosting\Dot.GameHosting.csproj" />
-        <ProjectReference Include="..\Dot.GameStorage.Binary\Dot.GameSavesAccess.csproj" />
-        <ProjectReference Include="..\Dot.Presentation\Dot.Presentation.csproj" />
+        <ProjectReference Include="..\Dot.GameHosting\Dot.GameHosting.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\Dot.GameStorage.Binary\Dot.GameSavesAccess.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\Dot.Presentation\Dot.Presentation.csproj" PrivateAssets="All" />
     </ItemGroup>
 
 </Project>

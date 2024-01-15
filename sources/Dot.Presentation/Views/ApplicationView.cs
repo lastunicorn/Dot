@@ -1,69 +1,85 @@
-﻿using System;
+﻿// Dot
+// Copyright (C) 2020-2024 Dust in the Wind
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+using System;
 using System.Threading;
 using DustInTheWind.Dot.AudioSupport;
+using DustInTheWind.Dot.Ports.PresentationAccess;
 using DustInTheWind.Dot.Presentation.ConsoleHelpers.ConsoleUtil;
 using DustInTheWind.Dot.Presentation.Controls;
 using DustInTheWind.Dot.Presentation.WindowsNative;
 
-namespace DustInTheWind.Dot.Presentation.Views
+namespace DustInTheWind.Dot.Presentation.Views;
+
+public class ApplicationView : ViewBase, IPresentation
 {
-    public class ApplicationView : ViewBase
+    public ApplicationView(Audio audio)
+        : base(audio)
     {
-        public ApplicationView(Audio audio)
-            : base(audio)
+    }
+
+    public void DisplayApplicationHeader()
+    {
+        ApplicationHeader applicationHeader = CreateApplicationHeader();
+        applicationHeader.Display();
+    }
+
+    protected virtual ApplicationHeader CreateApplicationHeader()
+    {
+        return new ApplicationHeader
         {
-        }
+            TitleColor = DefaultTheme.Instance.TitleColor
+        };
+    }
 
-        public void DisplayApplicationHeader()
-        {
-            ApplicationHeader applicationHeader = CreateApplicationHeader();
-            applicationHeader.Display();
-        }
+    public void ResetConsoleWindow()
+    {
+        Console.BackgroundColor = ConsoleColor.Black;
+        Console.ForegroundColor = ConsoleColor.Gray;
+        Console.Clear();
 
-        protected virtual ApplicationHeader CreateApplicationHeader()
-        {
-            return new ApplicationHeader
-            {
-                TitleColor = DefaultTheme.Instance.TitleColor
-            };
-        }
+        CustomConsole.SetSize(80, 1024, 80, 50);
 
-        public void ResetConsoleWindow()
-        {
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.Clear();
+        Display display = new();
+        ConsoleWindow consoleWindow = new();
 
-            CustomConsole.SetSize(80, 1024, 80, 50);
+        int top = 0;
+        int left = (display.Width - consoleWindow.Width) / 2;
 
-            Display display = new Display();
-            ConsoleWindow consoleWindow = new ConsoleWindow();
+        consoleWindow.SetPosition(left, top);
+    }
 
-            int top = 0;
-            int left = (display.Width - consoleWindow.Width) / 2;
+    public void DisplayFunctionalityNotImplementedInfo()
+    {
+        DisplayInfo("Sorry! This functionality is not implemented yet.");
+    }
 
-            consoleWindow.SetPosition(left, top);
-        }
+    public void DisplayOperationCanceledInfo()
+    {
+        DisplayInfo("Operation was canceled.");
+    }
 
-        public void DisplayFunctionalityNotImplementedInfo()
-        {
-            DisplayInfo("Sorry! This functionality is not implemented yet.");
-        }
+    public void DisplayGoodByeMessage()
+    {
+        DisplayInfo("Bye!");
+        Thread.Sleep(1000);
+    }
 
-        public void DisplayOperationCanceledInfo()
-        {
-            DisplayInfo("Operation was canceled.");
-        }
-
-        public void DisplayGoodByeMessage()
-        {
-            DisplayInfo("Bye!");
-            Thread.Sleep(1000);
-        }
-
-        public void DisplayError(Exception exception)
-        {
-            CustomConsole.WriteError("Internal error occurred. " + exception);
-        }
+    public void DisplayError(Exception exception)
+    {
+        CustomConsole.WriteError("Internal error occurred. " + exception);
     }
 }

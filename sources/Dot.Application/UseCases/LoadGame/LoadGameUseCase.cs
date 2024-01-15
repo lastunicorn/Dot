@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Dot.GameHosting;
 using DustInTheWind.Dot.Application.UseCases.SaveGame;
 using DustInTheWind.Dot.Domain.DataAccess;
@@ -47,7 +48,7 @@ namespace DustInTheWind.Dot.Application.UseCases.LoadGame
             IGame newGame = gameFactory.Create();
             newGame.Import(gameSlot.Data.ToExportData());
             game = newGame;
-            
+
             gameRepository.Add(game);
 
             game.Open();
@@ -61,13 +62,13 @@ namespace DustInTheWind.Dot.Application.UseCases.LoadGame
 
         private GameSlot ChooseGameSlot()
         {
-            IEnumerable<GameSlot> gameSlots = gameSlotRepository.GetAll();
-            GameSlot gameSlot = view.AskToChooseGameSlot(gameSlots);
+            List<GameSlot> gameSlots = gameSlotRepository.GetAll().ToList();
+            GameSlotId gameSlotId = view.AskToChooseGameSlot(gameSlots.Select(x => new GameSlotId(x.Id)));
 
-            if (gameSlot == null)
+            if (gameSlotId == null)
                 throw new OperationCanceledException();
 
-            return gameSlot;
+            return gameSlots.FirstOrDefault(x => x.Id == gameSlotId.Id);
         }
 
         private void SavePreviousGame()

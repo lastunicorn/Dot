@@ -17,25 +17,26 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
-using Dot.GameHosting;
 using DustInTheWind.Dot.AdventureGame.ActionModel;
+using DustInTheWind.Dot.Application.UseCases.Exit;
 
 namespace DustInTheWind.Dot.Application.GameHostActions;
 
-public class MainMenuAction : ActionBase
+public class ExitAction : ActionBase
 {
-    private readonly ModuleEngine moduleEngine;
+    private readonly IUseCaseFactory useCaseFactory;
 
-    public MainMenuAction(ModuleEngine moduleEngine)
-        : base("menu", "m")
+    public ExitAction(IUseCaseFactory useCaseFactory)
+        : base("exit", "quit", "x")
     {
-        this.moduleEngine = moduleEngine ?? throw new ArgumentNullException(nameof(moduleEngine));
+        this.useCaseFactory = useCaseFactory ?? throw new ArgumentNullException(nameof(useCaseFactory));
     }
 
-    public override string Description => "Displays the main menu of the game.";
+    public override string Description => "Exits the game.";
 
-    public override List<string> Usage => new() { "<<:menu>>", "<<:m>>" };
+    public override List<string> Usage => new() { "<<:exit>>", "<<:quit>>", "<<:x>>" };
 
     public override ActionType ActionType => ActionType.EnvironmentCommand;
 
@@ -43,7 +44,7 @@ public class MainMenuAction : ActionBase
     {
         return new List<Regex>
         {
-            new(@"^\s*(:menu|:m)\s*$", RegexOptions.IgnoreCase | RegexOptions.Singleline)
+            new(@"^\s*(:exit|:quit|:x)\s*$", RegexOptions.IgnoreCase | RegexOptions.Singleline)
         };
     }
 
@@ -54,8 +55,9 @@ public class MainMenuAction : ActionBase
 
     public override IEnumerable Execute(params object[] parameters)
     {
-        moduleEngine.RequestToChangeModule("main-menu");
+        ExitUseCase useCase = useCaseFactory.Create<ExitUseCase>();
+        useCase.Execute();
 
-        yield break;
+        return Enumerable.Empty<object>();
     }
 }

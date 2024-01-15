@@ -17,6 +17,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using DustInTheWind.Dot.AdventureGame.ActionModel;
 using DustInTheWind.Dot.Application.UseCases.NewGame;
@@ -57,6 +58,6 @@ public class NewGameAction : ActionBase
         CreateNewGameUseCase useCase = useCaseFactory.Create<CreateNewGameUseCase>();
         useCase.Execute();
 
-        yield break;
+        return Enumerable.Empty<object>();
     }
 }

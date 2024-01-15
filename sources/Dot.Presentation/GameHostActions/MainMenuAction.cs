@@ -17,25 +17,26 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using DustInTheWind.Dot.AdventureGame.ActionModel;
-using DustInTheWind.Dot.Application.UseCases.SaveGame;
+using DustInTheWind.Dot.Application.UseCases.MainMenu;
 
 namespace DustInTheWind.Dot.Application.GameHostActions;
 
-public class SaveGameAction : ActionBase
+public class MainMenuAction : ActionBase
 {
     private readonly IUseCaseFactory useCaseFactory;
 
-    public SaveGameAction(IUseCaseFactory useCaseFactory)
-        : base("save")
+    public MainMenuAction(IUseCaseFactory useCaseFactory)
+        : base("menu", "m")
     {
         this.useCaseFactory = useCaseFactory ?? throw new ArgumentNullException(nameof(useCaseFactory));
     }
 
-    public override string Description => "Saves the current game.";
+    public override string Description => "Displays the main menu of the game.";
 
-    public override List<string> Usage => new() { "<<:save>>" };
+    public override List<string> Usage => new() { "<<:menu>>", "<<:m>>" };
 
     public override ActionType ActionType => ActionType.EnvironmentCommand;
 
@@ -43,7 +44,7 @@ public class SaveGameAction : ActionBase
     {
         return new List<Regex>
         {
-            new(@"^\s*:save\s*$", RegexOptions.IgnoreCase | RegexOptions.Singleline)
+            new(@"^\s*(:menu|:m)\s*$", RegexOptions.IgnoreCase | RegexOptions.Singleline)
         };
     }
 
@@ -54,9 +55,9 @@ public class SaveGameAction : ActionBase
 
     public override IEnumerable Execute(params object[] parameters)
     {
-        SaveGameUseCase useCase = useCaseFactory.Create<SaveGameUseCase>();
+        MainMenuUseCase useCase = useCaseFactory.Create<MainMenuUseCase>();
         useCase.Execute();
 
-        yield break;
+        return Enumerable.Empty<object>();
     }
 }

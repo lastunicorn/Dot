@@ -17,25 +17,26 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
-using Dot.GameHosting;
 using DustInTheWind.Dot.AdventureGame.ActionModel;
+using DustInTheWind.Dot.Application.UseCases.LoadGame;
 
 namespace DustInTheWind.Dot.Application.GameHostActions;
 
-public class ExitAction : ActionBase
+public class LoadGameAction : ActionBase
 {
-    private readonly IModuleHost moduleHost;
+    private readonly IUseCaseFactory useCaseFactory;
 
-    public ExitAction(IModuleHost moduleHost)
-        : base("exit", "quit", "x")
+    public LoadGameAction(IUseCaseFactory useCaseFactory)
+        : base("load")
     {
-        this.moduleHost = moduleHost ?? throw new ArgumentNullException(nameof(moduleHost));
+        this.useCaseFactory = useCaseFactory ?? throw new ArgumentNullException(nameof(useCaseFactory));
     }
 
-    public override string Description => "Exits the game.";
+    public override string Description => "Loads a previously saved game.";
 
-    public override List<string> Usage => new() { "<<:exit>>", "<<:quit>>", "<<:x>>" };
+    public override List<string> Usage => new() { "<<:load>>" };
 
     public override ActionType ActionType => ActionType.EnvironmentCommand;
 
@@ -43,7 +44,7 @@ public class ExitAction : ActionBase
     {
         return new List<Regex>
         {
-            new(@"^\s*(:exit|:quit|:x)\s*$", RegexOptions.IgnoreCase | RegexOptions.Singleline)
+            new(@"^\s*:load\s*$", RegexOptions.IgnoreCase | RegexOptions.Singleline)
         };
     }
 
@@ -54,8 +55,9 @@ public class ExitAction : ActionBase
 
     public override IEnumerable Execute(params object[] parameters)
     {
-        moduleHost.Close();
+        LoadGameUseCase useCase = useCaseFactory.Create<LoadGameUseCase>();
+        useCase.Execute();
 
-        yield break;
+        return Enumerable.Empty<object>();
     }
 }

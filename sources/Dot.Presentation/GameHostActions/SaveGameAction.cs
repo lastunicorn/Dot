@@ -17,25 +17,26 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using DustInTheWind.Dot.AdventureGame.ActionModel;
-using DustInTheWind.Dot.Application.UseCases.LoadGame;
+using DustInTheWind.Dot.Application.UseCases.SaveGame;
 
 namespace DustInTheWind.Dot.Application.GameHostActions;
 
-public class LoadGameAction : ActionBase
+public class SaveGameAction : ActionBase
 {
     private readonly IUseCaseFactory useCaseFactory;
 
-    public LoadGameAction(IUseCaseFactory useCaseFactory)
-        : base("load")
+    public SaveGameAction(IUseCaseFactory useCaseFactory)
+        : base("save")
     {
         this.useCaseFactory = useCaseFactory ?? throw new ArgumentNullException(nameof(useCaseFactory));
     }
 
-    public override string Description => "Loads a previously saved game.";
+    public override string Description => "Saves the current game.";
 
-    public override List<string> Usage => new() { "<<:load>>" };
+    public override List<string> Usage => new() { "<<:save>>" };
 
     public override ActionType ActionType => ActionType.EnvironmentCommand;
 
@@ -43,7 +44,7 @@ public class LoadGameAction : ActionBase
     {
         return new List<Regex>
         {
-            new(@"^\s*:load\s*$", RegexOptions.IgnoreCase | RegexOptions.Singleline)
+            new(@"^\s*:save\s*$", RegexOptions.IgnoreCase | RegexOptions.Singleline)
         };
     }
 
@@ -54,9 +55,9 @@ public class LoadGameAction : ActionBase
 
     public override IEnumerable Execute(params object[] parameters)
     {
-        LoadGameUseCase useCase = useCaseFactory.Create<LoadGameUseCase>();
+        SaveGameUseCase useCase = useCaseFactory.Create<SaveGameUseCase>();
         useCase.Execute();
 
-        yield break;
+        return Enumerable.Empty<object>();
     }
 }

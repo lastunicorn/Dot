@@ -101,8 +101,8 @@ namespace DustInTheWind.Dot.Presentation.Presenters
             this.resultHandlers.Add(typeof(Action), typeof(ActionHandler));
 
 
-            actions.Add(new MainMenuAction(moduleEngine));
-            actions.Add(new ExitAction(moduleHost));
+            actions.Add(new MainMenuAction(useCaseFactory));
+            actions.Add(new ExitAction(useCaseFactory));
             actions.Add(new NewGameAction(useCaseFactory));
             actions.Add(new LoadGameAction(useCaseFactory));
             actions.Add(new SaveGameAction(useCaseFactory));
