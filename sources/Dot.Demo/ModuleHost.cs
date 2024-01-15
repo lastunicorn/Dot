@@ -14,16 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
+using Dot.GameHosting;
+using DustInTheWind.Dot.Ports.PresentationAccess;
 
-namespace DustInTheWind.Dot.Domain.ModuleModel;
+namespace DustInTheWind.Dot.Demo;
 
-public class NoModulesException : Exception
+internal class ModuleHost : StandardModuleHost
 {
-    private const string DefaultMessage = "There are no modules configured.";
-
-    public NoModulesException()
-        : base(DefaultMessage)
+    public ModuleHost(IPresentation presentation, ModuleEngine moduleEngine)
+        : base(presentation, moduleEngine)
     {
     }
 }

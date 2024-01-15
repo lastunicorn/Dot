@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\Dot.GameHosting\Dot.GameHosting.csproj" />
         <ProjectReference Include="..\Dot.GameStorage.Binary\Dot.GameSavesAccess.csproj" />
         <ProjectReference Include="..\Dot.Presentation\Dot.Presentation.csproj" />
     </ItemGroup>

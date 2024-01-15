@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <AssemblyName>DustInTheWind.Dot.PresentationAccess</AssemblyName>
+        <RootNamespace>DustInTheWind.Dot.PresentationAccess</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Dot.AudioSupport\Dot.AudioSupport.csproj" />
+        <ProjectReference Include="..\Dot.Ports.PresentationAccess\Dot.Ports.PresentationAccess.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\Dot.Presentation\Dot.Presentation.csproj" />
+    </ItemGroup>
+
+</Project>

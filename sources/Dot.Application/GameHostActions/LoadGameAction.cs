@@ -1,3 +1,19 @@
+// Dot
+// Copyright (C) 2020-2024 Dust in the Wind
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,43 +21,42 @@ using System.Text.RegularExpressions;
 using DustInTheWind.Dot.AdventureGame.ActionModel;
 using DustInTheWind.Dot.Application.UseCases.LoadGame;
 
-namespace DustInTheWind.Dot.Application.GameHostActions
+namespace DustInTheWind.Dot.Application.GameHostActions;
+
+public class LoadGameAction : ActionBase
 {
-    public class LoadGameAction : ActionBase
+    private readonly IUseCaseFactory useCaseFactory;
+
+    public LoadGameAction(IUseCaseFactory useCaseFactory)
+        : base("load")
     {
-        private readonly IUseCaseFactory useCaseFactory;
+        this.useCaseFactory = useCaseFactory ?? throw new ArgumentNullException(nameof(useCaseFactory));
+    }
 
-        public LoadGameAction(IUseCaseFactory useCaseFactory)
-            : base("load")
+    public override string Description => "Loads a previously saved game.";
+
+    public override List<string> Usage => new() { "<<:load>>" };
+
+    public override ActionType ActionType => ActionType.EnvironmentCommand;
+
+    protected override List<Regex> CreateMatchers()
+    {
+        return new List<Regex>
         {
-            this.useCaseFactory = useCaseFactory ?? throw new ArgumentNullException(nameof(useCaseFactory));
-        }
+            new(@"^\s*:load\s*$", RegexOptions.IgnoreCase | RegexOptions.Singleline)
+        };
+    }
 
-        public override string Description => "Loads a previously saved game.";
+    protected override string[] ExtractParameters(Match match)
+    {
+        return Array.Empty<string>();
+    }
 
-        public override List<string> Usage => new List<string> { "<<:load>>" };
+    public override IEnumerable Execute(params object[] parameters)
+    {
+        LoadGameUseCase useCase = useCaseFactory.Create<LoadGameUseCase>();
+        useCase.Execute();
 
-        public override ActionType ActionType => ActionType.EnvironmentCommand;
-
-        protected override List<Regex> CreateMatchers()
-        {
-            return new List<Regex>
-            {
-                new Regex(@"^\s*:load\s*$", RegexOptions.IgnoreCase | RegexOptions.Singleline)
-            };
-        }
-
-        protected override string[] ExtractParameters(Match match)
-        {
-            return new string[0];
-        }
-
-        public override IEnumerable Execute(params object[] parameters)
-        {
-            LoadGameUseCase useCase = useCaseFactory.Create<LoadGameUseCase>();
-            useCase.Execute();
-
-            yield break;
-        }
+        yield break;
     }
 }

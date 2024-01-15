@@ -14,26 +14,19 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using DustInTheWind.Dot.Presentation.ConsoleHelpers.ConsoleUtil;
+namespace DustInTheWind.Dot.Ports.PresentationAccess;
 
-namespace DustInTheWind.Dot.Demo;
-
-internal class Program
+public interface IPresentation
 {
-    private static void Main(string[] args)
-    {
-        try
-        {
-            Bootstrapper bootstrapper = new();
-            bootstrapper.Run();
-        }
-        catch (Exception ex)
-        {
-            CustomConsole.WriteError("Fatal error");
-            CustomConsole.WriteError(ex);
+    void DisplayApplicationHeader();
 
-            CustomConsole.Pause();
-        }
-    }
+    void ResetConsoleWindow();
+
+    void DisplayFunctionalityNotImplementedInfo();
+
+    void DisplayOperationCanceledInfo();
+
+    void DisplayGoodByeMessage();
+
+    void DisplayError(Exception exception);
 }

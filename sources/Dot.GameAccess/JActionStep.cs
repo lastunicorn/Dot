@@ -22,12 +22,3 @@ public class JActionStep
     
     public JCondition Condition { get; set; }
 }
-
-public class JCondition
-{
-    public string Type { get; set; }
-    
-    public bool Exists { get; set; }
-    
-    public string Value { get; set; }
-}

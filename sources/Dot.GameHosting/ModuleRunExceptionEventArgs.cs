@@ -14,26 +14,16 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using DustInTheWind.Dot.Presentation.ConsoleHelpers.ConsoleUtil;
+namespace Dot.GameHosting;
 
-namespace DustInTheWind.Dot.Demo;
-
-internal class Program
+public class ModuleRunExceptionEventArgs : EventArgs
 {
-    private static void Main(string[] args)
-    {
-        try
-        {
-            Bootstrapper bootstrapper = new();
-            bootstrapper.Run();
-        }
-        catch (Exception ex)
-        {
-            CustomConsole.WriteError("Fatal error");
-            CustomConsole.WriteError(ex);
+    public Exception Exception { get; }
 
-            CustomConsole.Pause();
-        }
+    public string NextModule { get; set; }
+
+    public ModuleRunExceptionEventArgs(Exception ex)
+    {
+        Exception = ex;
     }
 }

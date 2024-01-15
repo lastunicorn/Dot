@@ -1,4 +1,5 @@
 ﻿using System;
+using Dot.GameHosting;
 using DustInTheWind.Dot.Domain;
 using DustInTheWind.Dot.Presentation.ConsoleHelpers.UIControls;
 
@@ -6,13 +7,13 @@ namespace DustInTheWind.Dot.Presentation.Commands
 {
     internal class ExitCommand : ICommand
     {
-        private readonly IGameApplication gameApplication;
+        private readonly IModuleHost moduleHost;
 
         public event EventHandler CanExecuteChanges;
 
-        public ExitCommand(IGameApplication gameApplication)
+        public ExitCommand(IModuleHost moduleHost)
         {
-            this.gameApplication = gameApplication ?? throw new ArgumentNullException(nameof(gameApplication));
+            this.moduleHost = moduleHost ?? throw new ArgumentNullException(nameof(moduleHost));
         }
 
         public bool CanExecute()
@@ -22,7 +23,7 @@ namespace DustInTheWind.Dot.Presentation.Commands
 
         public void Execute()
         {
-            gameApplication.Close();
+            moduleHost.Close();
         }
     }
 }

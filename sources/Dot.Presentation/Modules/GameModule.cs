@@ -1,5 +1,5 @@
 using System;
-using DustInTheWind.Dot.Domain.ModuleModel;
+using Dot.GameHosting;
 using DustInTheWind.Dot.Presentation.Presenters;
 
 namespace DustInTheWind.Dot.Presentation.Modules

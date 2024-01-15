@@ -1,5 +1,5 @@
 ﻿using System;
-using DustInTheWind.Dot.Domain.ModuleModel;
+using Dot.GameHosting;
 using DustInTheWind.Dot.Presentation.ConsoleHelpers.ConsoleUtil;
 using DustInTheWind.Dot.Presentation.Presenters;
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Dot.GameHosting;
 using DustInTheWind.Dot.AdventureGame;
 using DustInTheWind.Dot.AdventureGame.ActionModel;
 using DustInTheWind.Dot.AdventureGame.ActionResultHandlers;
@@ -12,7 +13,6 @@ using DustInTheWind.Dot.Domain;
 using DustInTheWind.Dot.Domain.AudioTextModel;
 using DustInTheWind.Dot.Domain.DataAccess;
 using DustInTheWind.Dot.Domain.GameModel;
-using DustInTheWind.Dot.Domain.ModuleModel;
 using DustInTheWind.Dot.Presentation.Views;
 
 namespace DustInTheWind.Dot.Presentation.Presenters
@@ -78,9 +78,9 @@ namespace DustInTheWind.Dot.Presentation.Presenters
         private readonly ActionSet actions = new ActionSet();
 
         public GamePresenter(GameView gameView, GameRepository gameRepository, ResultHandlersCollection resultHandlers,
-            IGameApplication gameApplication, IUseCaseFactory useCaseFactory, ModuleEngine moduleEngine)
+            IModuleHost moduleHost, IUseCaseFactory useCaseFactory, ModuleEngine moduleEngine)
         {
-            if (gameApplication == null) throw new ArgumentNullException(nameof(gameApplication));
+            if (moduleHost == null) throw new ArgumentNullException(nameof(moduleHost));
             if (useCaseFactory == null) throw new ArgumentNullException(nameof(useCaseFactory));
             if (moduleEngine == null) throw new ArgumentNullException(nameof(moduleEngine));
 
@@ -102,7 +102,7 @@ namespace DustInTheWind.Dot.Presentation.Presenters
 
 
             actions.Add(new MainMenuAction(moduleEngine));
-            actions.Add(new ExitAction(gameApplication));
+            actions.Add(new ExitAction(moduleHost));
             actions.Add(new NewGameAction(useCaseFactory));
             actions.Add(new LoadGameAction(useCaseFactory));
             actions.Add(new SaveGameAction(useCaseFactory));

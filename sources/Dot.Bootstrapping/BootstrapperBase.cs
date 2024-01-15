@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Dot.GameHosting;
 using DustInTheWind.Dot.AdventureGame;
 using DustInTheWind.Dot.AdventureGame.ActionModel;
 using DustInTheWind.Dot.Application.UseCases.LoadGame;
@@ -9,7 +10,6 @@ using DustInTheWind.Dot.Application.UseCases.SaveGame;
 using DustInTheWind.Dot.Domain;
 using DustInTheWind.Dot.Domain.DataAccess;
 using DustInTheWind.Dot.Domain.GameModel;
-using DustInTheWind.Dot.Domain.ModuleModel;
 using DustInTheWind.Dot.GameSavesAccess;
 using DustInTheWind.Dot.Ports.GameSavesAccess;
 using DustInTheWind.Dot.Presentation;
@@ -27,8 +27,8 @@ namespace DustInTheWind.Dot.Bootstrapping
 
             IServiceProvider serviceProvider = servicesContainer.BuildServiceProvider();
 
-            IGameApplication application = serviceProvider.GetService<IGameApplication>();
-            application.Run();
+            IModuleHost host = serviceProvider.GetService<IModuleHost>();
+            host.Run();
         }
 
         protected abstract IServicesContainer CreateServicesContainer();
@@ -54,7 +54,7 @@ namespace DustInTheWind.Dot.Bootstrapping
 
             Type applicationType = RetrieveApplicationType();
             if (applicationType != null)
-                servicesContainer.AddSingleton(typeof(IGameApplication), applicationType);
+                servicesContainer.AddSingleton(typeof(IModuleHost), applicationType);
 
             Type gameType = RetrieveGameType();
             if (gameType != null)
@@ -64,7 +64,7 @@ namespace DustInTheWind.Dot.Bootstrapping
         private static Type RetrieveApplicationType()
         {
             return GetAllClientTypes()
-                .FirstOrDefault(x => typeof(IGameApplication).IsAssignableFrom(x) && x.IsClass && !x.IsAbstract);
+                .FirstOrDefault(x => typeof(IModuleHost).IsAssignableFrom(x) && x.IsClass && !x.IsAbstract);
         }
 
         private static Type RetrieveGameType()

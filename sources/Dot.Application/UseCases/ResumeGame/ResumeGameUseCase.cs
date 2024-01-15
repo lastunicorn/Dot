@@ -1,5 +1,5 @@
 ﻿using System;
-using DustInTheWind.Dot.Domain.ModuleModel;
+using Dot.GameHosting;
 
 namespace DustInTheWind.Dot.Application.UseCases.ResumeGame
 {

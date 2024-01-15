@@ -14,16 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
+namespace Dot.GameHosting;
 
-namespace DustInTheWind.Dot.Domain.ModuleModel;
-
-public class ModuleNotFoundException : Exception
+public class NoModulesException : Exception
 {
-    private const string DefaultMessage = "Module not found: {0}";
+    private const string DefaultMessage = "There are no modules configured.";
 
-    public ModuleNotFoundException(string moduleId)
-        : base(string.Format(DefaultMessage, moduleId))
+    public NoModulesException()
+        : base(DefaultMessage)
     {
     }
 }

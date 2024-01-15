@@ -63,7 +63,7 @@ namespace DustInTheWind.Dot.Presentation.Views
 
         public void DisplayError(Exception exception)
         {
-            CustomConsole.WriteError("Internal error occured. " + exception);
+            CustomConsole.WriteError("Internal error occurred. " + exception);
         }
     }
 }
