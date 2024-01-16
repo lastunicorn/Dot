@@ -14,15 +14,23 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using Dot.GameHosting;
-using DustInTheWind.Dot.Ports.PresentationAccess;
+using System;
+using DustInTheWind.Dot.Domain.GameModel;
+using Ninject;
 
-namespace DustInTheWind.Dot.Demo;
+namespace DustInTheWind.Dot.Setup.Ninject;
 
-internal class ModuleHost : StandardModuleHost
+internal class GameFactory : IGameFactory
 {
-    public ModuleHost(IPresentation presentation, ModuleEngine moduleEngine)
-        : base(presentation, moduleEngine)
+    private readonly IKernel kernel;
+
+    public GameFactory(IKernel kernel)
     {
+        this.kernel = kernel ?? throw new ArgumentNullException(nameof(kernel));
+    }
+
+    public IGame Create()
+    {
+        return kernel.Get<IGame>();
     }
 }

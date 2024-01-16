@@ -3,32 +3,24 @@
     <PropertyGroup>
         <TargetFramework>net6</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
-        <RootNamespace>DustInTheWind.Dot.Presentation</RootNamespace>
-        <AssemblyName>DustInTheWind.Dot.Presentation</AssemblyName>
+        <RootNamespace>DustInTheWind.Dot.Setup.MicrosoftDependencyInjection</RootNamespace>
+        <AssemblyName>DustInTheWind.Dot.Setup.MicrosoftDependencyInjection</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
-        <None Remove="Ascii\separator.ascii" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <EmbeddedResource Include="Ascii\separator.ascii" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.9" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.9" />
     </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\Dot.AdventureGame\Dot.AdventureGame.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\Dot.Application\Dot.Application.csproj" PrivateAssets="All" />
-        <ProjectReference Include="..\Dot.AudioSupport\Dot.Presentation.AudioSupport.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\Dot.ConsoleHelpers\Dot.Prsentation.ConsoleHelpers.csproj" PrivateAssets="All" />
-        <ProjectReference Include="..\Dot.Domain\Dot.Domain.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\Dot.GameHosting\Dot.GameHosting.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\Dot.GameStorage.Binary\Dot.GameSavesAccess.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\Dot.Ports.PresentationAccess\Dot.Ports.PresentationAccess.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\Dot.Ports.SaveAccess\Dot.Ports.GameSavesAccess.csproj" PrivateAssets="All" />
-        <ProjectReference Include="..\Dot.WindowsNative\Dot.Presentation.WindowsNative.csproj" PrivateAssets="All" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Presenters\" />
+        <ProjectReference Include="..\Dot.Presentation\Dot.Presentation.csproj" PrivateAssets="All" />
     </ItemGroup>
 
 </Project>

@@ -2,12 +2,13 @@
 
     <PropertyGroup>
         <TargetFramework>net6</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
         <AssemblyName>DustInTheWind.Dot.GameSavesAccess</AssemblyName>
         <RootNamespace>DustInTheWind.Dot.GameSavesAccess</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Dot.Ports.SaveAccess\Dot.Ports.GameSavesAccess.csproj" />
+        <ProjectReference Include="..\Dot.Ports.SaveAccess\Dot.Ports.GameSavesAccess.csproj" PrivateAssets="All" />
     </ItemGroup>
 
 </Project>

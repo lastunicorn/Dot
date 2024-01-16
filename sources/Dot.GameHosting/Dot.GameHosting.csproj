@@ -1,12 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace>DustInTheWind.Dot.GameHosting</RootNamespace>
+        <AssemblyName>DustInTheWind.Dot.GameHosting</AssemblyName>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Dot.Ports.PresentationAccess\Dot.Ports.PresentationAccess.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Dot.Ports.PresentationAccess\Dot.Ports.PresentationAccess.csproj" PrivateAssets="All" />
+    </ItemGroup>
 
 </Project>

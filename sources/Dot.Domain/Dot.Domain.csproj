@@ -2,6 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net6</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>DustInTheWind.Dot.Domain</RootNamespace>
         <AssemblyName>DustInTheWind.Dot.Domain</AssemblyName>
     </PropertyGroup>

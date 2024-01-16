@@ -2,6 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net6</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
         <IsPackable>false</IsPackable>
     </PropertyGroup>
 
@@ -79,6 +80,7 @@
         <ProjectReference Include="..\Dot.AdventureGame\Dot.AdventureGame.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\Dot.GameAccess\Dot.GameAccess.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\Dot.GameStorage.Binary\Dot.GameSavesAccess.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\Dot.Ports.SaveAccess\Dot.Ports.GameSavesAccess.csproj" />
     </ItemGroup>
 
 </Project>

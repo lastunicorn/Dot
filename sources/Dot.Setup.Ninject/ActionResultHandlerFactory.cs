@@ -15,21 +15,22 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Dot.GameHosting;
+using DustInTheWind.Dot.AdventureGame.ActionModel;
+using Ninject;
 
-namespace DustInTheWind.Dot.Application.UseCases.MainMenu;
+namespace DustInTheWind.Dot.Setup.Ninject;
 
-public class MainMenuUseCase
+internal class ActionResultHandlerFactory : IActionResultHandlerFactory
 {
-    private readonly ModuleEngine moduleEngine;
+    private readonly IKernel kernel;
 
-    public MainMenuUseCase(ModuleEngine moduleEngine)
+    public ActionResultHandlerFactory(IKernel kernel)
     {
-        this.moduleEngine = moduleEngine ?? throw new ArgumentNullException(nameof(moduleEngine));
+        this.kernel = kernel ?? throw new ArgumentNullException(nameof(kernel));
     }
 
-    public void Execute()
+    public IResultHandler Create(Type resultHandlerType)
     {
-        moduleEngine.RequestToChangeModule("main-menu");
+        return kernel.Get(resultHandlerType) as IResultHandler;
     }
 }

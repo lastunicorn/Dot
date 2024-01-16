@@ -1,6 +1,6 @@
 ﻿using System;
-using Dot.GameHosting;
 using DustInTheWind.Dot.Domain;
+using DustInTheWind.Dot.GameHosting;
 using DustInTheWind.Dot.Presentation.ConsoleHelpers.UIControls;
 
 namespace DustInTheWind.Dot.Presentation.Commands

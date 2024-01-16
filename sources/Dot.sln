@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Domain", "Dot.Domain\Do
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Prsentation.ConsoleHelpers", "Dot.ConsoleHelpers\Dot.Prsentation.ConsoleHelpers.csproj", "{E86A55EE-33C2-4331-9386-857BEA87A314}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.AudioSupport", "Dot.AudioSupport\Dot.AudioSupport.csproj", "{6DEA5153-36DC-4BC4-81B2-04F57FC55F13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Presentation.AudioSupport", "Dot.AudioSupport\Dot.Presentation.AudioSupport.csproj", "{6DEA5153-36DC-4BC4-81B2-04F57FC55F13}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Application", "Dot.Application\Dot.Application.csproj", "{189462EC-6D35-4901-A4D8-BB5722DA88FA}"
 EndProject
@@ -28,11 +28,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.GameSavesAccess", "Dot.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Tests", "Dot.Tests\Dot.Tests.csproj", "{33DFF2AA-ED29-4C04-8A90-29EDA1FA0876}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Ninject", "Dot.Ninject\Dot.Ninject.csproj", "{5B6350FD-D055-4636-814E-11D187215EAF}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Bootstrapping", "Dot.Bootstrapping\Dot.Bootstrapping.csproj", "{17A5419B-21DF-434E-8EF2-9AF48EC27531}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.MicrosoftDependencyInjection", "Dot.MicrosoftDependencyInjection\Dot.MicrosoftDependencyInjection.csproj", "{090B77D0-4AB7-4B8D-AF60-1C40BABB741B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Setup.MicrosoftDependencyInjection", "Dot.MicrosoftDependencyInjection\Dot.Setup.MicrosoftDependencyInjection.csproj", "{090B77D0-4AB7-4B8D-AF60-1C40BABB741B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Ports.GameSavesAccess", "Dot.Ports.SaveAccess\Dot.Ports.GameSavesAccess.csproj", "{8134FA14-3C3E-4E16-8E6B-8EC9AF02347F}"
 EndProject
@@ -47,6 +43,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dot.Ports.PresentationAccess", "Dot.Ports.PresentationAccess\Dot.Ports.PresentationAccess.csproj", "{C23A9E50-AA5D-4E57-ABD5-BE90A08ECA72}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dot.GameHosting", "Dot.GameHosting\Dot.GameHosting.csproj", "{238CCE62-0221-4220-8C2E-3AAF509108CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dot.Setup.Ninject", "Dot.Setup.Ninject\Dot.Setup.Ninject.csproj", "{20E4DA08-03B6-4F94-B15B-C7AC83FD1BF3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -94,14 +92,6 @@ Global
 		{33DFF2AA-ED29-4C04-8A90-29EDA1FA0876}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33DFF2AA-ED29-4C04-8A90-29EDA1FA0876}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33DFF2AA-ED29-4C04-8A90-29EDA1FA0876}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5B6350FD-D055-4636-814E-11D187215EAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5B6350FD-D055-4636-814E-11D187215EAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5B6350FD-D055-4636-814E-11D187215EAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5B6350FD-D055-4636-814E-11D187215EAF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{17A5419B-21DF-434E-8EF2-9AF48EC27531}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{17A5419B-21DF-434E-8EF2-9AF48EC27531}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{17A5419B-21DF-434E-8EF2-9AF48EC27531}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{17A5419B-21DF-434E-8EF2-9AF48EC27531}.Release|Any CPU.Build.0 = Release|Any CPU
 		{090B77D0-4AB7-4B8D-AF60-1C40BABB741B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{090B77D0-4AB7-4B8D-AF60-1C40BABB741B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{090B77D0-4AB7-4B8D-AF60-1C40BABB741B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -122,6 +112,10 @@ Global
 		{238CCE62-0221-4220-8C2E-3AAF509108CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{238CCE62-0221-4220-8C2E-3AAF509108CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{238CCE62-0221-4220-8C2E-3AAF509108CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20E4DA08-03B6-4F94-B15B-C7AC83FD1BF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20E4DA08-03B6-4F94-B15B-C7AC83FD1BF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20E4DA08-03B6-4F94-B15B-C7AC83FD1BF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20E4DA08-03B6-4F94-B15B-C7AC83FD1BF3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

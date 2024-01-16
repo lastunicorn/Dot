@@ -16,7 +16,7 @@
 
 using DustInTheWind.Dot.Ports.PresentationAccess;
 
-namespace Dot.GameHosting;
+namespace DustInTheWind.Dot.GameHosting;
 
 public class StandardModuleHost : IModuleHost
 {

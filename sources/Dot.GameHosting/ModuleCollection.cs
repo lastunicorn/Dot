@@ -14,23 +14,25 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using DustInTheWind.Dot.Domain.GameModel;
-using Ninject;
+using System.Collections.ObjectModel;
 
-namespace DustInTheWind.Dot.Ninject;
+namespace DustInTheWind.Dot.GameHosting;
 
-public class GameFactory : IGameFactory
+internal class ModuleCollection : Collection<IModule>
 {
-    private readonly IKernel kernel;
-
-    public GameFactory(IKernel kernel)
+    public IModule GetById(string id)
     {
-        this.kernel = kernel ?? throw new ArgumentNullException(nameof(kernel));
+        return Items.FirstOrDefault(x => x.Id == id);
     }
 
-    public IGame Create()
+    public void AddRange(IEnumerable<IModule> modules)
     {
-        return kernel.Get<IGame>();
+        foreach (IModule module in modules)
+        {
+            if (module == null)
+                throw new ArgumentException("A null module cannot be added to the collection.", nameof(modules));
+
+            Items.Add(module);
+        }
     }
 }

@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace>DustInTheWind.Dot.Setup.Ninject</RootNamespace>
+        <AssemblyName>DustInTheWind.Dot.Setup.Ninject</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Ninject" Version="3.3.6" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Dot.AdventureGame\Dot.AdventureGame.csproj" PrivateAssets="All" />
+      <ProjectReference Include="..\Dot.Application\Dot.Application.csproj" PrivateAssets="All" />
+      <ProjectReference Include="..\Dot.ConsoleHelpers\Dot.Prsentation.ConsoleHelpers.csproj" PrivateAssets="All" />
+      <ProjectReference Include="..\Dot.GameHosting\Dot.GameHosting.csproj" PrivateAssets="All" />
+      <ProjectReference Include="..\Dot.GameStorage.Binary\Dot.GameSavesAccess.csproj" PrivateAssets="All" />
+      <ProjectReference Include="..\Dot.Ports.PresentationAccess\Dot.Ports.PresentationAccess.csproj" PrivateAssets="All" />
+      <ProjectReference Include="..\Dot.Ports.SaveAccess\Dot.Ports.GameSavesAccess.csproj" PrivateAssets="All" />
+      <ProjectReference Include="..\Dot.Presentation\Dot.Presentation.csproj" PrivateAssets="All" />
+    </ItemGroup>
+
+</Project>

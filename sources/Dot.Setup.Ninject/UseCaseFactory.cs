@@ -14,22 +14,24 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Dot.Bootstrapping;
-using DustInTheWind.Dot.Ninject;
+using System;
+using DustInTheWind.Dot.Application;
+using Ninject;
 
-namespace DustInTheWind.Dot.Demo;
+namespace DustInTheWind.Dot.Setup.Ninject;
 
-internal class Bootstrapper : BootstrapperBase
+internal class UseCaseFactory : IUseCaseFactory
 {
-    protected override IServicesContainer CreateServicesContainer()
+    private readonly IKernel kernel;
+
+    public UseCaseFactory(IKernel kernel)
     {
-        return new NinjectServicesContainer();
+        this.kernel = kernel ?? throw new ArgumentNullException(nameof(kernel));
     }
 
-    protected override void ConfigureServices(IServicesContainer servicesContainer)
+    public T Create<T>()
+        where T : class
     {
-        base.ConfigureServices(servicesContainer);
-
-        servicesContainer.ConfigureFactories();
+        return kernel.Get<T>();
     }
 }

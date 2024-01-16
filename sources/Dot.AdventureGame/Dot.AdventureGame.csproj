@@ -2,6 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net6</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
         <AssemblyName>DustInTheWind.Dot.AdventureGame</AssemblyName>
         <RootNamespace>DustInTheWind.Dot.AdventureGame</RootNamespace>
     </PropertyGroup>

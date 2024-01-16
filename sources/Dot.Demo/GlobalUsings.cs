@@ -1,4 +1,4 @@
-﻿// Dot
+// Dot
 // Copyright (C) 2020-2024 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,22 +14,4 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using DustInTheWind.Dot.GameHosting;
-
-namespace DustInTheWind.Dot.Application.UseCases.MainMenu;
-
-public class MainMenuUseCase
-{
-    private readonly ModuleEngine moduleEngine;
-
-    public MainMenuUseCase(ModuleEngine moduleEngine)
-    {
-        this.moduleEngine = moduleEngine ?? throw new ArgumentNullException(nameof(moduleEngine));
-    }
-
-    public void Execute()
-    {
-        moduleEngine.RequestToChangeModule("main-menu");
-    }
-}
+global using System;

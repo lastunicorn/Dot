@@ -15,21 +15,22 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Dot.GameHosting;
+using DustInTheWind.Dot.Presentation;
+using Ninject;
 
-namespace DustInTheWind.Dot.Application.UseCases.MainMenu;
+namespace DustInTheWind.Dot.Setup.Ninject;
 
-public class MainMenuUseCase
+internal class ScreenFactory : IScreenFactory
 {
-    private readonly ModuleEngine moduleEngine;
+    private readonly IKernel kernel;
 
-    public MainMenuUseCase(ModuleEngine moduleEngine)
+    public ScreenFactory(IKernel kernel)
     {
-        this.moduleEngine = moduleEngine ?? throw new ArgumentNullException(nameof(moduleEngine));
+        this.kernel = kernel ?? throw new ArgumentNullException(nameof(kernel));
     }
 
-    public void Execute()
+    public T Create<T>()
     {
-        moduleEngine.RequestToChangeModule("main-menu");
+        return kernel.Get<T>();
     }
 }

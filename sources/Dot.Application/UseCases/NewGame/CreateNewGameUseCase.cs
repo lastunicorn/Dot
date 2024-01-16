@@ -1,7 +1,7 @@
 ﻿using System;
-using Dot.GameHosting;
 using DustInTheWind.Dot.Domain.DataAccess;
 using DustInTheWind.Dot.Domain.GameModel;
+using DustInTheWind.Dot.GameHosting;
 
 namespace DustInTheWind.Dot.Application.UseCases.NewGame
 {

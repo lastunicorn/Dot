@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using Dot.GameHosting;
+using DustInTheWind.Dot.GameHosting;
 
 namespace DustInTheWind.Dot.Application.UseCases.Exit;
 

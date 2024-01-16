@@ -17,9 +17,9 @@
 using System;
 using DustInTheWind.Dot.Domain.GameModel;
 
-namespace DustInTheWind.Dot.MicrosoftDependencyInjection;
+namespace DustInTheWind.Dot.Setup.MicrosoftDependencyInjection;
 
-public class GameFactory : IGameFactory
+internal class GameFactory : IGameFactory
 {
     private readonly IServiceProvider serviceProvider;
 

@@ -14,26 +14,26 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using DustInTheWind.Dot.Presentation.ConsoleHelpers.ConsoleUtil;
+using DustInTheWind.Dot.Setup.Ninject;
 
 namespace DustInTheWind.Dot.Demo;
 
 internal class Program
 {
-    private static void Main(string[] args)
+    public static void Main(string[] args)
     {
-        try
-        {
-            Bootstrapper bootstrapper = new();
-            bootstrapper.Run();
-        }
-        catch (Exception ex)
-        {
-            CustomConsole.WriteError("Fatal error");
-            CustomConsole.WriteError(ex);
+        new DotApplication()
+            .WithGame<DemoGame>()
+            .WhenUnhandledException(HandleUnhandledException)
+            .Run();
+    }
 
-            CustomConsole.Pause();
-        }
+    private static void HandleUnhandledException(Exception ex)
+    {
+        CustomConsole.WriteError("Fatal error");
+        CustomConsole.WriteError(ex);
+
+        CustomConsole.Pause();
     }
 }

@@ -14,11 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace Dot.GameHosting;
+namespace DustInTheWind.Dot.GameHosting;
 
 public class ModuleEngine
 {
-    private readonly List<IModule> modules = new();
+    private readonly ModuleCollection modules = new();
 
     private IModule currentModule;
     private volatile bool closeWasRequested;
@@ -26,9 +26,9 @@ public class ModuleEngine
 
     public event EventHandler<ModuleRunExceptionEventArgs> ModuleRunException;
 
-    public ModuleEngine()
-    {
-    }
+    //public ModuleEngine()
+    //{
+    //}
 
     public ModuleEngine(IEnumerable<IModule> modules)
     {
@@ -52,7 +52,7 @@ public class ModuleEngine
         {
             try
             {
-                currentModule = ComputeNextModule(nextModuleId);
+                currentModule = GetModule(nextModuleId);
                 nextModuleId = currentModule?.Run();
 
                 if (requestedNextModuleId != null)
@@ -81,12 +81,9 @@ public class ModuleEngine
         return firstModule.Id;
     }
 
-    private IModule ComputeNextModule(string nextModuleId)
+    private IModule GetModule(string moduleId)
     {
-        IModule nextModule = modules
-            .FirstOrDefault(x => x.Id == nextModuleId);
-
-        return nextModule ?? throw new ModuleNotFoundException(nextModuleId);
+        return modules.GetById(moduleId) ?? throw new ModuleNotFoundException(moduleId);
     }
 
     public void RequestToChangeModule(string moduleId)

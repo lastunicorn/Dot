@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Dot.GameHosting;
 using DustInTheWind.Dot.AdventureGame;
 using DustInTheWind.Dot.AdventureGame.ActionModel;
 using DustInTheWind.Dot.AdventureGame.ActionResultHandlers;
@@ -12,6 +11,7 @@ using DustInTheWind.Dot.Domain;
 using DustInTheWind.Dot.Domain.AudioTextModel;
 using DustInTheWind.Dot.Domain.DataAccess;
 using DustInTheWind.Dot.Domain.GameModel;
+using DustInTheWind.Dot.GameHosting;
 using DustInTheWind.Dot.Presentation.GameHostActions;
 using DustInTheWind.Dot.Presentation.Views;
 

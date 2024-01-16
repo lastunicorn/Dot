@@ -16,7 +16,7 @@
 
 using Newtonsoft.Json;
 
-namespace Dot.GameAccess;
+namespace DustInTheWind.Dot.GameAccess;
 
 public class JObjectDocument
 {
