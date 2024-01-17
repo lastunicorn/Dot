@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DustInTheWind.ConsoleTools.Modularization;
 using DustInTheWind.Dot.AdventureGame;
 using DustInTheWind.Dot.AdventureGame.ActionModel;
 using DustInTheWind.Dot.AdventureGame.ActionResultHandlers;
@@ -78,7 +79,7 @@ namespace DustInTheWind.Dot.Presentation.Presenters
         private readonly ActionSet actions = new ActionSet();
 
         public GamePresenter(GameView gameView, GameRepository gameRepository, ResultHandlersCollection resultHandlers,
-            IModuleHost moduleHost, IUseCaseFactory useCaseFactory, ModuleEngine moduleEngine)
+            ModuleHost moduleHost, IUseCaseFactory useCaseFactory, ModuleEngine moduleEngine)
         {
             if (moduleHost == null) throw new ArgumentNullException(nameof(moduleHost));
             if (useCaseFactory == null) throw new ArgumentNullException(nameof(useCaseFactory));

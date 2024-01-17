@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.ConsoleTools.Modularization;
 using DustInTheWind.Dot.AdventureGame.ActionModel;
 using DustInTheWind.Dot.Application.UseCases.NewGame;
 using DustInTheWind.Dot.Domain;
@@ -53,7 +54,7 @@ internal static class NinjectExtensions
         kernel.Bind<IModule>().To<MenuModule>();
         kernel.Bind<IModule>().To<GameModule>();
 
-        kernel.Bind<IModuleHost>().To<StandardModuleHost>().InSingletonScope();
+        kernel.Bind<ModuleHost>().ToSelf().InSingletonScope();
 
         kernel.Bind<IGameFactory>().To<GameFactory>();
         kernel.Bind<IUseCaseFactory>().To<UseCaseFactory>();

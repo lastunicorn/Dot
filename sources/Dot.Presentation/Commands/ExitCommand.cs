@@ -7,11 +7,11 @@ namespace DustInTheWind.Dot.Presentation.Commands
 {
     internal class ExitCommand : ICommand
     {
-        private readonly IModuleHost moduleHost;
+        private readonly ModuleHost moduleHost;
 
         public event EventHandler CanExecuteChanges;
 
-        public ExitCommand(IModuleHost moduleHost)
+        public ExitCommand(ModuleHost moduleHost)
         {
             this.moduleHost = moduleHost ?? throw new ArgumentNullException(nameof(moduleHost));
         }

@@ -21,9 +21,9 @@ namespace DustInTheWind.Dot.Application.UseCases.Exit;
 
 public class ExitUseCase
 {
-    private readonly IModuleHost moduleHost;
+    private readonly ModuleHost moduleHost;
 
-    public ExitUseCase(IModuleHost moduleHost)
+    public ExitUseCase(ModuleHost moduleHost)
     {
         this.moduleHost = moduleHost ?? throw new ArgumentNullException(nameof(moduleHost));
     }

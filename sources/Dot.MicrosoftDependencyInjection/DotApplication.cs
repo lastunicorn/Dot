@@ -51,7 +51,7 @@ public class DotApplication
         {
             IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
 
-            IModuleHost host = serviceProvider.GetService<IModuleHost>();
+            ModuleHost host = serviceProvider.GetService<ModuleHost>();
             host.Run();
         }
         catch (Exception ex)

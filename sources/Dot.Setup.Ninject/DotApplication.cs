@@ -48,7 +48,7 @@ public class DotApplication
     {
         try
         {
-            IModuleHost host = kernel.Get<IModuleHost>();
+            ModuleHost host = kernel.Get<ModuleHost>();
             host.Run();
         }
         catch (Exception ex)

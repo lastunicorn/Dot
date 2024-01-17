@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.ConsoleTools.Modularization;
 using DustInTheWind.Dot.AdventureGame.ActionModel;
 using DustInTheWind.Dot.Application;
 using DustInTheWind.Dot.Application.UseCases.NewGame;
@@ -53,7 +54,7 @@ internal static class ServiceCollectionExtensions
         servicesCollection.AddTransient<IModule, MenuModule>();
         servicesCollection.AddTransient<IModule, GameModule>();
 
-        servicesCollection.AddSingleton<IModuleHost, StandardModuleHost>();
+        servicesCollection.AddSingleton<ModuleHost>();
 
         servicesCollection.AddTransient<IGameFactory, GameFactory>();
         servicesCollection.AddTransient<IUseCaseFactory, UseCaseFactory>();

@@ -8,6 +8,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="ConsoleTools.Modularization" Version="1.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
         <ProjectReference Include="..\Dot.Ports.PresentationAccess\Dot.Ports.PresentationAccess.csproj" PrivateAssets="All" />
     </ItemGroup>
 

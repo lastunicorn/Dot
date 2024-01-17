@@ -14,16 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.ConsoleTools.Modularization;
 using DustInTheWind.Dot.Ports.PresentationAccess;
 
 namespace DustInTheWind.Dot.GameHosting;
 
-public class StandardModuleHost : IModuleHost
+public class ModuleHost
 {
     private readonly IPresentation presentation;
     private readonly ModuleEngine moduleEngine;
 
-    public StandardModuleHost(IPresentation presentation, ModuleEngine moduleEngine)
+    public ModuleHost(IPresentation presentation, ModuleEngine moduleEngine)
     {
         this.presentation = presentation ?? throw new ArgumentNullException(nameof(presentation));
         this.moduleEngine = moduleEngine ?? throw new ArgumentNullException(nameof(moduleEngine));
