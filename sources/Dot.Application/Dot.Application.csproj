@@ -11,6 +11,7 @@
         <ProjectReference Include="..\Dot.AdventureGame\Dot.AdventureGame.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\Dot.Domain\Dot.Domain.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\Dot.GameHosting\Dot.GameHosting.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\Dot.Ports.ConfigAccess\Dot.Ports.ConfigAccess.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\Dot.Ports.PresentationAccess\Dot.Ports.PresentationAccess.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\Dot.Ports.SaveAccess\Dot.Ports.GameSavesAccess.csproj" PrivateAssets="All" />
     </ItemGroup>

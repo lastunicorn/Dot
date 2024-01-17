@@ -46,6 +46,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dot.GameHosting", "Dot.Game
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dot.Setup.Ninject", "Dot.Setup.Ninject\Dot.Setup.Ninject.csproj", "{20E4DA08-03B6-4F94-B15B-C7AC83FD1BF3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dot.Ports.ConfigAccess", "Dot.Ports.ConfigAccess\Dot.Ports.ConfigAccess.csproj", "{29E681CE-65B6-4C46-8005-FB13D13BA67E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dot.ConfigAccess", "Dot.ConfigAccess\Dot.ConfigAccess.csproj", "{9D0B9E42-3D34-4320-9B20-8FD1DD54ED4E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -116,6 +120,14 @@ Global
 		{20E4DA08-03B6-4F94-B15B-C7AC83FD1BF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20E4DA08-03B6-4F94-B15B-C7AC83FD1BF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20E4DA08-03B6-4F94-B15B-C7AC83FD1BF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29E681CE-65B6-4C46-8005-FB13D13BA67E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29E681CE-65B6-4C46-8005-FB13D13BA67E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29E681CE-65B6-4C46-8005-FB13D13BA67E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29E681CE-65B6-4C46-8005-FB13D13BA67E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D0B9E42-3D34-4320-9B20-8FD1DD54ED4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D0B9E42-3D34-4320-9B20-8FD1DD54ED4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D0B9E42-3D34-4320-9B20-8FD1DD54ED4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D0B9E42-3D34-4320-9B20-8FD1DD54ED4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -126,6 +138,8 @@ Global
 		{8134FA14-3C3E-4E16-8E6B-8EC9AF02347F} = {1729746B-38CB-4296-A467-9147E1367C94}
 		{C8FF28A9-0950-4170-9F25-8A985D369A0E} = {5AACFF78-6728-4D14-862E-E6BAF36A5317}
 		{C23A9E50-AA5D-4E57-ABD5-BE90A08ECA72} = {1729746B-38CB-4296-A467-9147E1367C94}
+		{29E681CE-65B6-4C46-8005-FB13D13BA67E} = {1729746B-38CB-4296-A467-9147E1367C94}
+		{9D0B9E42-3D34-4320-9B20-8FD1DD54ED4E} = {5AACFF78-6728-4D14-862E-E6BAF36A5317}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {337FF7E9-B5A4-4D8E-953F-FB64A69C238D}

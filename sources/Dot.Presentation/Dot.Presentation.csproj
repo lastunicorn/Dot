@@ -22,6 +22,7 @@
         <ProjectReference Include="..\Dot.ConsoleHelpers\Dot.Prsentation.ConsoleHelpers.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\Dot.Domain\Dot.Domain.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\Dot.GameHosting\Dot.GameHosting.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\Dot.Ports.ConfigAccess\Dot.Ports.ConfigAccess.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\Dot.Ports.PresentationAccess\Dot.Ports.PresentationAccess.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\Dot.Ports.SaveAccess\Dot.Ports.GameSavesAccess.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\Dot.WindowsNative\Dot.Presentation.WindowsNative.csproj" PrivateAssets="All" />

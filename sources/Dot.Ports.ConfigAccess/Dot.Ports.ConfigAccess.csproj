@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <AssemblyName>DustInTheWind.Dot.Ports.ConfigAccess</AssemblyName>
+        <RootNamespace>DustInTheWind.Dot.Ports.ConfigAccess</RootNamespace>
+    </PropertyGroup>
+
+</Project>
