@@ -19,7 +19,6 @@ using DustInTheWind.Dot.AdventureGame.ActionModel;
 using DustInTheWind.Dot.Application;
 using DustInTheWind.Dot.Application.UseCases.NewGame;
 using DustInTheWind.Dot.Domain;
-using DustInTheWind.Dot.Domain.DataAccess;
 using DustInTheWind.Dot.Domain.GameModel;
 using DustInTheWind.Dot.GameHosting;
 using DustInTheWind.Dot.GameSavesAccess;
@@ -36,7 +35,6 @@ internal static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddDot(this IServiceCollection servicesCollection)
     {
-        servicesCollection.AddSingleton<GameRepository>();
         servicesCollection.AddTransient<ResultHandlersCollection>();
         servicesCollection.AddSingleton<ModuleEngine>();
 
@@ -56,7 +54,6 @@ internal static class ServiceCollectionExtensions
 
         servicesCollection.AddSingleton<ModuleHost>();
 
-        servicesCollection.AddTransient<IGameFactory, GameFactory>();
         servicesCollection.AddTransient<IUseCaseFactory, UseCaseFactory>();
         servicesCollection.AddTransient<IScreenFactory, ScreenFactory>();
         servicesCollection.AddTransient<ICommandFactory, CommandFactory>();

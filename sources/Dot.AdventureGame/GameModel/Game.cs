@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using DustInTheWind.Dot.AdventureGame.ActionModel;
 using DustInTheWind.Dot.AdventureGame.Actions;
@@ -11,21 +8,21 @@ using DustInTheWind.Dot.Domain.GameModel;
 
 namespace DustInTheWind.Dot.AdventureGame.GameModel
 {
-    public abstract class Game : IGame
+    public abstract class Game
     {
-        private readonly GameTimer gameTimer = new GameTimer();
+        private readonly GameTimer gameTimer = new();
 
         private ILocation lastLocation;
         private GameState state = GameState.Closed;
         private bool isNew = true;
         private bool isFinished;
 
-        private readonly LocationEngine locationEngine = new LocationEngine();
-        private readonly AddOnCollection addOns = new AddOnCollection();
+        private readonly LocationEngine locationEngine = new();
+        private readonly AddOnCollection addOns = new();
 
-        public Inventory Inventory { get; } = new Inventory();
+        public Inventory Inventory { get; } = new();
 
-        public ActionSet Actions { get; } = new ActionSet();
+        public ActionSet Actions { get; } = new();
 
         public GameState State
         {
@@ -39,6 +36,8 @@ namespace DustInTheWind.Dot.AdventureGame.GameModel
                 OnStateChanged();
             }
         }
+
+        public bool IsLoaded { get; private set; }
 
         public TimeSpan TotalPlayTime => gameTimer.TotalPlayTime;
 
@@ -57,7 +56,29 @@ namespace DustInTheWind.Dot.AdventureGame.GameModel
             locationEngine.CurrentLocationChanged += HandleCurrentLocationChanged;
         }
 
-        public abstract void InitializeNew();
+        public void InitializeNew()
+        {
+            Clear();
+
+            DoInitializeNew();
+            IsLoaded = true;
+        }
+
+        private void Clear()
+        {
+            State = default;
+            isNew = true;
+            isFinished = false;
+            gameTimer.Clear();
+
+            locationEngine.Clear();
+            addOns.Clear();
+            Inventory.Clear();
+
+            IsLoaded = false;
+        }
+
+        protected abstract void DoInitializeNew();
 
         private void HandleCurrentLocationChanged(object sender, EventArgs e)
         {
@@ -88,7 +109,7 @@ namespace DustInTheWind.Dot.AdventureGame.GameModel
 
         public void Open()
         {
-            if (State == GameState.Paused || State == GameState.Closed)
+            if (State is GameState.Paused or GameState.Closed)
             {
                 if (!isFinished)
                     gameTimer.Start();
@@ -103,7 +124,7 @@ namespace DustInTheWind.Dot.AdventureGame.GameModel
 
                 State = GameState.Open;
 
-                GameOpenEventArgs eventArgs = new GameOpenEventArgs(isNew);
+                GameOpenEventArgs eventArgs = new(isNew);
                 OnOpened(eventArgs);
 
                 isNew = false;
@@ -280,6 +301,8 @@ namespace DustInTheWind.Dot.AdventureGame.GameModel
             ExportNode inventoryExportNode = (ExportNode)storageData["inventory"];
             Inventory.Clear();
             Inventory.Import(inventoryExportNode);
+
+            IsLoaded = true;
         }
 
         protected virtual void OnStateChanged()

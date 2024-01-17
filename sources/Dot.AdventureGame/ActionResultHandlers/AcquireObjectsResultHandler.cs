@@ -5,17 +5,17 @@ using DustInTheWind.Dot.AdventureGame.ActionModel;
 using DustInTheWind.Dot.AdventureGame.ActionResults;
 using DustInTheWind.Dot.AdventureGame.GameModel;
 using DustInTheWind.Dot.AdventureGame.ObjectModel;
-using DustInTheWind.Dot.Domain.DataAccess;
+using DustInTheWind.Dot.Domain.GameModel;
 
 namespace DustInTheWind.Dot.AdventureGame.ActionResultHandlers
 {
     public class AcquireObjectsResultHandler : ResultHandlerBase<AcquireObjectsResult>
     {
-        private readonly GameRepository gameRepository;
+        private readonly Game game;
 
-        public AcquireObjectsResultHandler(GameRepository gameRepository)
+        public AcquireObjectsResultHandler(Game game)
         {
-            this.gameRepository = gameRepository ?? throw new ArgumentNullException(nameof(gameRepository));
+            this.game = game ?? throw new ArgumentNullException(nameof(game));
         }
 
         public override void Handle(AcquireObjectsResult acquireObjectsResult)
@@ -26,9 +26,7 @@ namespace DustInTheWind.Dot.AdventureGame.ActionResultHandlers
             IEnumerable<IObject> objects = acquireObjectsResult.Objects
                 .Where(x => x != null);
 
-            Game game = gameRepository.Get() as Game;
-
-            if (game == null)
+            if (!game.IsLoaded)
             {
                 string objectsNames = string.Join(", ", objects.Select(x => x.Name));
                 throw new Exception("The objects cannot he acquired. There is no game in progress. Objects: " + objectsNames);

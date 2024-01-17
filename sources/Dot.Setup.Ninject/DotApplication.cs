@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.Dot.AdventureGame.GameModel;
 using DustInTheWind.Dot.Domain.GameModel;
 using DustInTheWind.Dot.GameHosting;
 using Ninject;
@@ -38,9 +39,9 @@ public class DotApplication
     }
 
     public DotApplication WithGame<TGame>()
-        where TGame : IGame
+        where TGame : Game
     {
-        kernel.Bind<IGame>().To<TGame>();
+        kernel.Bind<Game>().To<TGame>().InSingletonScope();
         return this;
     }
 

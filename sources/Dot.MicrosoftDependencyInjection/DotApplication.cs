@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.Dot.AdventureGame.GameModel;
 using DustInTheWind.Dot.Domain.GameModel;
 using DustInTheWind.Dot.GameHosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -39,9 +40,9 @@ public class DotApplication
     }
 
     public DotApplication WithGame<TGame>()
-        where TGame : class, IGame
+        where TGame : Game
     {
-        serviceCollection.AddTransient<IGame, TGame>();
+        serviceCollection.AddSingleton<Game, TGame>();
         return this;
     }
 

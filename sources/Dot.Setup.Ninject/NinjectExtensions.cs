@@ -18,7 +18,6 @@ using DustInTheWind.ConsoleTools.Modularization;
 using DustInTheWind.Dot.AdventureGame.ActionModel;
 using DustInTheWind.Dot.Application.UseCases.NewGame;
 using DustInTheWind.Dot.Domain;
-using DustInTheWind.Dot.Domain.DataAccess;
 using DustInTheWind.Dot.Domain.GameModel;
 using DustInTheWind.Dot.GameSavesAccess;
 using DustInTheWind.Dot.Ports.GameSavesAccess;
@@ -36,7 +35,6 @@ internal static class NinjectExtensions
 {
     public static IKernel BindDot(this IKernel kernel)
     {
-        kernel.Bind<GameRepository>().ToSelf().InSingletonScope();
         kernel.Bind<ResultHandlersCollection>().ToSelf();
         kernel.Bind<ModuleEngine>().ToSelf().InSingletonScope();
 
@@ -56,7 +54,6 @@ internal static class NinjectExtensions
 
         kernel.Bind<ModuleHost>().ToSelf().InSingletonScope();
 
-        kernel.Bind<IGameFactory>().To<GameFactory>();
         kernel.Bind<IUseCaseFactory>().To<UseCaseFactory>();
         kernel.Bind<IScreenFactory>().To<ScreenFactory>();
         kernel.Bind<ICommandFactory>().To<CommandFactory>();

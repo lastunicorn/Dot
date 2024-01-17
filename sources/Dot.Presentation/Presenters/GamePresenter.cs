@@ -10,7 +10,6 @@ using DustInTheWind.Dot.AdventureGame.GameModel;
 using DustInTheWind.Dot.Application;
 using DustInTheWind.Dot.Domain;
 using DustInTheWind.Dot.Domain.AudioTextModel;
-using DustInTheWind.Dot.Domain.DataAccess;
 using DustInTheWind.Dot.Domain.GameModel;
 using DustInTheWind.Dot.GameHosting;
 using DustInTheWind.Dot.Presentation.GameHostActions;
@@ -71,14 +70,14 @@ namespace DustInTheWind.Dot.Presentation.Presenters
     internal class GamePresenter
     {
         private readonly GameView gameView;
-        private readonly GameRepository gameRepository;
+        private readonly Game game;
         private readonly ResultHandlersCollection resultHandlers;
 
         private volatile bool exitWasRequested;
 
         private readonly ActionSet actions = new ActionSet();
 
-        public GamePresenter(GameView gameView, GameRepository gameRepository, ResultHandlersCollection resultHandlers,
+        public GamePresenter(GameView gameView, Game game, ResultHandlersCollection resultHandlers,
             ModuleHost moduleHost, IUseCaseFactory useCaseFactory, ModuleEngine moduleEngine)
         {
             if (moduleHost == null) throw new ArgumentNullException(nameof(moduleHost));
@@ -86,7 +85,7 @@ namespace DustInTheWind.Dot.Presentation.Presenters
             if (moduleEngine == null) throw new ArgumentNullException(nameof(moduleEngine));
 
             this.gameView = gameView ?? throw new ArgumentNullException(nameof(gameView));
-            this.gameRepository = gameRepository ?? throw new ArgumentNullException(nameof(gameRepository));
+            this.game = game ?? throw new ArgumentNullException(nameof(game));
             this.resultHandlers = resultHandlers ?? throw new ArgumentNullException(nameof(resultHandlers));
 
             this.resultHandlers.Add(typeof(ChangeLocationResult), typeof(ChangeLocationResultHandler));
@@ -113,7 +112,6 @@ namespace DustInTheWind.Dot.Presentation.Presenters
         {
             exitWasRequested = false;
 
-            IGame game = gameRepository.Get();
             game.CurrentLocationChanged += HandleCurrentLocationChanged;
             game.Open();
 
@@ -140,8 +138,6 @@ namespace DustInTheWind.Dot.Presentation.Presenters
 
         private void ExecuteCommand(string commandText)
         {
-            Game game = gameRepository.Get() as Game;
-
             ActionInfo? actionInfo = game?.FindMatchingAction(commandText) ?? actions.FindMatchingAction(commandText);
 
             if (actionInfo.HasValue)

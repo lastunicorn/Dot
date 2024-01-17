@@ -15,33 +15,27 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using DustInTheWind.ConsoleTools.Modularization;
-using DustInTheWind.Dot.Domain.DataAccess;
-using DustInTheWind.Dot.Domain.GameModel;
+using DustInTheWind.Dot.AdventureGame.GameModel;
 
 namespace DustInTheWind.Dot.Application.UseCases.NewGame;
 
 public class CreateNewGameUseCase
 {
-    private readonly GameRepository gameRepository;
-    private readonly IGameFactory gameFactory;
+    private readonly Game game;
     private readonly ModuleEngine moduleEngine;
 
-    public CreateNewGameUseCase(GameRepository gameRepository, IGameFactory gameFactory, ModuleEngine moduleEngine)
+    public CreateNewGameUseCase(Game game, ModuleEngine moduleEngine)
     {
-        this.gameRepository = gameRepository ?? throw new ArgumentNullException(nameof(gameRepository));
-        this.gameFactory = gameFactory ?? throw new ArgumentNullException(nameof(gameFactory));
+        this.game = game ?? throw new ArgumentNullException(nameof(game));
         this.moduleEngine = moduleEngine ?? throw new ArgumentNullException(nameof(moduleEngine));
     }
 
     public void Execute()
     {
-        IGame game = gameRepository.Get();
-        game?.Close();
+        if (game.IsLoaded)
+            game.Close();
 
-        IGame newGame = gameFactory.Create();
-        newGame.InitializeNew();
-        game = newGame;
-        gameRepository.Add(game);
+        game.InitializeNew();
 
         moduleEngine.RequestToChangeModule("game");
     }

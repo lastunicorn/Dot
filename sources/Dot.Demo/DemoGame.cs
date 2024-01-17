@@ -21,7 +21,7 @@ namespace DustInTheWind.Dot.Demo;
 
 internal sealed class DemoGame : StandardGame
 {
-    public override void InitializeNew()
+    protected override void DoInitializeNew()
     {
         ParkLocation parkLocation = new();
         parkLocation.InitializeNew();
