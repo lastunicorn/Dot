@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using DustInTheWind.Dot.Domain.GameModel;
 using DustInTheWind.Dot.GameHosting;
 using Ninject;
@@ -61,9 +60,9 @@ public class DotApplication
         }
     }
 
-    public DotApplication WhenUnhandledException(Action<Exception> exceptionHandler)
+    public DotApplication WhenUnhandledException(Action<Exception> handler)
     {
-        this.exceptionHandler = exceptionHandler;
+        exceptionHandler = handler;
         return this;
     }
 }

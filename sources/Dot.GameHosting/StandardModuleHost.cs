@@ -20,8 +20,6 @@ namespace DustInTheWind.Dot.GameHosting;
 
 public class StandardModuleHost : IModuleHost
 {
-    private volatile bool closeWasRequested;
-
     private readonly IPresentation presentation;
     private readonly ModuleEngine moduleEngine;
 
@@ -30,6 +28,7 @@ public class StandardModuleHost : IModuleHost
         this.presentation = presentation ?? throw new ArgumentNullException(nameof(presentation));
         this.moduleEngine = moduleEngine ?? throw new ArgumentNullException(nameof(moduleEngine));
 
+        moduleEngine.SetDefaultModule("main-menu");
         moduleEngine.ModuleRunException += HandleModuleRunException;
     }
 
@@ -39,17 +38,14 @@ public class StandardModuleHost : IModuleHost
         {
             case NotImplementedException:
                 presentation.DisplayFunctionalityNotImplementedInfo();
-                e.NextModule = "main-menu";
                 break;
 
             case OperationCanceledException:
                 presentation.DisplayOperationCanceledInfo();
-                e.NextModule = "main-menu";
                 break;
 
             default:
                 presentation.DisplayError(e.Exception);
-                e.NextModule = null;
                 break;
         }
     }
@@ -59,21 +55,16 @@ public class StandardModuleHost : IModuleHost
         presentation.ResetConsoleWindow();
         presentation.DisplayApplicationHeader();
 
-        closeWasRequested = false;
-
-        while (!closeWasRequested)
+        try
         {
-            try
-            {
-                moduleEngine.Run();
-            }
-            catch (OperationCanceledException)
-            {
-            }
-            catch (Exception ex)
-            {
-                presentation.DisplayError(ex);
-            }
+            moduleEngine.Run();
+        }
+        catch (OperationCanceledException)
+        {
+        }
+        catch (Exception ex)
+        {
+            presentation.DisplayError(ex);
         }
 
         presentation.DisplayGoodByeMessage();
@@ -81,7 +72,6 @@ public class StandardModuleHost : IModuleHost
 
     public void Close()
     {
-        closeWasRequested = true;
-        moduleEngine.Close();
+        moduleEngine.RequestToClose();
     }
 }

@@ -21,14 +21,15 @@ public class ModuleEngine
     private readonly ModuleCollection modules = new();
 
     private IModule currentModule;
+    private IModule defaultModule;
     private volatile bool closeWasRequested;
     private string requestedNextModuleId;
 
     public event EventHandler<ModuleRunExceptionEventArgs> ModuleRunException;
 
-    //public ModuleEngine()
-    //{
-    //}
+    public ModuleEngine()
+    {
+    }
 
     public ModuleEngine(IEnumerable<IModule> modules)
     {
@@ -43,6 +44,11 @@ public class ModuleEngine
         modules.Add(module);
     }
 
+    public void SetDefaultModule(string moduleId)
+    {
+        defaultModule = GetModuleOrThrow(moduleId);
+    }
+
     public void Run()
     {
         closeWasRequested = false;
@@ -52,7 +58,7 @@ public class ModuleEngine
         {
             try
             {
-                currentModule = GetModule(nextModuleId);
+                currentModule = GetModuleOrThrow(nextModuleId);
                 nextModuleId = currentModule?.Run();
 
                 if (requestedNextModuleId != null)
@@ -73,15 +79,17 @@ public class ModuleEngine
 
     private string GetDefaultModuleId()
     {
+        if (defaultModule != null)
+            return defaultModule.Id;
+
         IModule firstModule = modules.FirstOrDefault();
 
-        if (firstModule == null)
-            throw new NoModulesException();
-
-        return firstModule.Id;
+        return firstModule == null
+            ? throw new NoModulesException()
+            : firstModule.Id;
     }
 
-    private IModule GetModule(string moduleId)
+    private IModule GetModuleOrThrow(string moduleId)
     {
         return modules.GetById(moduleId) ?? throw new ModuleNotFoundException(moduleId);
     }
@@ -92,12 +100,10 @@ public class ModuleEngine
         currentModule?.RequestExit();
     }
 
-    public bool Close()
+    public void RequestToClose()
     {
         closeWasRequested = true;
         currentModule?.RequestExit();
-
-        return true;
     }
 
     protected virtual void OnModuleRunException(ModuleRunExceptionEventArgs e)
