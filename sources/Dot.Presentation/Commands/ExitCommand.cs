@@ -5,7 +5,7 @@ using DustInTheWind.Dot.Presentation.ConsoleHelpers.UIControls;
 
 namespace DustInTheWind.Dot.Presentation.Commands
 {
-    internal class ExitCommand : ICommand
+    public class ExitCommand : ICommand
     {
         private readonly ModuleHost moduleHost;
 

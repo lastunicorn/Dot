@@ -27,12 +27,12 @@ namespace DustInTheWind.Dot.Presentation.GameHostActions;
 
 public class LoadGameAction : ActionBase
 {
-    private readonly IUseCaseFactory useCaseFactory;
+    private readonly RequestBus requestBus;
 
-    public LoadGameAction(IUseCaseFactory useCaseFactory)
+    public LoadGameAction(RequestBus requestBus)
         : base("load")
     {
-        this.useCaseFactory = useCaseFactory ?? throw new ArgumentNullException(nameof(useCaseFactory));
+        this.requestBus = requestBus ?? throw new ArgumentNullException(nameof(requestBus));
     }
 
     public override string Description => "Loads a previously saved game.";
@@ -56,8 +56,8 @@ public class LoadGameAction : ActionBase
 
     public override IEnumerable Execute(params object[] parameters)
     {
-        LoadGameUseCase useCase = useCaseFactory.Create<LoadGameUseCase>();
-        useCase.Execute();
+        LoadGameRequest request = new();
+        requestBus.Send(request).Wait();
 
         return Enumerable.Empty<object>();
     }

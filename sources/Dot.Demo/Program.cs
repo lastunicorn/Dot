@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using DustInTheWind.Dot.Presentation.ConsoleHelpers.ConsoleUtil;
-using DustInTheWind.Dot.Setup.Ninject;
+using DustInTheWind.Dot.Setup.MicrosoftDependencyInjection;
 
 namespace DustInTheWind.Dot.Demo;
 

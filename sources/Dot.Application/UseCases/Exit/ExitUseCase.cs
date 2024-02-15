@@ -14,12 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using DustInTheWind.Dot.GameHosting;
+using MediatR;
 
 namespace DustInTheWind.Dot.Application.UseCases.Exit;
 
-public class ExitUseCase
+public class ExitUseCase : IRequestHandler<ExitRequest>
 {
     private readonly ModuleHost moduleHost;
 
@@ -28,8 +28,10 @@ public class ExitUseCase
         this.moduleHost = moduleHost ?? throw new ArgumentNullException(nameof(moduleHost));
     }
 
-    public void Execute()
+    public Task Handle(ExitRequest request, CancellationToken cancellationToken)
     {
         moduleHost.Close();
+
+        return Task.CompletedTask;
     }
 }

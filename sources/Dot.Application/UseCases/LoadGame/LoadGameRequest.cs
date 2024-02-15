@@ -14,14 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Dot.Ports.PresentationAccess;
+using MediatR;
 
-public class GameSlotId
+namespace DustInTheWind.Dot.Application.UseCases.LoadGame;
+
+public class LoadGameRequest : IRequest
 {
-    public int Id { get; }
-
-    public GameSlotId(int id)
-    {
-        Id = id;
-    }
 }

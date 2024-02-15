@@ -1,4 +1,22 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<!--
+Dot
+Copyright (C) 2020-2024 Dust in the Wind
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net6</TargetFramework>
@@ -23,8 +41,8 @@
         <ProjectReference Include="..\Dot.Domain\Dot.Domain.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\Dot.GameHosting\Dot.GameHosting.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\Dot.Ports.ConfigAccess\Dot.Ports.ConfigAccess.csproj" PrivateAssets="All" />
-        <ProjectReference Include="..\Dot.Ports.PresentationAccess\Dot.Ports.PresentationAccess.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\Dot.Ports.SaveAccess\Dot.Ports.GameSavesAccess.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\Dot.Presentation.Controls\Dot.Presentation.Controls.csproj" />
         <ProjectReference Include="..\Dot.WindowsNative\Dot.Presentation.WindowsNative.csproj" PrivateAssets="All" />
     </ItemGroup>
 

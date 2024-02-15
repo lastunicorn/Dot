@@ -15,10 +15,11 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using DustInTheWind.ConsoleTools.Modularization;
+using MediatR;
 
 namespace DustInTheWind.Dot.Application.UseCases.ResumeGame;
 
-public class ResumeGameUseCase
+public class ResumeGameUseCase : IRequestHandler<ResumeGameRequest>
 {
     private readonly ModuleEngine moduleEngine;
 
@@ -27,8 +28,10 @@ public class ResumeGameUseCase
         this.moduleEngine = moduleEngine ?? throw new ArgumentNullException(nameof(moduleEngine));
     }
 
-    public void Execute()
+    public Task Handle(ResumeGameRequest request, CancellationToken cancellationToken)
     {
         moduleEngine.RequestToChangeModule("game");
+
+        return Task.CompletedTask;
     }
 }

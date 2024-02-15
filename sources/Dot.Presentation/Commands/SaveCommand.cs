@@ -21,16 +21,16 @@ using DustInTheWind.Dot.Presentation.ConsoleHelpers.UIControls;
 
 namespace DustInTheWind.Dot.Presentation.Commands;
 
-internal class SaveCommand : ICommand
+public class SaveCommand : ICommand
 {
-    private readonly IUseCaseFactory useCaseFactory;
+    private readonly RequestBus requestBus;
     private readonly Game game;
 
     public event EventHandler CanExecuteChanges;
 
-    public SaveCommand(IUseCaseFactory useCaseFactory, Game game)
+    public SaveCommand(RequestBus requestBus, Game game)
     {
-        this.useCaseFactory = useCaseFactory ?? throw new ArgumentNullException(nameof(useCaseFactory));
+        this.requestBus = requestBus ?? throw new ArgumentNullException(nameof(requestBus));
         this.game = game ?? throw new ArgumentNullException(nameof(game));
     }
 
@@ -41,12 +41,7 @@ internal class SaveCommand : ICommand
 
     public void Execute()
     {
-        SaveGameUseCase useCase = useCaseFactory.Create<SaveGameUseCase>();
-        useCase.Execute();
-    }
-
-    protected virtual void OnCanExecuteChanges()
-    {
-        CanExecuteChanges?.Invoke(this, EventArgs.Empty);
+        SaveGameRequest request = new();
+        requestBus.Send(request).Wait();
     }
 }

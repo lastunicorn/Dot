@@ -14,24 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using DustInTheWind.Dot.Application;
-using Ninject;
+using MediatR;
 
-namespace DustInTheWind.Dot.Setup.Ninject;
+namespace DustInTheWind.Dot.Application.UseCases.ResumeGame;
 
-internal class UseCaseFactory : IUseCaseFactory
+public class ResumeGameRequest : IRequest
 {
-    private readonly IKernel kernel;
-
-    public UseCaseFactory(IKernel kernel)
-    {
-        this.kernel = kernel ?? throw new ArgumentNullException(nameof(kernel));
-    }
-
-    public T Create<T>()
-        where T : class
-    {
-        return kernel.Get<T>();
-    }
 }

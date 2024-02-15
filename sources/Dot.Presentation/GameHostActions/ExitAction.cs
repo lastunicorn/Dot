@@ -27,12 +27,12 @@ namespace DustInTheWind.Dot.Presentation.GameHostActions;
 
 public class ExitAction : ActionBase
 {
-    private readonly IUseCaseFactory useCaseFactory;
+    private readonly RequestBus requestBus;
 
-    public ExitAction(IUseCaseFactory useCaseFactory)
+    public ExitAction(RequestBus requestBus)
         : base("exit", "quit", "x")
     {
-        this.useCaseFactory = useCaseFactory ?? throw new ArgumentNullException(nameof(useCaseFactory));
+        this.requestBus = requestBus ?? throw new ArgumentNullException(nameof(requestBus));
     }
 
     public override string Description => "Exits the game.";
@@ -56,8 +56,8 @@ public class ExitAction : ActionBase
 
     public override IEnumerable Execute(params object[] parameters)
     {
-        ExitUseCase useCase = useCaseFactory.Create<ExitUseCase>();
-        useCase.Execute();
+        ExitRequest request = new();
+        requestBus.Send(request).Wait();
 
         return Enumerable.Empty<object>();
     }

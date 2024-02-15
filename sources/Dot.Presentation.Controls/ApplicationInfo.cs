@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace DustInTheWind.Dot.Presentation
 {
-    internal class ApplicationInfo
+    public class ApplicationInfo
     {
         private readonly Assembly assembly;
 

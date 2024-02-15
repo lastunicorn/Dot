@@ -1,4 +1,4 @@
-﻿namespace DustInTheWind.Dot.Ports.PresentationAccess
+﻿namespace DustInTheWind.Dot.Ports.UserAccess
 {
     public interface ILoadGameView
     {

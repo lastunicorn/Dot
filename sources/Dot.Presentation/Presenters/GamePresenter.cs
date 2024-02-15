@@ -65,7 +65,7 @@ namespace DustInTheWind.Dot.Presentation.Presenters
      *               +   :x
      */
 
-    internal class GamePresenter
+    public class GamePresenter
     {
         private readonly GameView gameView;
         private readonly Game game;
@@ -73,12 +73,10 @@ namespace DustInTheWind.Dot.Presentation.Presenters
 
         private volatile bool exitWasRequested;
 
-        private readonly ActionSet actions = new ActionSet();
+        private readonly ActionSet actions = new();
 
-        public GamePresenter(GameView gameView, Game game, ResultHandlersCollection resultHandlers, IUseCaseFactory useCaseFactory)
+        public GamePresenter(GameView gameView, Game game, ResultHandlersCollection resultHandlers, RequestBus requestBus)
         {
-            if (useCaseFactory == null) throw new ArgumentNullException(nameof(useCaseFactory));
-
             this.gameView = gameView ?? throw new ArgumentNullException(nameof(gameView));
             this.game = game ?? throw new ArgumentNullException(nameof(game));
             this.resultHandlers = resultHandlers ?? throw new ArgumentNullException(nameof(resultHandlers));
@@ -96,11 +94,11 @@ namespace DustInTheWind.Dot.Presentation.Presenters
             this.resultHandlers.Add(typeof(Action), typeof(ActionHandler));
 
 
-            actions.Add(new MainMenuAction(useCaseFactory));
-            actions.Add(new ExitAction(useCaseFactory));
-            actions.Add(new NewGameAction(useCaseFactory));
-            actions.Add(new LoadGameAction(useCaseFactory));
-            actions.Add(new SaveGameAction(useCaseFactory));
+            actions.Add(new MainMenuAction(requestBus));
+            actions.Add(new ExitAction(requestBus));
+            actions.Add(new NewGameAction(requestBus));
+            actions.Add(new LoadGameAction(requestBus));
+            actions.Add(new SaveGameAction(requestBus));
         }
 
         public void Display()

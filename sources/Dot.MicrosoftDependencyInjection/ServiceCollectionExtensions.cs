@@ -17,16 +17,27 @@
 using DustInTheWind.ConsoleTools.Modularization;
 using DustInTheWind.Dot.AdventureGame.ActionModel;
 using DustInTheWind.Dot.Application;
+using DustInTheWind.Dot.Application.UseCases.Credits;
+using DustInTheWind.Dot.Application.UseCases.Exit;
+using DustInTheWind.Dot.Application.UseCases.LoadGame;
+using DustInTheWind.Dot.Application.UseCases.MainMenu;
 using DustInTheWind.Dot.Application.UseCases.NewGame;
+using DustInTheWind.Dot.Application.UseCases.ResumeGame;
+using DustInTheWind.Dot.Application.UseCases.SaveGame;
+using DustInTheWind.Dot.AudioSupport;
 using DustInTheWind.Dot.Domain;
 using DustInTheWind.Dot.Domain.GameModel;
 using DustInTheWind.Dot.GameHosting;
 using DustInTheWind.Dot.GameSavesAccess;
 using DustInTheWind.Dot.Ports.GameSavesAccess;
-using DustInTheWind.Dot.Ports.PresentationAccess;
+using DustInTheWind.Dot.Ports.UserAccess;
 using DustInTheWind.Dot.Presentation;
+using DustInTheWind.Dot.Presentation.Commands;
 using DustInTheWind.Dot.Presentation.Modules;
+using DustInTheWind.Dot.Presentation.Presenters;
 using DustInTheWind.Dot.Presentation.Views;
+using DustInTheWind.Dot.UserAccess;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DustInTheWind.Dot.Setup.MicrosoftDependencyInjection;
@@ -35,29 +46,50 @@ internal static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddDot(this IServiceCollection servicesCollection)
     {
+        servicesCollection.AddSingleton<IMediator, Mediator>();
+        servicesCollection.AddSingleton<RequestBus>();
+
         servicesCollection.AddTransient<ResultHandlersCollection>();
         servicesCollection.AddSingleton<ModuleEngine>();
 
+        servicesCollection.AddTransient<Audio>();
         servicesCollection.AddTransient<IPresentation, ApplicationView>();
         servicesCollection.AddTransient<IGameSlotRepository, GameSlotRepository>();
         servicesCollection.AddTransient<IGameSettings, GameSettings>();
 
         servicesCollection.AddTransient<IUserInterface, UserInterface>();
         servicesCollection.AddTransient<ILoadGameView, LoadGameView>();
-        servicesCollection.AddTransient<ISaveGameView, SaveGameView>();
-        servicesCollection.AddTransient<MainMenuView>();
-
-        servicesCollection.AddTransient<CreateNewGameUseCase>();
+        servicesCollection.AddTransient<IGameSavingTerminal, GameSavingTerminal>();
 
         servicesCollection.AddTransient<IModule, MenuModule>();
+        servicesCollection.AddTransient<MainMenuPresenter>();
+        servicesCollection.AddTransient<MainMenuView>();
+
         servicesCollection.AddTransient<IModule, GameModule>();
+        servicesCollection.AddTransient<GamePresenter>();
+        servicesCollection.AddTransient<GameView>();
 
         servicesCollection.AddSingleton<ModuleHost>();
 
-        servicesCollection.AddTransient<IUseCaseFactory, UseCaseFactory>();
         servicesCollection.AddTransient<IScreenFactory, ScreenFactory>();
         servicesCollection.AddTransient<ICommandFactory, CommandFactory>();
         servicesCollection.AddTransient<IActionResultHandlerFactory, ActionResultHandlerFactory>();
+
+        servicesCollection.AddTransient<NewGameCommand>();
+        servicesCollection.AddTransient<ResumeGameCommand>();
+        servicesCollection.AddTransient<SaveCommand>();
+        servicesCollection.AddTransient<LoadCommand>();
+        servicesCollection.AddTransient<CreditsCommand>();
+        servicesCollection.AddTransient<CreditsView>();
+        servicesCollection.AddTransient<ExitCommand>();
+
+        servicesCollection.AddTransient<IRequestHandler<MainMenuRequest>, MainMenuUseCase>();
+        servicesCollection.AddTransient<IRequestHandler<CreateNewGameRequest>, CreateNewGameUseCase>();
+        servicesCollection.AddTransient<IRequestHandler<ResumeGameRequest>, ResumeGameUseCase>();
+        servicesCollection.AddTransient<IRequestHandler<SaveGameRequest>, SaveGameUseCase>();
+        servicesCollection.AddTransient<IRequestHandler<LoadGameRequest>, LoadGameUseCase>();
+        servicesCollection.AddTransient<IRequestHandler<CreditsRequest, CreditsResponse>, CreditsUseCase>();
+        servicesCollection.AddTransient<IRequestHandler<ExitRequest>, ExitUseCase>();
 
         return servicesCollection;
     }

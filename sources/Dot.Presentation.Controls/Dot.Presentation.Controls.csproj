@@ -1,4 +1,4 @@
-﻿<!--
+<!--
 Dot
 Copyright (C) 2020-2024 Dust in the Wind
 
@@ -21,12 +21,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
-        <AssemblyName>DustInTheWind.Dot.ConfigAccess</AssemblyName>
-        <RootNamespace>DustInTheWind.Dot.ConfigAccess</RootNamespace>
+        <AssemblyName>DustInTheWind.Dot.Presentation.Controls</AssemblyName>
+        <RootNamespace>DustInTheWind.Dot.Presentation.Controls</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Dot.Ports.ConfigAccess\Dot.Ports.ConfigAccess.csproj" PrivateAssets="All" />
+      <ProjectReference Include="..\Dot.AudioSupport\Dot.Presentation.AudioSupport.csproj" />
+      <ProjectReference Include="..\Dot.ConsoleHelpers\Dot.Prsentation.ConsoleHelpers.csproj" />
+      <ProjectReference Include="..\Dot.Domain\Dot.Domain.csproj" />
     </ItemGroup>
 
 </Project>

@@ -14,31 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Dot.Application;
-using DustInTheWind.Dot.Application.UseCases.NewGame;
-using DustInTheWind.Dot.Presentation.ConsoleHelpers.UIControls;
+namespace DustInTheWind.Dot.Ports.UserAccess;
 
-namespace DustInTheWind.Dot.Presentation.Commands;
-
-public class NewGameCommand : ICommand
+public class GameSlotId
 {
-    private readonly RequestBus requestBus;
+    public int Id { get; }
 
-    public event EventHandler CanExecuteChanges;
-
-    public NewGameCommand(RequestBus requestBus)
+    public GameSlotId(int id)
     {
-        this.requestBus = requestBus ?? throw new ArgumentNullException(nameof(requestBus));
-    }
-
-    public bool CanExecute()
-    {
-        return true;
-    }
-
-    public void Execute()
-    {
-        CreateNewGameRequest request = new();
-        requestBus.Send(request).Wait();
+        Id = id;
     }
 }

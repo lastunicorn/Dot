@@ -1,7 +1,8 @@
-﻿using System;
+﻿using DustInTheWind.Dot.Presentation;
 using DustInTheWind.Dot.Presentation.ConsoleHelpers.ConsoleUtil;
+using DustInTheWind.Dot.Presentation.Controls;
 
-namespace DustInTheWind.Dot.Presentation.Controls
+namespace DustInTheWind.Dot.UserAccess.Controls
 {
     public class ApplicationHeader
     {

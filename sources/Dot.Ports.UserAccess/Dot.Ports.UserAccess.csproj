@@ -1,4 +1,4 @@
-﻿<!--
+<!--
 Dot
 Copyright (C) 2020-2024 Dust in the Wind
 
@@ -19,14 +19,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net6</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
-        <AssemblyName>DustInTheWind.Dot.ConfigAccess</AssemblyName>
-        <RootNamespace>DustInTheWind.Dot.ConfigAccess</RootNamespace>
+        <AssemblyName>DustInTheWind.Dot.Ports.UserAccess</AssemblyName>
+        <RootNamespace>DustInTheWind.Dot.Ports.UserAccess</RootNamespace>
     </PropertyGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\Dot.Ports.ConfigAccess\Dot.Ports.ConfigAccess.csproj" PrivateAssets="All" />
-    </ItemGroup>
 
 </Project>

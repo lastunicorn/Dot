@@ -16,34 +16,34 @@
 
 using DustInTheWind.ConsoleTools.Modularization;
 using DustInTheWind.Dot.AdventureGame.GameModel;
-using DustInTheWind.Dot.Application.UseCases.SaveGame;
 using DustInTheWind.Dot.Domain.GameModel;
 using DustInTheWind.Dot.Ports.GameSavesAccess;
-using DustInTheWind.Dot.Ports.PresentationAccess;
+using DustInTheWind.Dot.Ports.UserAccess;
+using MediatR;
 
 namespace DustInTheWind.Dot.Application.UseCases.LoadGame;
 
-public class LoadGameUseCase
+public class LoadGameUseCase : IRequestHandler<LoadGameRequest>
 {
     private readonly ILoadGameView view;
+    private readonly IGameSavingTerminal gameSavingTerminal;
     private readonly Game game;
-    private readonly IUseCaseFactory useCaseFactory;
     private readonly IGameSlotRepository gameSlotRepository;
     private readonly IGameSettings gameSettings;
     private readonly ModuleEngine moduleEngine;
 
-    public LoadGameUseCase(ILoadGameView loadGameView, Game game,
-        IUseCaseFactory useCaseFactory, IGameSlotRepository gameSlotRepository, IGameSettings gameSettings, ModuleEngine moduleEngine)
+    public LoadGameUseCase(ILoadGameView loadGameView, IGameSavingTerminal gameSavingTerminal, Game game,
+        IGameSlotRepository gameSlotRepository, IGameSettings gameSettings, ModuleEngine moduleEngine)
     {
         view = loadGameView ?? throw new ArgumentNullException(nameof(loadGameView));
+        this.gameSavingTerminal = gameSavingTerminal ?? throw new ArgumentNullException(nameof(gameSavingTerminal));
         this.game = game ?? throw new ArgumentNullException(nameof(game));
-        this.useCaseFactory = useCaseFactory ?? throw new ArgumentNullException(nameof(useCaseFactory));
         this.gameSlotRepository = gameSlotRepository ?? throw new ArgumentNullException(nameof(gameSlotRepository));
         this.gameSettings = gameSettings ?? throw new ArgumentNullException(nameof(gameSettings));
         this.moduleEngine = moduleEngine ?? throw new ArgumentNullException(nameof(moduleEngine));
     }
 
-    public void Execute()
+    public Task Handle(LoadGameRequest request, CancellationToken cancellationToken)
     {
         if (game.IsLoaded)
         {
@@ -63,6 +63,8 @@ public class LoadGameUseCase
         moduleEngine.RequestToChangeModule("main-menu");
 
         view.AnnounceSuccess();
+
+        return Task.CompletedTask;
     }
 
     private GameSlot ChooseGameSlot()
@@ -82,8 +84,21 @@ public class LoadGameUseCase
 
         if (savePreviousGame)
         {
-            SaveGameUseCase saveGameUseCase = useCaseFactory.Create<SaveGameUseCase>();
-            saveGameUseCase.Execute();
+            if (!game.IsLoaded)
+                throw new GameNotRunningException();
+
+            List<GameSlot> gameSlots = gameSlotRepository.GetAll().ToList();
+            GameSlotId gameSlotId = gameSavingTerminal.SelectGameSlot(gameSlots.Select(x => new GameSlotId(x.Id)));
+
+            if (gameSlotId == null)
+                throw new OperationCanceledException();
+
+            GameSlot gameSlot = gameSlots.FirstOrDefault(x => x.Id == gameSlotId.Id);
+
+            gameSlot.Data = game.Export().ToStorageData();
+            gameSlotRepository.AddOrReplace(gameSlot);
+
+            gameSettings.LastSavedGame = gameSlot.Id;
         }
     }
 }

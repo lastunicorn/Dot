@@ -24,13 +24,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.AdventureGame", "Dot.Ad
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Demo", "Dot.Demo\Dot.Demo.csproj", "{97272D44-504B-422D-928F-50F0CCBC9C2E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.GameSavesAccess", "Dot.GameStorage.Binary\Dot.GameSavesAccess.csproj", "{944619C8-D290-4278-832C-3DB434C86E3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.GameSavesAccess.Binary", "Dot.GameSavesAccess.Binary\Dot.GameSavesAccess.Binary.csproj", "{944619C8-D290-4278-832C-3DB434C86E3D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Tests", "Dot.Tests\Dot.Tests.csproj", "{33DFF2AA-ED29-4C04-8A90-29EDA1FA0876}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Setup.MicrosoftDependencyInjection", "Dot.MicrosoftDependencyInjection\Dot.Setup.MicrosoftDependencyInjection.csproj", "{090B77D0-4AB7-4B8D-AF60-1C40BABB741B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Ports.GameSavesAccess", "Dot.Ports.SaveAccess\Dot.Ports.GameSavesAccess.csproj", "{8134FA14-3C3E-4E16-8E6B-8EC9AF02347F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Ports.GameSavesAccess", "Dot.Ports.GameSavesAccess\Dot.Ports.GameSavesAccess.csproj", "{8134FA14-3C3E-4E16-8E6B-8EC9AF02347F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ports", "Ports", "{1729746B-38CB-4296-A467-9147E1367C94}"
 EndProject
@@ -40,15 +40,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.GameAccess", "Dot.GameA
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GameModules", "GameModules", "{D6C42C04-865B-49FA-93A3-8AED5107B720}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dot.Ports.PresentationAccess", "Dot.Ports.PresentationAccess\Dot.Ports.PresentationAccess.csproj", "{C23A9E50-AA5D-4E57-ABD5-BE90A08ECA72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Ports.UserAccess", "Dot.Ports.UserAccess\Dot.Ports.UserAccess.csproj", "{C23A9E50-AA5D-4E57-ABD5-BE90A08ECA72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dot.GameHosting", "Dot.GameHosting\Dot.GameHosting.csproj", "{238CCE62-0221-4220-8C2E-3AAF509108CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.GameHosting", "Dot.GameHosting\Dot.GameHosting.csproj", "{238CCE62-0221-4220-8C2E-3AAF509108CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dot.Setup.Ninject", "Dot.Setup.Ninject\Dot.Setup.Ninject.csproj", "{20E4DA08-03B6-4F94-B15B-C7AC83FD1BF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Setup.Ninject", "Dot.Setup.Ninject\Dot.Setup.Ninject.csproj", "{20E4DA08-03B6-4F94-B15B-C7AC83FD1BF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dot.Ports.ConfigAccess", "Dot.Ports.ConfigAccess\Dot.Ports.ConfigAccess.csproj", "{29E681CE-65B6-4C46-8005-FB13D13BA67E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Ports.ConfigAccess", "Dot.Ports.ConfigAccess\Dot.Ports.ConfigAccess.csproj", "{29E681CE-65B6-4C46-8005-FB13D13BA67E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dot.ConfigAccess", "Dot.ConfigAccess\Dot.ConfigAccess.csproj", "{9D0B9E42-3D34-4320-9B20-8FD1DD54ED4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.ConfigAccess", "Dot.ConfigAccess\Dot.ConfigAccess.csproj", "{9D0B9E42-3D34-4320-9B20-8FD1DD54ED4E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.UserAccess", "Dot.UserAccess\Dot.UserAccess.csproj", "{DB282A5D-6C11-468A-9F7E-D3A191284C24}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Presentation.Controls", "Dot.Presentation.Controls\Dot.Presentation.Controls.csproj", "{21FC7217-26B7-4A83-9E81-AB8FD95BB7AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -128,6 +132,14 @@ Global
 		{9D0B9E42-3D34-4320-9B20-8FD1DD54ED4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D0B9E42-3D34-4320-9B20-8FD1DD54ED4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D0B9E42-3D34-4320-9B20-8FD1DD54ED4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB282A5D-6C11-468A-9F7E-D3A191284C24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB282A5D-6C11-468A-9F7E-D3A191284C24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB282A5D-6C11-468A-9F7E-D3A191284C24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB282A5D-6C11-468A-9F7E-D3A191284C24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21FC7217-26B7-4A83-9E81-AB8FD95BB7AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21FC7217-26B7-4A83-9E81-AB8FD95BB7AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21FC7217-26B7-4A83-9E81-AB8FD95BB7AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21FC7217-26B7-4A83-9E81-AB8FD95BB7AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -140,6 +152,7 @@ Global
 		{C23A9E50-AA5D-4E57-ABD5-BE90A08ECA72} = {1729746B-38CB-4296-A467-9147E1367C94}
 		{29E681CE-65B6-4C46-8005-FB13D13BA67E} = {1729746B-38CB-4296-A467-9147E1367C94}
 		{9D0B9E42-3D34-4320-9B20-8FD1DD54ED4E} = {5AACFF78-6728-4D14-862E-E6BAF36A5317}
+		{DB282A5D-6C11-468A-9F7E-D3A191284C24} = {5AACFF78-6728-4D14-862E-E6BAF36A5317}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {337FF7E9-B5A4-4D8E-953F-FB64A69C238D}

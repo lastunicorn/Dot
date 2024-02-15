@@ -14,19 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Dot.Ports.PresentationAccess;
+using MediatR;
 
-public interface IPresentation
+namespace DustInTheWind.Dot.Application.UseCases.NewGame;
+
+public class CreateNewGameRequest : IRequest
 {
-    void DisplayApplicationHeader();
-
-    void ResetConsoleWindow();
-
-    void DisplayFunctionalityNotImplementedInfo();
-
-    void DisplayOperationCanceledInfo();
-
-    void DisplayGoodByeMessage();
-
-    void DisplayError(Exception exception);
 }

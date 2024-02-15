@@ -27,12 +27,12 @@ namespace DustInTheWind.Dot.Presentation.GameHostActions;
 
 public class NewGameAction : ActionBase
 {
-    private readonly IUseCaseFactory useCaseFactory;
+    private readonly RequestBus requestBus;
 
-    public NewGameAction(IUseCaseFactory useCaseFactory)
+    public NewGameAction(RequestBus requestBus)
         : base("new")
     {
-        this.useCaseFactory = useCaseFactory ?? throw new ArgumentNullException(nameof(useCaseFactory));
+        this.requestBus = requestBus ?? throw new ArgumentNullException(nameof(requestBus));
     }
 
     public override string Description => "Starts a new game.";
@@ -56,8 +56,8 @@ public class NewGameAction : ActionBase
 
     public override IEnumerable Execute(params object[] parameters)
     {
-        CreateNewGameUseCase useCase = useCaseFactory.Create<CreateNewGameUseCase>();
-        useCase.Execute();
+        CreateNewGameRequest request = new();
+        requestBus.Send(request).Wait();
 
         return Enumerable.Empty<object>();
     }

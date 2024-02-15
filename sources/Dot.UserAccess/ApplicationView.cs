@@ -14,15 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Threading;
 using DustInTheWind.Dot.AudioSupport;
-using DustInTheWind.Dot.Ports.PresentationAccess;
+using DustInTheWind.Dot.Ports.UserAccess;
+using DustInTheWind.Dot.Presentation;
 using DustInTheWind.Dot.Presentation.ConsoleHelpers.ConsoleUtil;
-using DustInTheWind.Dot.Presentation.Controls;
+using DustInTheWind.Dot.Presentation.Views;
 using DustInTheWind.Dot.Presentation.WindowsNative;
+using DustInTheWind.Dot.UserAccess.Controls;
 
-namespace DustInTheWind.Dot.Presentation.Views;
+namespace DustInTheWind.Dot.UserAccess;
 
 public class ApplicationView : ViewBase, IPresentation
 {

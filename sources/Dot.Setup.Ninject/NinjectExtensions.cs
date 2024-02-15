@@ -21,13 +21,21 @@ using DustInTheWind.Dot.Domain;
 using DustInTheWind.Dot.Domain.GameModel;
 using DustInTheWind.Dot.GameSavesAccess;
 using DustInTheWind.Dot.Ports.GameSavesAccess;
-using DustInTheWind.Dot.Ports.PresentationAccess;
 using DustInTheWind.Dot.Presentation;
 using DustInTheWind.Dot.Presentation.Views;
 using Ninject;
 using DustInTheWind.Dot.Presentation.Modules;
 using DustInTheWind.Dot.Application;
 using DustInTheWind.Dot.GameHosting;
+using DustInTheWind.Dot.Ports.UserAccess;
+using DustInTheWind.Dot.UserAccess;
+using MediatR;
+using Ninject.Components;
+using Ninject;
+using Ninject.Infrastructure;
+using Ninject.Planning.Bindings;
+using Ninject.Planning.Bindings.Resolvers;
+using Ninject.Modules;
 
 namespace DustInTheWind.Dot.Setup.Ninject;
 
@@ -35,6 +43,23 @@ internal static class NinjectExtensions
 {
     public static IKernel BindDot(this IKernel kernel)
     {
+        kernel.Bind<IServiceProvider>().To<ServiceProvider>();
+
+        kernel.Bind<IMediator>().ToMethod(context =>
+        {
+            Mediator mediator = context.Kernel.Get<Mediator>();
+            return mediator;
+        }).InSingletonScope();
+
+        //kernel.Bind(x =>
+        //    x.FromThisAssembly()
+        //        .SelectAllClasses()
+        //        .InheritedFrom<IRequestHandler<>>()
+        //        .BindToSelf());
+
+        kernel.Bind<RequestBus>().ToSelf().InSingletonScope();
+
+
         kernel.Bind<ResultHandlersCollection>().ToSelf();
         kernel.Bind<ModuleEngine>().ToSelf().InSingletonScope();
 
@@ -44,7 +69,7 @@ internal static class NinjectExtensions
 
         kernel.Bind<IUserInterface>().To<UserInterface>();
         kernel.Bind<ILoadGameView>().To<LoadGameView>();
-        kernel.Bind<ISaveGameView>().To<SaveGameView>();
+        kernel.Bind<IGameSavingTerminal>().To<GameSavingTerminal>();
         kernel.Bind<MainMenuView>().ToSelf();
 
         kernel.Bind<CreateNewGameUseCase>().ToSelf();
@@ -54,7 +79,6 @@ internal static class NinjectExtensions
 
         kernel.Bind<ModuleHost>().ToSelf().InSingletonScope();
 
-        kernel.Bind<IUseCaseFactory>().To<UseCaseFactory>();
         kernel.Bind<IScreenFactory>().To<ScreenFactory>();
         kernel.Bind<ICommandFactory>().To<CommandFactory>();
         kernel.Bind<IActionResultHandlerFactory>().To<ActionResultHandlerFactory>();
@@ -62,3 +86,49 @@ internal static class NinjectExtensions
         return kernel;
     }
 }
+
+internal class ServiceProvider : IServiceProvider
+{
+    private readonly IKernel kernel;
+
+    public ServiceProvider(IKernel kernel)
+    {
+        this.kernel = kernel ?? throw new ArgumentNullException(nameof(kernel));
+    }
+
+    public object GetService(Type serviceType)
+    {
+        return kernel.Get(serviceType);
+    }
+}
+
+//public class ContravariantBindingResolver : NinjectComponent, IBindingResolver
+//{
+//    /// <summary>
+//    /// Returns any bindings from the specified collection that match the specified service.
+//    /// </summary>
+//    public IEnumerable<IBinding> Resolve(Multimap<Type, IBinding> bindings, Type service)
+//    {
+//        if (service.IsGenericType)
+//        {
+//            var genericType = service.GetGenericTypeDefinition();
+//            var genericArguments = genericType.GetGenericArguments();
+//            var isContravariant = genericArguments.Length == 1
+//                                  && genericArguments
+//                                      .Single()
+//                                      .GenericParameterAttributes.HasFlag(GenericParameterAttributes.Contravariant);
+//            if (isContravariant)
+//            {
+//                var argument = service.GetGenericArguments().Single();
+//                var matches = bindings.Where(kvp => kvp.Key.IsGenericType
+//                                                    && kvp.Key.GetGenericTypeDefinition() == genericType
+//                                                    && kvp.Key.GetGenericArguments().Single() != argument
+//                                                    && kvp.Key.GetGenericArguments().Single().IsAssignableFrom(argument))
+//                    .SelectMany(kvp => kvp.Value);
+//                return matches;
+//            }
+//        }
+
+//        return Enumerable.Empty<IBinding>();
+//    }
+//}

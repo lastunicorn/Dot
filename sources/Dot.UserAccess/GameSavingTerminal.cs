@@ -14,25 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using DustInTheWind.Dot.Application.UseCases.LoadGame;
-using DustInTheWind.Dot.Application.UseCases.SaveGame;
-using DustInTheWind.Dot.AudioSupport;
-using DustInTheWind.Dot.Ports.PresentationAccess;
+using DustInTheWind.Dot.Ports.UserAccess;
 using DustInTheWind.Dot.Presentation.ConsoleHelpers.ConsoleUtil;
 using DustInTheWind.Dot.Presentation.ConsoleHelpers.UIControls;
-using DustInTheWind.Dot.Presentation.Controls;
 
-namespace DustInTheWind.Dot.Presentation.Views;
+namespace DustInTheWind.Dot.UserAccess;
 
-public class SaveGameView : ViewBase, ISaveGameView
+public class GameSavingTerminal : IGameSavingTerminal
 {
-    public SaveGameView(Audio audio)
-        : base(audio)
-    {
-    }
-
     public GameSlotId SelectGameSlot(IEnumerable<GameSlotId> gameSlotIds)
     {
         CustomConsole.WriteLine("Save Game", ConsoleColor.Green, HorizontalAlign.Center);

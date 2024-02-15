@@ -27,12 +27,12 @@ namespace DustInTheWind.Dot.Presentation.GameHostActions;
 
 public class SaveGameAction : ActionBase
 {
-    private readonly IUseCaseFactory useCaseFactory;
+    private readonly RequestBus requestBus;
 
-    public SaveGameAction(IUseCaseFactory useCaseFactory)
+    public SaveGameAction(RequestBus requestBus)
         : base("save")
     {
-        this.useCaseFactory = useCaseFactory ?? throw new ArgumentNullException(nameof(useCaseFactory));
+        this.requestBus = requestBus ?? throw new ArgumentNullException(nameof(requestBus));
     }
 
     public override string Description => "Saves the current game.";
@@ -56,8 +56,8 @@ public class SaveGameAction : ActionBase
 
     public override IEnumerable Execute(params object[] parameters)
     {
-        SaveGameUseCase useCase = useCaseFactory.Create<SaveGameUseCase>();
-        useCase.Execute();
+        SaveGameRequest request = new();
+        requestBus.Send(request).Wait();
 
         return Enumerable.Empty<object>();
     }

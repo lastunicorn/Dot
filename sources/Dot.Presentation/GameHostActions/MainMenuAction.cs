@@ -27,12 +27,12 @@ namespace DustInTheWind.Dot.Presentation.GameHostActions;
 
 public class MainMenuAction : ActionBase
 {
-    private readonly IUseCaseFactory useCaseFactory;
+    private readonly RequestBus requestBus;
 
-    public MainMenuAction(IUseCaseFactory useCaseFactory)
+    public MainMenuAction(RequestBus requestBus)
         : base("menu", "m")
     {
-        this.useCaseFactory = useCaseFactory ?? throw new ArgumentNullException(nameof(useCaseFactory));
+        this.requestBus = requestBus ?? throw new ArgumentNullException(nameof(requestBus));
     }
 
     public override string Description => "Displays the main menu of the game.";
@@ -56,8 +56,8 @@ public class MainMenuAction : ActionBase
 
     public override IEnumerable Execute(params object[] parameters)
     {
-        MainMenuUseCase useCase = useCaseFactory.Create<MainMenuUseCase>();
-        useCase.Execute();
+        MainMenuRequest request = new();
+        requestBus.Send(request).Wait();
 
         return Enumerable.Empty<object>();
     }

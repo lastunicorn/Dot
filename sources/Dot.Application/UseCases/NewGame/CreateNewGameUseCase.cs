@@ -16,10 +16,11 @@
 
 using DustInTheWind.ConsoleTools.Modularization;
 using DustInTheWind.Dot.AdventureGame.GameModel;
+using MediatR;
 
 namespace DustInTheWind.Dot.Application.UseCases.NewGame;
 
-public class CreateNewGameUseCase
+public class CreateNewGameUseCase : IRequestHandler<CreateNewGameRequest>
 {
     private readonly Game game;
     private readonly ModuleEngine moduleEngine;
@@ -30,7 +31,7 @@ public class CreateNewGameUseCase
         this.moduleEngine = moduleEngine ?? throw new ArgumentNullException(nameof(moduleEngine));
     }
 
-    public void Execute()
+    public Task Handle(CreateNewGameRequest request, CancellationToken cancellationToken)
     {
         if (game.IsLoaded)
             game.Close();
@@ -38,5 +39,7 @@ public class CreateNewGameUseCase
         game.InitializeNew();
 
         moduleEngine.RequestToChangeModule("game");
+
+        return Task.CompletedTask;
     }
 }

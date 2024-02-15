@@ -16,9 +16,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace DustInTheWind.Dot.Domain.GameModel;
 
+[Serializable]
 public class ExportNode : Dictionary<string, object>
 {
     public Type ObjectType { get; set; }
@@ -38,5 +40,14 @@ public class ExportNode : Dictionary<string, object>
     public void Set<T>(string key, T value)
     {
         this[key] = value;
+    }
+
+    public ExportNode()
+    {
+    }
+
+    public ExportNode(SerializationInfo info, StreamingContext context)
+    {
+
     }
 }

@@ -14,13 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using DustInTheWind.Dot.Application.UseCases.LoadGame;
-using DustInTheWind.Dot.Ports.PresentationAccess;
+using DustInTheWind.Dot.Ports.UserAccess;
 using DustInTheWind.Dot.Presentation.ConsoleHelpers.UIControls;
 
-namespace DustInTheWind.Dot.Presentation.Controls;
+namespace DustInTheWind.Dot.UserAccess;
 
 internal class SaveMenuControl : SelectableMenu<GameSlotId>
 {

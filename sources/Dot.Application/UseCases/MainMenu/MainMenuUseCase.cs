@@ -15,10 +15,11 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using DustInTheWind.ConsoleTools.Modularization;
+using MediatR;
 
 namespace DustInTheWind.Dot.Application.UseCases.MainMenu;
 
-public class MainMenuUseCase
+public class MainMenuUseCase : IRequestHandler<MainMenuRequest>
 {
     private readonly ModuleEngine moduleEngine;
 
@@ -27,8 +28,10 @@ public class MainMenuUseCase
         this.moduleEngine = moduleEngine ?? throw new ArgumentNullException(nameof(moduleEngine));
     }
 
-    public void Execute()
+    public Task Handle(MainMenuRequest request, CancellationToken cancellationToken)
     {
         moduleEngine.RequestToChangeModule("main-menu");
+
+        return Task.CompletedTask;
     }
 }

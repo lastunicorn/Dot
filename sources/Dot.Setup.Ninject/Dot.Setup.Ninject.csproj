@@ -1,4 +1,22 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<!--
+Dot
+Copyright (C) 2020-2024 Dust in the Wind
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net6</TargetFramework>
@@ -8,6 +26,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="MediatR" Version="12.2.0" />
         <PackageReference Include="Ninject" Version="3.3.6" />
     </ItemGroup>
 
@@ -17,11 +36,12 @@
       <ProjectReference Include="..\Dot.ConfigAccess\Dot.ConfigAccess.csproj" PrivateAssets="All" />
       <ProjectReference Include="..\Dot.ConsoleHelpers\Dot.Prsentation.ConsoleHelpers.csproj" PrivateAssets="All" />
       <ProjectReference Include="..\Dot.GameHosting\Dot.GameHosting.csproj" PrivateAssets="compile" />
-      <ProjectReference Include="..\Dot.GameStorage.Binary\Dot.GameSavesAccess.csproj" PrivateAssets="All" />
+      <ProjectReference Include="..\Dot.GameSavesAccess.Binary\Dot.GameSavesAccess.Binary.csproj" PrivateAssets="All" />
       <ProjectReference Include="..\Dot.Ports.ConfigAccess\Dot.Ports.ConfigAccess.csproj" PrivateAssets="All" />
-      <ProjectReference Include="..\Dot.Ports.PresentationAccess\Dot.Ports.PresentationAccess.csproj" PrivateAssets="All" />
-      <ProjectReference Include="..\Dot.Ports.SaveAccess\Dot.Ports.GameSavesAccess.csproj" PrivateAssets="All" />
+      <ProjectReference Include="..\Dot.Ports.GameSavesAccess\Dot.Ports.GameSavesAccess.csproj" PrivateAssets="All" />
+      <ProjectReference Include="..\Dot.Ports.UserAccess\Dot.Ports.UserAccess.csproj" PrivateAssets="All" />
       <ProjectReference Include="..\Dot.Presentation\Dot.Presentation.csproj" PrivateAssets="All" />
+      <ProjectReference Include="..\Dot.UserAccess\Dot.UserAccess.csproj" PrivateAssets="All" />
     </ItemGroup>
 
 </Project>

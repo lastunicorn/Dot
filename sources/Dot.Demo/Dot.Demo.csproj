@@ -21,13 +21,14 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="ConsoleTools.Modularization" Version="1.2.0" />
         <PackageReference Include="Ninject" Version="3.3.6" />
     </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\Dot.AdventureGame\Dot.AdventureGame.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\Dot.ConsoleHelpers\Dot.Prsentation.ConsoleHelpers.csproj" PrivateAssets="All" />
-        <ProjectReference Include="..\Dot.Setup.Ninject\Dot.Setup.Ninject.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\Dot.MicrosoftDependencyInjection\Dot.Setup.MicrosoftDependencyInjection.csproj" PrivateAssets="All" />
     </ItemGroup>
 
 </Project>

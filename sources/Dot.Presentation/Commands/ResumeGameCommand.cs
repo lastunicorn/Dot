@@ -21,17 +21,17 @@ using DustInTheWind.Dot.Presentation.ConsoleHelpers.UIControls;
 
 namespace DustInTheWind.Dot.Presentation.Commands;
 
-internal class ResumeGameCommand : ICommand
+public class ResumeGameCommand : ICommand
 {
     private readonly Game game;
-    private readonly IUseCaseFactory useCaseFactory;
+    private readonly RequestBus requestBus;
 
     public event EventHandler CanExecuteChanges;
 
-    public ResumeGameCommand(Game game, IUseCaseFactory useCaseFactory)
+    public ResumeGameCommand(Game game, RequestBus requestBus)
     {
         this.game = game ?? throw new ArgumentNullException(nameof(game));
-        this.useCaseFactory = useCaseFactory ?? throw new ArgumentNullException(nameof(useCaseFactory));
+        this.requestBus = requestBus ?? throw new ArgumentNullException(nameof(requestBus));
     }
 
     public bool CanExecute()
@@ -41,8 +41,8 @@ internal class ResumeGameCommand : ICommand
 
     public void Execute()
     {
-        ResumeGameUseCase useCase = useCaseFactory.Create<ResumeGameUseCase>();
-        useCase.Execute();
+        ResumeGameRequest request = new();
+        requestBus.Send(request).Wait();
     }
 
     protected virtual void OnCanExecuteChanges()

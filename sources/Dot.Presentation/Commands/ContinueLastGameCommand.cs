@@ -24,15 +24,15 @@ namespace DustInTheWind.Dot.Presentation.Commands;
 
 internal class ContinueLastGameCommand : ICommand
 {
-    private readonly IUseCaseFactory useCaseFactory;
+    private readonly RequestBus requestBus;
     private readonly Game game;
     private readonly IGameSettings gameSettings;
 
     public event EventHandler CanExecuteChanges;
 
-    public ContinueLastGameCommand(IUseCaseFactory useCaseFactory, Game game, IGameSettings gameSettings)
+    public ContinueLastGameCommand(RequestBus requestBus, Game game, IGameSettings gameSettings)
     {
-        this.useCaseFactory = useCaseFactory ?? throw new ArgumentNullException(nameof(useCaseFactory));
+        this.requestBus = requestBus ?? throw new ArgumentNullException(nameof(requestBus));
         this.game = game ?? throw new ArgumentNullException(nameof(game));
         this.gameSettings = gameSettings ?? throw new ArgumentNullException(nameof(gameSettings));
     }
@@ -44,7 +44,7 @@ internal class ContinueLastGameCommand : ICommand
 
     public void Execute()
     {
-        LoadGameUseCase useCase = useCaseFactory.Create<LoadGameUseCase>();
-        useCase.Execute();
+        LoadGameRequest request = new();
+        requestBus.Send(request).Wait();
     }
 }

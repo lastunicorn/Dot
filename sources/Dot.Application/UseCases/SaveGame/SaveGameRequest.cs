@@ -14,23 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using DustInTheWind.Dot.Application;
+using MediatR;
 
-namespace DustInTheWind.Dot.Setup.MicrosoftDependencyInjection;
+namespace DustInTheWind.Dot.Application.UseCases.SaveGame;
 
-internal class UseCaseFactory : IUseCaseFactory
+public class SaveGameRequest : IRequest
 {
-    private readonly IServiceProvider serviceProvider;
-
-    public UseCaseFactory(IServiceProvider serviceProvider)
-    {
-        this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
-    }
-
-    public T Create<T>()
-        where T : class
-    {
-        return (T)serviceProvider.GetService(typeof(T));
-    }
 }

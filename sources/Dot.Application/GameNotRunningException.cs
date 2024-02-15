@@ -14,31 +14,22 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Dot.Application;
-using DustInTheWind.Dot.Application.UseCases.NewGame;
-using DustInTheWind.Dot.Presentation.ConsoleHelpers.UIControls;
+using System.Runtime.Serialization;
 
-namespace DustInTheWind.Dot.Presentation.Commands;
+namespace DustInTheWind.Dot.Application;
 
-public class NewGameCommand : ICommand
+[Serializable]
+public class GameNotRunningException : Exception
 {
-    private readonly RequestBus requestBus;
+    private const string DefaultMessage = "No game is in progress.";
 
-    public event EventHandler CanExecuteChanges;
-
-    public NewGameCommand(RequestBus requestBus)
+    public GameNotRunningException()
+        : base(DefaultMessage)
     {
-        this.requestBus = requestBus ?? throw new ArgumentNullException(nameof(requestBus));
     }
 
-    public bool CanExecute()
+    protected GameNotRunningException(SerializationInfo info, StreamingContext context)
+        : base(info, context)
     {
-        return true;
-    }
-
-    public void Execute()
-    {
-        CreateNewGameRequest request = new();
-        requestBus.Send(request).Wait();
     }
 }
