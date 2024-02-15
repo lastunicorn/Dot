@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using DustInTheWind.ConsoleTools.Modularization;
 using DustInTheWind.Dot.AdventureGame;
 using DustInTheWind.Dot.AdventureGame.ActionModel;
 using DustInTheWind.Dot.AdventureGame.ActionResultHandlers;
@@ -11,7 +10,6 @@ using DustInTheWind.Dot.Application;
 using DustInTheWind.Dot.Domain;
 using DustInTheWind.Dot.Domain.AudioTextModel;
 using DustInTheWind.Dot.Domain.GameModel;
-using DustInTheWind.Dot.GameHosting;
 using DustInTheWind.Dot.Presentation.GameHostActions;
 using DustInTheWind.Dot.Presentation.Views;
 
@@ -77,12 +75,9 @@ namespace DustInTheWind.Dot.Presentation.Presenters
 
         private readonly ActionSet actions = new ActionSet();
 
-        public GamePresenter(GameView gameView, Game game, ResultHandlersCollection resultHandlers,
-            ModuleHost moduleHost, IUseCaseFactory useCaseFactory, ModuleEngine moduleEngine)
+        public GamePresenter(GameView gameView, Game game, ResultHandlersCollection resultHandlers, IUseCaseFactory useCaseFactory)
         {
-            if (moduleHost == null) throw new ArgumentNullException(nameof(moduleHost));
             if (useCaseFactory == null) throw new ArgumentNullException(nameof(useCaseFactory));
-            if (moduleEngine == null) throw new ArgumentNullException(nameof(moduleEngine));
 
             this.gameView = gameView ?? throw new ArgumentNullException(nameof(gameView));
             this.game = game ?? throw new ArgumentNullException(nameof(game));
