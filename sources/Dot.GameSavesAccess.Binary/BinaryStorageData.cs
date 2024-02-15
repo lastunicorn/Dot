@@ -1,9 +1,8 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 using System.Security.Permissions;
 using DustInTheWind.Dot.Ports.GameSavesAccess;
 
-namespace DustInTheWind.Dot.GameSavesAccess;
+namespace DustInTheWind.Dot.GameSavesAccess.Binary;
 
 [Serializable]
 public class BinaryStorageData : BinaryStorageNode

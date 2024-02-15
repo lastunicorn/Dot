@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DustInTheWind.Dot.Presentation
+﻿namespace DustInTheWind.Dot.Presentation.Controls
 {
     public class DefaultTheme : ITheme
     {

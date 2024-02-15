@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using DustInTheWind.Dot.GameSavesAccess;
+using DustInTheWind.Dot.GameSavesAccess.Binary;
 using DustInTheWind.Dot.Ports.GameSavesAccess;
 using Xunit;
 

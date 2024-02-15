@@ -1,7 +1,6 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 
-namespace DustInTheWind.Dot.Presentation
+namespace DustInTheWind.Dot.Presentation.Controls
 {
     public class ApplicationInfo
     {

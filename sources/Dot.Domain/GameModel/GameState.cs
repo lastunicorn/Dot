@@ -1,4 +1,4 @@
-namespace DustInTheWind.Dot.AdventureGame.GameModel
+namespace DustInTheWind.Dot.Domain.GameModel
 {
     public enum GameState
     {

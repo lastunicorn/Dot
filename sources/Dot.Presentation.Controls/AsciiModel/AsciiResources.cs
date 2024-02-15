@@ -1,9 +1,6 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 
-namespace DustInTheWind.Dot.Presentation.AsciiModel
+namespace DustInTheWind.Dot.Presentation.Controls.AsciiModel
 {
     public class AsciiResources
     {

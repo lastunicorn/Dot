@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 using DustInTheWind.Dot.Ports.GameSavesAccess;
 
-namespace DustInTheWind.Dot.GameSavesAccess;
+namespace DustInTheWind.Dot.GameSavesAccess.Binary;
 
 [Serializable]
 public class BinaryStorageNode : Dictionary<string, object>

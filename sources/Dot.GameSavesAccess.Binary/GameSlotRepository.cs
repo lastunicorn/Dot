@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using DustInTheWind.Dot.Ports.GameSavesAccess;
 
-namespace DustInTheWind.Dot.GameSavesAccess;
+namespace DustInTheWind.Dot.GameSavesAccess.Binary;
 
 public class GameSlotRepository : IGameSlotRepository
 {

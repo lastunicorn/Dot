@@ -18,7 +18,7 @@ using DustInTheWind.Dot.AudioSupport;
 using DustInTheWind.Dot.Ports.UserAccess;
 using DustInTheWind.Dot.Presentation;
 using DustInTheWind.Dot.Presentation.ConsoleHelpers.ConsoleUtil;
-using DustInTheWind.Dot.Presentation.Views;
+using DustInTheWind.Dot.Presentation.Controls;
 using DustInTheWind.Dot.Presentation.WindowsNative;
 using DustInTheWind.Dot.UserAccess.Controls;
 

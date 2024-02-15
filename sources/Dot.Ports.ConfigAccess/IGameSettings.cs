@@ -1,4 +1,4 @@
-﻿namespace DustInTheWind.Dot.Domain.GameModel
+﻿namespace DustInTheWind.Dot.Ports.ConfigAccess
 {
     public interface IGameSettings
     {
